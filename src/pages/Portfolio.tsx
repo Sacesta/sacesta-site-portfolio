@@ -1,41 +1,60 @@
 import ChromaGrid from '../components/ChromaGrid';
+import '../styles/Portfolio.css';
 
 const portfolioItems = [
     {
-        id: 1,
+        image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROkxxFA2D-BslQdDLo0Kxu02QI0XEMEuETrDoGhsEWBi3ovX1DTrrTPLM&s',
         title: 'Project Alpha',
-        description: 'A revolutionary web application',
-        image: 'https://via.placeholder.com/400x300/667eea/ffffff?text=Project+Alpha',
+        subtitle: 'A revolutionary web application',
+        handle: 'Web Development',
+        borderColor: '#667eea',
+        gradient: 'linear-gradient(145deg, #667eea, #000)',
+        url: 'https://project-alpha.demo.com'
     },
     {
-        id: 2,
+        image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROkxxFA2D-BslQdDLo0Kxu02QI0XEMEuETrDoGhsEWBi3ovX1DTrrTPLM&s',
         title: 'Project Beta',
-        description: 'Mobile-first design system',
-        image: 'https://via.placeholder.com/400x300/764ba2/ffffff?text=Project+Beta',
+        subtitle: 'Mobile-first design system',
+        handle: 'UI/UX Design',
+        borderColor: '#764ba2',
+        gradient: 'linear-gradient(145deg, #764ba2, #000)',
+        url: 'https://project-beta.demo.com'
     },
     {
-        id: 3,
+        image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROkxxFA2D-BslQdDLo0Kxu02QI0XEMEuETrDoGhsEWBi3ovX1DTrrTPLM&s',
         title: 'Project Gamma',
-        description: 'E-commerce platform',
-        image: 'https://via.placeholder.com/400x300/f093fb/ffffff?text=Project+Gamma',
+        subtitle: 'E-commerce platform',
+        handle: 'Full Stack',
+        borderColor: '#f093fb',
+        gradient: 'linear-gradient(145deg, #f093fb, #000)',
+        url: 'https://project-gamma.demo.com'
     },
     {
-        id: 4,
+        image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROkxxFA2D-BslQdDLo0Kxu02QI0XEMEuETrDoGhsEWBi3ovX1DTrrTPLM&s',
         title: 'Project Delta',
-        description: 'AI-powered analytics',
-        image: 'https://via.placeholder.com/400x300/4facfe/ffffff?text=Project+Delta',
+        subtitle: 'AI-powered analytics',
+        handle: 'Data Science',
+        borderColor: '#4facfe',
+        gradient: 'linear-gradient(145deg, #4facfe, #000)',
+        url: 'https://project-delta.demo.com'
     },
     {
-        id: 5,
+        image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROkxxFA2D-BslQdDLo0Kxu02QI0XEMEuETrDoGhsEWBi3ovX1DTrrTPLM&s',
         title: 'Project Epsilon',
-        description: 'Social media dashboard',
-        image: 'https://via.placeholder.com/400x300/00f2fe/ffffff?text=Project+Epsilon',
+        subtitle: 'Social media dashboard',
+        handle: 'Dashboard',
+        borderColor: '#00f2fe',
+        gradient: 'linear-gradient(145deg, #00f2fe, #000)',
+        url: 'https://project-epsilon.demo.com'
     },
     {
-        id: 6,
+        image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROkxxFA2D-BslQdDLo0Kxu02QI0XEMEuETrDoGhsEWBi3ovX1DTrrTPLM&s',
         title: 'Project Zeta',
-        description: 'Real-time collaboration tool',
-        image: 'https://via.placeholder.com/400x300/43e97b/ffffff?text=Project+Zeta',
+        subtitle: 'Real-time collaboration tool',
+        handle: 'Real-time',
+        borderColor: '#43e97b',
+        gradient: 'linear-gradient(145deg, #43e97b, #000)',
+        url: 'https://project-zeta.demo.com'
     },
 ];
 
@@ -43,7 +62,16 @@ export default function Portfolio() {
     return (
         <div className="portfolio-container">
             <h1 className="portfolio-title">Our Portfolio</h1>
-            <ChromaGrid items={portfolioItems} />
+            <p className="portfolio-subtitle">Interactive showcase of our latest projects</p>
+            <div className="chroma-grid-wrapper">
+                <ChromaGrid 
+                    items={portfolioItems}
+                    radius={300}
+                    damping={0.45}
+                    fadeOut={0.6}
+                    ease="power3.out"
+                />
+            </div>
         </div>
     );
 }

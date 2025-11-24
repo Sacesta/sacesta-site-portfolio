@@ -1,67 +1,210 @@
-import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { useRef, useEffect } from 'react';
+import type { ReactElement, PointerEvent, MouseEvent, CSSProperties } from 'react';
+import { gsap } from 'gsap';
+import FadeContent from './FadeContent';
+import '../styles/chromaGrid.css';
 
-interface PortfolioItem {
-    id: number;
-    title: string;
-    description: string;
-    image: string;
+interface ChromaItem {
+  image: string;
+  title: string;
+  subtitle: string;
+  handle?: string;
+  borderColor: string;
+  gradient: string;
+  url?: string;
+  location?: string;
 }
 
 interface ChromaGridProps {
-    items: PortfolioItem[];
+  items?: ChromaItem[];
+  className?: string;
+  radius?: number;
+  columns?: number;
+  rows?: number;
+  damping?: number;
+  fadeOut?: number;
+  ease?: string;
 }
 
-export default function ChromaGrid({ items }: ChromaGridProps) {
-    const [hoveredId, setHoveredId] = useState<number | null>(null);
+export const ChromaGrid = ({
+  items,
+  className = '',
+  radius = 300,
+  columns = 3,
+  rows = 2,
+  damping = 0.45,
+  fadeOut = 0.6,
+  ease = 'power3.out'
+}: ChromaGridProps): ReactElement => {
+  const rootRef = useRef<HTMLDivElement>(null);
+  const fadeRef = useRef<HTMLDivElement>(null);
+  const setX = useRef<((value: number | string) => void) | null>(null);
+  const setY = useRef<((value: number | string) => void) | null>(null);
+  const pos = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
 
-    const gradients = [
-        'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-        'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
-        'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
-        'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
-        'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
-        'linear-gradient(135deg, #30cfd0 0%, #330867 100%)',
-    ];
+  const demo: ChromaItem[] = [
+    {
+      image: 'https://i.pravatar.cc/300?img=8',
+      title: 'Alex Rivera',
+      subtitle: 'Full Stack Developer',
+      handle: '@alexrivera',
+      borderColor: '#4F46E5',
+      gradient: 'linear-gradient(145deg, #4F46E5, #000)',
+      url: 'https://github.com/'
+    },
+    {
+      image: 'https://i.pravatar.cc/300?img=11',
+      title: 'Jordan Chen',
+      subtitle: 'DevOps Engineer',
+      handle: '@jordanchen',
+      borderColor: '#10B981',
+      gradient: 'linear-gradient(210deg, #10B981, #000)',
+      url: 'https://linkedin.com/in/'
+    },
+    {
+      image: 'https://i.pravatar.cc/300?img=3',
+      title: 'Morgan Blake',
+      subtitle: 'UI/UX Designer',
+      handle: '@morganblake',
+      borderColor: '#F59E0B',
+      gradient: 'linear-gradient(165deg, #F59E0B, #000)',
+      url: 'https://dribbble.com/'
+    },
+    {
+      image: 'https://i.pravatar.cc/300?img=16',
+      title: 'Casey Park',
+      subtitle: 'Data Scientist',
+      handle: '@caseypark',
+      borderColor: '#EF4444',
+      gradient: 'linear-gradient(195deg, #EF4444, #000)',
+      url: 'https://kaggle.com/'
+    },
+    {
+      image: 'https://i.pravatar.cc/300?img=25',
+      title: 'Sam Kim',
+      subtitle: 'Mobile Developer',
+      handle: '@thesamkim',
+      borderColor: '#8B5CF6',
+      gradient: 'linear-gradient(225deg, #8B5CF6, #000)',
+      url: 'https://github.com/'
+    },
+    {
+      image: 'https://i.pravatar.cc/300?img=60',
+      title: 'Tyler Rodriguez',
+      subtitle: 'Cloud Architect',
+      handle: '@tylerrod',
+      borderColor: '#06B6D4',
+      gradient: 'linear-gradient(135deg, #06B6D4, #000)',
+      url: 'https://aws.amazon.com/'
+    }
+  ];
 
-    return (
-        <div className="chroma-grid">
-            {items.map((item, index) => (
-                <motion.div
-                    key={item.id}
-                    className="chroma-grid-item"
-                    onMouseEnter={() => setHoveredId(item.id)}
-                    onMouseLeave={() => setHoveredId(null)}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                >
-                    <div
-                        className="chroma-grid-border"
-                        style={{ background: gradients[index % gradients.length] }}
-                    >
-                        <motion.div
-                            className="chroma-grid-content"
-                            whileHover={{ scale: 0.98 }}
-                            transition={{ duration: 0.2 }}
-                        >
-                            <div
-                                className="chroma-grid-image"
-                                style={{ backgroundImage: `url(${item.image})` }}
-                            />
-                            <motion.div
-                                className="chroma-grid-overlay"
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: hoveredId === item.id ? 1 : 0 }}
-                                transition={{ duration: 0.3 }}
-                            >
-                                <h3 className="chroma-grid-title">{item.title}</h3>
-                                <p className="chroma-grid-description">{item.description}</p>
-                            </motion.div>
-                        </motion.div>
-                    </div>
-                </motion.div>
-            ))}
-        </div>
-    );
-}
+  const data: ChromaItem[] = items?.length ? items : demo;
+
+  useEffect(() => {
+    const el = rootRef.current;
+    if (!el) return;
+    
+    setX.current = gsap.quickSetter(el, '--x', 'px');
+    setY.current = gsap.quickSetter(el, '--y', 'px');
+    const { width, height } = el.getBoundingClientRect();
+    pos.current = { x: width / 2, y: height / 2 };
+    setX.current(pos.current.x);
+    setY.current(pos.current.y);
+  }, []);
+
+  const moveTo = (x: number, y: number): void => {
+    gsap.to(pos.current, {
+      x,
+      y,
+      duration: damping,
+      ease,
+      onUpdate: () => {
+        setX.current?.(pos.current.x);
+        setY.current?.(pos.current.y);
+      },
+      overwrite: true
+    });
+  };
+
+  const handleMove = (e: PointerEvent<HTMLDivElement>): void => {
+    if (!rootRef.current) return;
+    
+    const r = rootRef.current.getBoundingClientRect();
+    moveTo(e.clientX - r.left, e.clientY - r.top);
+    gsap.to(fadeRef.current, { opacity: 0, duration: 0.25, overwrite: true });
+  };
+
+  const handleLeave = (): void => {
+    gsap.to(fadeRef.current, {
+      opacity: 1,
+      duration: fadeOut,
+      overwrite: true
+    });
+  };
+
+  const handleCardClick = (url?: string): void => {
+    if (url) {
+      window.open(url, '_blank', 'noopener,noreferrer');
+    }
+  };
+
+  const handleCardMove = (e: MouseEvent<HTMLElement>): void => {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    card.style.setProperty('--mouse-x', `${x}px`);
+    card.style.setProperty('--mouse-y', `${y}px`);
+  };
+
+  return (
+    <FadeContent 
+      blur={true} 
+      duration={1000} 
+      easing="ease-out" 
+      initialOpacity={0}
+      className={`chroma-grid-wrapper ${className}`}
+    >
+      <div
+        ref={rootRef}
+        className={`chroma-grid ${className}`}
+        style={{
+          '--r': `${radius}px`,
+          '--cols': columns,
+          '--rows': rows
+        } as CSSProperties}
+        onPointerMove={handleMove}
+        onPointerLeave={handleLeave}
+      >
+        {data.map((c, i) => (
+          <article
+            key={i}
+            className="chroma-card"
+            onMouseMove={handleCardMove}
+            onClick={() => handleCardClick(c.url)}
+            style={{
+              '--card-border': c.borderColor || 'transparent',
+              '--card-gradient': c.gradient,
+              cursor: c.url ? 'pointer' : 'default'
+            } as CSSProperties}
+          >
+            <div className="chroma-img-wrapper">
+              <img src={c.image} alt={c.title} loading="lazy" />
+            </div>
+            <footer className="chroma-info">
+              <h3 className="name">{c.title}</h3>
+              {c.handle && <span className="handle">{c.handle}</span>}
+              <p className="role">{c.subtitle}</p>
+              {c.location && <span className="location">{c.location}</span>}
+            </footer>
+          </article>
+        ))}
+        <div className="chroma-overlay" />
+        <div ref={fadeRef} className="chroma-fade" />
+      </div>
+    </FadeContent>
+  );
+};
+
+export default ChromaGrid;

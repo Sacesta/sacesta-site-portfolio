@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 :root {
   font-family: 'Courier New', Courier, monospace;
   line-height: 1.5;
@@ -66,27 +68,41 @@ body {
   position: fixed;
   bottom: 2rem;
   left: 50%;
+  top : 48%;
+  bottom: 47%;
   transform: translateX(-50%);
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 0.9rem;
+  color: #fff;
+  font-size: 1rem;
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 3px;
+  font-weight: 600;
+  background: rgba(0, 0, 0, 0.8);
+  background-color: transparent;
+  padding: 12px 24px;
+  border-radius: 8px;
+  /* border: 1px solid rgba(255, 255, 255, 0.3); */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   animation: pulse 2s ease-in-out infinite;
   z-index: 1000;
+  cursor: pointer;
+  transition: all 0.6s ease;
+}
+
+
+.click-instruction:hover {
+  background: #000
+  transform: translateX(-50%) scale(1.05);
 }
 
 @keyframes pulse {
-
-  0%,
-  100% {
-    opacity: 0.6;
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4);
   }
-
   50% {
-    opacity: 1;
+    box-shadow: 0 0 0 8px rgba(255, 255, 255, 0);
   }
 }
-
 .portfolio-container {
   min-height: 100vh;
   padding: 4rem 2rem;

@@ -34,9 +34,9 @@ function App() {
   }, []);
 
   return (
-    <div className="app-container" onClick={handleClick} style={{ cursor: 'pointer' }}>
-      <div className="click-instruction">
-        Click anywhere to continue
+    <div className="app-container" onClick={handleClick}  style={{ cursor: 'pointer' }}>
+      <div className="click-instruction" >
+         Click anywhere to continue 
       </div>
       {isMobile ? (
         <div className="quote-container">
