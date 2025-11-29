@@ -1,4 +1,15 @@
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect, useState, ReactNode } from 'react';
+
+interface FadeContentProps {
+  children: ReactNode;
+  blur?: boolean;
+  duration?: number;
+  easing?: string;
+  delay?: number;
+  threshold?: number;
+  initialOpacity?: number;
+  className?: string;
+}
 
 const FadeContent = ({
   children,
@@ -8,18 +19,22 @@ const FadeContent = ({
   delay = 0,
   threshold = 0.1,
   initialOpacity = 0,
-  className = ''
-}) => {
+  className = '',
+}: FadeContentProps) => {
   const [inView, setInView] = useState(false);
-  const ref = useRef(null);
+
+  // FIX: ensure ref is typed correctly
+  const ref = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     if (!ref.current) return;
 
+    const element = ref.current;
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          observer.unobserve(ref.current);
+          observer.unobserve(element);
           setTimeout(() => {
             setInView(true);
           }, delay);
@@ -28,7 +43,7 @@ const FadeContent = ({
       { threshold }
     );
 
-    observer.observe(ref.current);
+    observer.observe(element);
 
     return () => observer.disconnect();
   }, [threshold, delay]);
@@ -40,7 +55,7 @@ const FadeContent = ({
       style={{
         opacity: inView ? 1 : initialOpacity,
         transition: `opacity ${duration}ms ${easing}, filter ${duration}ms ${easing}`,
-        filter: blur ? (inView ? 'blur(0px)' : 'blur(10px)') : 'none'
+        filter: blur ? (inView ? 'blur(0px)' : 'blur(10px)') : 'none',
       }}
     >
       {children}

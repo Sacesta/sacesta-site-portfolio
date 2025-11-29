@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
-import { blogData, Blog } from './Blogs';
+import { blogData } from './Blogs';
 import '../styles/BlogDetail.css';
 
 const BlogDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const location = useLocation();
-  const [scrollProgress, setScrollProgress] = useState(0);
+  const [, setScrollProgress] = useState(0);
   
   // Get blog data from navigation state or find by ID
   const blog = location.state?.blog || blogData.find(b => b.id === parseInt(id || ''));
@@ -128,7 +128,7 @@ const BlogDetail: React.FC = () => {
               <div className="tags-section">
                 <span className="section-label">Topics</span>
                 <div className="tags-container">
-                  {blog.tags.map((tag, index) => (
+                  {blog.tags.map((tag: string, index: number) => (
                     <span key={index} className="tag">{tag}</span>
                   ))}
                 </div>

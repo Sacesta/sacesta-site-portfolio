@@ -26,10 +26,12 @@ export default function DecryptedText({
     const [displayText, setDisplayText] = useState(text);
     const [isHovering, setIsHovering] = useState(false);
     const [revealedIndices, setRevealedIndices] = useState<Set<number>>(new Set());
-    const intervalRef = useRef<number | null>(null);
+
+    // FIX: Correct setInterval type
+    const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
     useEffect(() => {
-        let interval: number;
+        let interval: ReturnType<typeof setInterval>;
         let currentIteration = 0;
 
         const getNextChar = () => {
@@ -44,34 +46,47 @@ export default function DecryptedText({
         const scramble = () => {
             if (sequential) {
                 if (revealedIndices.size < text.length) {
-                    const nextIndex = revealDirection === 'start'
-                        ? revealedIndices.size
-                        : revealDirection === 'end'
-                            ? text.length - 1 - revealedIndices.size
-                            : Math.floor(text.length / 2) + (revealedIndices.size % 2 === 0 ? revealedIndices.size / 2 : -(revealedIndices.size + 1) / 2); // Simple center approximation
+                    const nextIndex =
+                        revealDirection === 'start'
+                            ? revealedIndices.size
+                            : revealDirection === 'end'
+                                ? text.length - 1 - revealedIndices.size
+                                : Math.floor(text.length / 2) +
+                                (revealedIndices.size % 2 === 0
+                                    ? revealedIndices.size / 2
+                                    : -(revealedIndices.size + 1) / 2);
 
                     setRevealedIndices(prev => new Set(prev).add(nextIndex));
                 } else {
                     clearInterval(interval);
                 }
 
-                setDisplayText(prev => prev.split('').map((char, i) => {
-                    if (revealedIndices.has(i) || char === ' ') return text[i];
-                    return getNextChar();
-                }).join(''));
+                setDisplayText(prev =>
+                    prev
+                        .split('')
+                        .map((char, i) => {
+                            if (revealedIndices.has(i) || char === ' ') return text[i];
+                            return getNextChar();
+                        })
+                        .join('')
+                );
 
                 return;
             }
 
-            setDisplayText(prev => prev.split('').map((char, i) => {
-                if (char === ' ') return char;
-                if (currentIteration >= maxIterations) {
-                    return text[i];
-                }
-                return getNextChar();
-            }).join(''));
+            setDisplayText(prev =>
+                prev
+                    .split('')
+                    .map((char, i) => {
+                        if (char === ' ') return char;
+                        if (currentIteration >= maxIterations) return text[i];
+                        return getNextChar();
+                    })
+                    .join('')
+            );
 
             currentIteration++;
+
             if (currentIteration > maxIterations) {
                 clearInterval(interval);
                 setDisplayText(text);
@@ -89,7 +104,18 @@ export default function DecryptedText({
         return () => {
             if (interval) clearInterval(interval);
         };
-    }, [text, speed, maxIterations, revealDirection, useOriginalCharsOnly, characters, animateOn, isHovering, sequential, revealedIndices]);
+    }, [
+        text,
+        speed,
+        maxIterations,
+        revealDirection,
+        useOriginalCharsOnly,
+        characters,
+        animateOn,
+        isHovering,
+        sequential,
+        revealedIndices,
+    ]);
 
     // Reset for sequential animation
     useEffect(() => {
@@ -97,7 +123,6 @@ export default function DecryptedText({
             setRevealedIndices(new Set());
         }
     }, [text, animateOn]);
-
 
     return (
         <span

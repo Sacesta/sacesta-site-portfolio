@@ -522,17 +522,6 @@ const GlobalSpotlight: React.FC<{
   return null;
 };
 
-const BentoCardGrid: React.FC<{
-  children: React.ReactNode;
-  gridRef?: React.RefObject<HTMLDivElement | null>;
-}> = ({ children, gridRef }) => (
-  <div 
-    className="flex gap-12 px-8 min-w-min h-full items-center bento-section select-none" 
-    ref={gridRef}
-  >
-    {children}
-  </div>
-);
 
 const useMobileDetection = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -561,7 +550,7 @@ const MagicBento: React.FC<BentoProps> = ({
   enableMagnetism = true
 }) => {
   const gridRef = useRef<HTMLDivElement>(null);
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
   const sectionRef = useRef<HTMLDivElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [mounted, setMounted] = useState(false);
