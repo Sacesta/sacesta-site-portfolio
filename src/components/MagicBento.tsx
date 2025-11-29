@@ -1,12 +1,9 @@
-
-
-
-
-
-
 import React, { useRef, useEffect, useCallback, useState } from 'react';
 import { gsap } from 'gsap';
-import '../styles/MagicBento.css';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+// Register ScrollTrigger plugin
+gsap.registerPlugin(ScrollTrigger);
 
 export interface BentoCardProps {
   color?: string;
@@ -365,13 +362,22 @@ const ParticleCard: React.FC<{
     };
   }, [animateParticles, clearAllParticles, disableAnimations, enableTilt, enableMagnetism, clickEffect, glowColor]);
 
-  const sizeClass = size === 'large' ? 'magic-bento-card--large' : 'magic-bento-card--small';
+  const sizeClasses = size === 'large' 
+    ? 'min-h-[405px] h-[330px] aspect-[2/1]'  // Increased from 310px to 465px (1.5x)
+    : 'min-h-[405px] h-[330px] aspect-square'; // Increased from 270px to 405px (1.5x)
 
   return (
     <div
       ref={cardRef}
-      className={`${className} ${sizeClass} particle-container`}
-      style={{ ...style, position: 'relative', overflow: 'hidden' }}
+      className={`
+        ${className} 
+        ${sizeClasses}
+        flex flex-col justify-between relative p-10 rounded-3xl border border-[#392e4e] bg-[#060010] 
+        font-light overflow-hidden transition-all duration-300 ease-in-out cursor-pointer
+        hover:-translate-y-1.5 hover:shadow-2xl
+        particle-container
+      `}
+      style={style}
     >
       {children}
     </div>
@@ -520,7 +526,10 @@ const BentoCardGrid: React.FC<{
   children: React.ReactNode;
   gridRef?: React.RefObject<HTMLDivElement | null>;
 }> = ({ children, gridRef }) => (
-  <div className="card-grid-horizontal bento-section" ref={gridRef}>
+  <div 
+    className="flex gap-12 px-8 min-w-min h-full items-center bento-section select-none" 
+    ref={gridRef}
+  >
     {children}
   </div>
 );
@@ -553,8 +562,45 @@ const MagicBento: React.FC<BentoProps> = ({
 }) => {
   const gridRef = useRef<HTMLDivElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const [mounted, setMounted] = useState(false);
   const isMobile = useMobileDetection();
   const shouldDisableAnimations = disableAnimations || isMobile;
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Initialize GSAP horizontal scroll
+  useEffect(() => {
+    if (!mounted || !sectionRef.current || !wrapperRef.current) return;
+
+    const section = sectionRef.current;
+    const wrapper = wrapperRef.current;
+
+    const totalWidth = wrapper.scrollWidth - window.innerWidth;
+
+    // Kill any existing ScrollTrigger instances
+    ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+
+    const ctx = gsap.context(() => {
+      gsap.to(wrapper, {
+        x: -totalWidth,
+        ease: "none",
+        scrollTrigger: {
+          trigger: section,
+          start: "top top",
+          end: `+=${totalWidth + 1000}`,
+          scrub: 1,
+          pin: true,
+          anticipatePin: 1,
+        },
+      });
+    }, section);
+
+    return () => ctx.revert();
+  }, [mounted]);
 
   // Group cards into sections of 3 (2 small + 1 large)
   const cardSections = [];
@@ -563,8 +609,121 @@ const MagicBento: React.FC<BentoProps> = ({
     cardSections.push(section);
   }
 
+  const scrollbarStyles = `
+    /* Border glow effect */
+    .border-glow::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      padding: 2px;
+      background: radial-gradient(
+        var(--glow-radius) circle at var(--glow-x) var(--glow-y),
+        rgba(132, 0, 255, calc(var(--glow-intensity) * 0.8)) 0%,
+        rgba(132, 0, 255, calc(var(--glow-intensity) * 0.4)) 30%,
+        transparent 70%
+      );
+      border-radius: inherit;
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask-composite: subtract;
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      z-index: 1;
+    }
+
+    .border-glow:hover::after {
+      opacity: 1;
+    }
+
+    .border-glow:hover {
+      box-shadow: 
+        0 12px 35px rgba(46, 24, 78, 0.5),
+        0 0 50px rgba(132, 0, 255, 0.2);
+    }
+
+    /* Text auto-hide */
+    .text-autohide .magic-bento-card__title {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .text-autohide .magic-bento-card__description {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 3;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* Global spotlight */
+    .global-spotlight {
+      mix-blend-mode: screen;
+      will-change: transform, opacity;
+      z-index: 200 !important;
+      pointer-events: none;
+    }
+
+    /* Fade in animation */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-fade-in-up {
+      animation: fadeInUp 0.6s ease-out;
+    }
+
+    /* Horizontal scroll section styles */
+    .horizontal-scroll-section {
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      background: transparent;
+      display: flex;
+      align-items: center;
+    }
+
+    .horizontal-scroll-wrapper {
+      display: flex;
+      gap: 8rem;
+      padding: 0 30vw;
+      height: 100%;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .bento-section-container {
+      flex-shrink: 0;
+      width: 80vw;
+      max-width: 1200px;
+    }
+
+    @media (max-width: 768px) {
+      .horizontal-scroll-wrapper {
+        gap: 2rem;
+        padding: 0 5vw;
+      }
+      
+      .bento-section-container {
+        width: 90vw;
+      }
+    }
+  `;
+
   return (
-    <div className="bento-container">
+    <>
+      <style>{scrollbarStyles}</style>
+      
       {enableSpotlight && (
         <GlobalSpotlight
           gridRef={gridRef}
@@ -575,20 +734,35 @@ const MagicBento: React.FC<BentoProps> = ({
         />
       )}
 
-      <div className="horizontal-scroll-container" ref={scrollContainerRef}>
-        <BentoCardGrid gridRef={gridRef}>
+      <section
+        ref={sectionRef}
+        className="horizontal-scroll-section"
+      >
+        <div
+          ref={wrapperRef}
+          className="horizontal-scroll-wrapper"
+        >
           {cardSections.map((section, sectionIndex) => (
-            <div key={sectionIndex} className="card-section">
+            <div 
+              key={sectionIndex} 
+              className="bento-section-container flex flex-col gap-8 h-full justify-center animate-fade-in-up"
+              style={{ animationDelay: `${sectionIndex * 0.1 + 0.1}s` }}
+            >
               {/* First row: 2 small cards */}
-              <div className="card-section__row">
+              <div className="flex w-[40vw] gap-5 lg:gap-16">
                 {section.slice(0, 2).map((card, index) => (
-                  <div key={index} className="card-section__small">
+                  <div key={index} className="flex-1 min-w-0">
                     {enableStars ? (
                       <ParticleCard
-                        className={`magic-bento-card ${textAutoHide ? 'magic-bento-card--text-autohide' : ''} ${enableBorderGlow ? 'magic-bento-card--border-glow' : ''}`}
+                        className={`
+                          magic-bento-card animate-fade-in-up
+                          ${textAutoHide ? 'text-autohide' : ''} 
+                          ${enableBorderGlow ? 'border-glow' : ''}
+                        `}
                         style={{
                           backgroundColor: card.color,
-                          '--glow-color': glowColor
+                          '--glow-color': glowColor,
+                          animationDelay: `${sectionIndex * 0.1 + 0.2 + index * 0.1}s`
                         } as React.CSSProperties}
                         disableAnimations={shouldDisableAnimations}
                         particleCount={particleCount}
@@ -598,28 +772,49 @@ const MagicBento: React.FC<BentoProps> = ({
                         enableMagnetism={enableMagnetism}
                         size="small"
                       >
-                        <div className="magic-bento-card__header">
-                          <div className="magic-bento-card__label">{card.label}</div>
+                        <div className="flex justify-between items-start relative text-white z-10">
+                          <div className="text-sm opacity-80 font-medium tracking-wider uppercase">
+                            {card.label}
+                          </div>
                         </div>
-                        <div className="magic-bento-card__content">
-                          <h2 className="magic-bento-card__title">{card.title}</h2>
-                          <p className="magic-bento-card__description">{card.description}</p>
+                        <div className="flex flex-col flex-grow justify-end relative text-white z-10">
+                          <h2 className="font-semibold text-2xl mb-3 leading-tight magic-bento-card__title">
+                            {card.title}
+                          </h2>
+                          <p className="text-base leading-relaxed opacity-80 m-0 magic-bento-card__description">
+                            {card.description}
+                          </p>
                         </div>
                       </ParticleCard>
                     ) : (
                       <div
-                        className={`magic-bento-card ${textAutoHide ? 'magic-bento-card--text-autohide' : ''} ${enableBorderGlow ? 'magic-bento-card--border-glow' : ''} magic-bento-card--small`}
+                        className={`
+                          magic-bento-card animate-fade-in-up
+                          flex flex-col justify-between relative p-10 rounded-3xl border border-[#392e4e] 
+                          bg-[#060010] font-light overflow-hidden transition-all duration-300 ease-in-out 
+                          cursor-pointer hover:-translate-y-1.5 hover:shadow-2xl
+                          min-h-[405px] h-[330px] aspect-square  /* Increased from 270px to 405px */
+                          ${textAutoHide ? 'text-autohide' : ''} 
+                          ${enableBorderGlow ? 'border-glow' : ''}
+                        `}
                         style={{
                           backgroundColor: card.color,
-                          '--glow-color': glowColor
+                          '--glow-color': glowColor,
+                          animationDelay: `${sectionIndex * 0.1 + 0.2 + index * 0.1}s`
                         } as React.CSSProperties}
                       >
-                        <div className="magic-bento-card__header">
-                          <div className="magic-bento-card__label">{card.label}</div>
+                        <div className="flex justify-between items-start relative text-white z-10">
+                          <div className="text-sm opacity-80 font-medium tracking-wider uppercase">
+                            {card.label}
+                          </div>
                         </div>
-                        <div className="magic-bento-card__content">
-                          <h2 className="magic-bento-card__title">{card.title}</h2>
-                          <p className="magic-bento-card__description">{card.description}</p>
+                        <div className="flex flex-col flex-grow justify-end relative text-white z-10">
+                          <h2 className="font-semibold text-2xl mb-3 leading-tight magic-bento-card__title">
+                            {card.title}
+                          </h2>
+                          <p className="text-base leading-relaxed opacity-80 m-0 magic-bento-card__description">
+                            {card.description}
+                          </p>
                         </div>
                       </div>
                     )}
@@ -628,15 +823,20 @@ const MagicBento: React.FC<BentoProps> = ({
               </div>
               
               {/* Second row: 1 large card */}
-              <div className="card-section__row">
+              <div className="flex w-full">
                 {section[2] && (
-                  <div className="card-section__large">
+                  <div className="w-full">
                     {enableStars ? (
                       <ParticleCard
-                        className={`magic-bento-card ${textAutoHide ? 'magic-bento-card--text-autohide' : ''} ${enableBorderGlow ? 'magic-bento-card--border-glow' : ''}`}
+                        className={`
+                          magic-bento-card animate-fade-in-up
+                          ${textAutoHide ? 'text-autohide' : ''} 
+                          ${enableBorderGlow ? 'border-glow' : ''}
+                        `}
                         style={{
                           backgroundColor: section[2].color,
-                          '--glow-color': glowColor
+                          '--glow-color': glowColor,
+                          animationDelay: `${sectionIndex * 0.1 + 0.4}s`
                         } as React.CSSProperties}
                         disableAnimations={shouldDisableAnimations}
                         particleCount={particleCount}
@@ -646,28 +846,50 @@ const MagicBento: React.FC<BentoProps> = ({
                         enableMagnetism={enableMagnetism}
                         size="large"
                       >
-                        <div className="magic-bento-card__header">
-                          <div className="magic-bento-card__label">{section[2].label}</div>
+                        <div className="flex flex-col items-start relative text-white z-10">
+                           <h2 className="font-semibold text-2xl mb-3 leading-tight magic-bento-card__title">
+                            {section[2].title}
+                          </h2>
+                          <p className="text-base leading-relaxed opacity-80 m-0 magic-bento-card__description">
+                            {section[2].description}
+                          </p>
                         </div>
-                        <div className="magic-bento-card__content">
-                          <h2 className="magic-bento-card__title">{section[2].title}</h2>
-                          <p className="magic-bento-card__description">{section[2].description}</p>
+                        <div className="flex flex-col flex-grow justify-end relative text-white z-10">
+                          
+                          <p className="text-base leading-relaxed opacity-80 m-0 magic-bento-card__description">
+                            {section[2].label}
+                          </p>
                         </div>
                       </ParticleCard>
                     ) : (
                       <div
-                        className={`magic-bento-card ${textAutoHide ? 'magic-bento-card--text-autohide' : ''} ${enableBorderGlow ? 'magic-bento-card--border-glow' : ''} magic-bento-card--large`}
+                        className={`
+                          magic-bento-card animate-fade-in-up
+                          flex flex-col justify-between relative p-10 rounded-3xl border border-[#392e4e] 
+                          bg-[#060010] font-light overflow-hidden transition-all duration-300 ease-in-out 
+                          cursor-pointer hover:-translate-y-1.5 hover:shadow-2xl
+                          min-h-[465px] h-[330px] aspect-[2/1]  /* Increased from 310px to 465px */
+                          ${textAutoHide ? 'text-autohide' : ''} 
+                          ${enableBorderGlow ? 'border-glow' : ''}
+                        `}
                         style={{
                           backgroundColor: section[2].color,
-                          '--glow-color': glowColor
+                          '--glow-color': glowColor,
+                          animationDelay: `${sectionIndex * 0.1 + 0.4}s`
                         } as React.CSSProperties}
                       >
-                        <div className="magic-bento-card__header">
-                          <div className="magic-bento-card__label">{section[2].label}</div>
+                        <div className="flex justify-between items-start relative text-white z-10">
+                          <div className="text-sm opacity-80 font-medium tracking-wider uppercase">
+                            {section[2].label}
+                          </div>
                         </div>
-                        <div className="magic-bento-card__content">
-                          <h2 className="magic-bento-card__title">{section[2].title}</h2>
-                          <p className="magic-bento-card__description">{section[2].description}</p>
+                        <div className="flex flex-col flex-grow justify-end relative text-white z-10">
+                          <h2 className="font-semibold text-2xl mb-3 leading-tight magic-bento-card__title">
+                            {section[2].title}
+                          </h2>
+                          <p className="text-base leading-relaxed opacity-80 m-0 magic-bento-card__description">
+                            {section[2].description}
+                          </p>
                         </div>
                       </div>
                     )}
@@ -676,9 +898,9 @@ const MagicBento: React.FC<BentoProps> = ({
               </div>
             </div>
           ))}
-        </BentoCardGrid>
-      </div>
-    </div>
+        </div>
+      </section>
+    </>
   );
 };
 

@@ -273,16 +273,6 @@ body{
   transition: opacity 0.3s ease;
 }
 
-.horizontal-scroll-container::before {
-  left: 0;
-  background: linear-gradient(to right, var(--background-dark) 0%, transparent 100%);
-}
-
-.horizontal-scroll-container::after {
-  right: 0;
-  background: linear-gradient(to left, var(--background-dark) 0%, transparent 100%);
-}
-
 .horizontal-scroll-container.scroll-start::before,
 .horizontal-scroll-container.scroll-end::after {
   opacity: 0;

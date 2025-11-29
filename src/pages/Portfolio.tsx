@@ -5,10 +5,7 @@ import MagicBento from "@/components/MagicBento";
 
 export default function Portfolio() {
     return (
-        <div className="portfolio-container">
-            <h1 className="portfolio-title">Our Portfolio</h1>
-            <p className="portfolio-subtitle">Interactive showcase of our latest projects</p>
-            
+        <div className="portfolio-container">    
             <MagicBento 
                 textAutoHide={true}
                 enableStars={true}
