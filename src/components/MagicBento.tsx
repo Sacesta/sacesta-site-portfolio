@@ -1,5 +1,7 @@
 import { useRef, useEffect, useState, useCallback } from 'react';
 import { gsap } from 'gsap';
+import { useNavigate } from 'react-router-dom';
+import { caseStudiesData } from '../data/caseStudies';
 
 const DEFAULT_PARTICLE_COUNT = 12;
 const DEFAULT_SPOTLIGHT_RADIUS = 300;
@@ -8,40 +10,88 @@ const MOBILE_BREAKPOINT = 768;
 
 const cardData = [
   {
+    id: 'analytics',
     color: '#060010',
-    title: 'Analytics',
-    description: 'Track user behavior',
-    label: 'Insights'
+    title: 'Visit Ahmedabad',
+    description: 'Where heritage storytelling meets modern digital engineering',
+    label: 'Tourism Platform'
   },
   {
+    id: 'dashboard',
     color: '#060010',
-    title: 'Dashboard',
-    description: 'Centralized data view',
-    label: 'Overview'
+    title: 'PIC Event Management Platform',
+    description: 'Engineering a seamless event backbone for thousands of athletes, coordinators, and administrators',
+    label: 'Event Platform'
   },
   {
+    id: 'collaboration',
     color: '#060010',
-    title: 'Collaboration',
-    description: 'Work together seamlessly',
-    label: 'Teamwork'
+    title: 'Mayuri Sharma Admin Platform',
+    description: 'Transforming a creator\'s knowledge into a scalable, structured, and beautifully organized education platform',
+    label: 'CMS Platform'
   },
   {
+    id: 'automation',
     color: '#060010',
-    title: 'Automation',
-    description: 'Streamline workflows',
-    label: 'Efficiency'
+    title: 'FindSecure — Security Intelligence Reimagined',
+    description: 'Where compliance, intelligence, and operational control converge in one secure platform',
+    label: 'Security Platform'
   },
   {
+    id: 'integration',
     color: '#060010',
-    title: 'Integration',
-    description: 'Connect favorite tools',
-    label: 'Connectivity'
+    title: 'ComeHome AI — Intelligent Property Discovery',
+    description: 'Turning scattered property listings into intelligent, human-centered discovery paths',
+    label: 'Real Estate Platform'
   },
   {
+    id: 'security',
     color: '#060010',
-    title: 'Security',
-    description: 'Enterprise-grade protection',
-    label: 'Protection'
+    title: 'ShivID – Identity Reimagined',
+    description: 'A next-generation identity layer powering authentication, authorization, and user lifecycle management with enterprise-grade accuracy',
+    label: 'Identity Platform'
+  },
+  {
+    id: 'esim-platform',
+    color: '#060010',
+    title: 'eSIM Platform — Global Connectivity',
+    description: 'Reimagining how people connect — anywhere, anytime',
+    label: 'Telecom Platform'
+  },
+  {
+    id: 'evoke-dholavira',
+    color: '#060010',
+    title: 'Evoke Dholavira — Digital Window',
+    description: 'Where archaeology meets digital artistry',
+    label: 'Heritage Platform'
+  },
+  {
+    id: 'bharat-upline',
+    color: '#060010',
+    title: 'Bharat Upline — Utility Engine',
+    description: 'Powering India\'s everyday transactions through a robust, scalable digital backbone',
+    label: 'Utility Platform'
+  },
+  {
+    id: 'ayris-assure',
+    color: '#060010',
+    title: 'Ayris Assure — Card Compliance',
+    description: 'Engineering trust, transparency, and total governance in financial card testing',
+    label: 'Fintech Platform'
+  },
+  {
+    id: 'ai-diagnostics',
+    color: '#060010',
+    title: 'AI Diagnostics Scanner',
+    description: 'Where medical data becomes clarity, and clarity becomes faster diagnosis',
+    label: 'Healthcare Platform'
+  },
+  {
+    id: 'security-2',
+    color: '#060010',
+    title: 'ShivID – Identity Reimagined',
+    description: 'A next-generation identity layer powering authentication, authorization, and user lifecycle management with enterprise-grade accuracy',
+    label: 'Identity Platform'
   }
 ];
 
@@ -79,6 +129,20 @@ const updateCardGlowProperties = (card, mouseX, mouseY, glow, radius) => {
   card.style.setProperty('--glow-radius', `${radius}px`);
 };
 
+interface ParticleCardProps {
+  children: React.ReactNode;
+  className?: string;
+  disableAnimations?: boolean;
+  style?: React.CSSProperties;
+  particleCount?: number;
+  glowColor?: string;
+  enableTilt?: boolean;
+  clickEffect?: boolean;
+  enableMagnetism?: boolean;
+  cardId?: string;
+  onCardClick?: (cardId: string) => void;
+}
+
 const ParticleCard = ({
   children,
   className = '',
@@ -88,8 +152,10 @@ const ParticleCard = ({
   glowColor = DEFAULT_GLOW_COLOR,
   enableTilt = true,
   clickEffect = false,
-  enableMagnetism = false
-}) => {
+  enableMagnetism = false,
+  cardId,
+  onCardClick
+}: ParticleCardProps) => {
   const cardRef = useRef(null);
   const particlesRef = useRef([]);
   const timeoutsRef = useRef([]);
@@ -246,48 +312,53 @@ const ParticleCard = ({
     };
 
     const handleClick = e => {
-      if (!clickEffect) return;
+      if (clickEffect) {
+        const rect = element.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
 
-      const rect = element.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
+        const maxDistance = Math.max(
+          Math.hypot(x, y),
+          Math.hypot(x - rect.width, y),
+          Math.hypot(x, y - rect.height),
+          Math.hypot(x - rect.width, y - rect.height)
+        );
 
-      const maxDistance = Math.max(
-        Math.hypot(x, y),
-        Math.hypot(x - rect.width, y),
-        Math.hypot(x, y - rect.height),
-        Math.hypot(x - rect.width, y - rect.height)
-      );
+        const ripple = document.createElement('div');
+        ripple.style.cssText = `
+          position: absolute;
+          width: ${maxDistance * 2}px;
+          height: ${maxDistance * 2}px;
+          border-radius: 50%;
+          background: radial-gradient(circle, rgba(${glowColor}, 0.4) 0%, rgba(${glowColor}, 0.2) 30%, transparent 70%);
+          left: ${x - maxDistance}px;
+          top: ${y - maxDistance}px;
+          pointer-events: none;
+          z-index: 1000;
+        `;
 
-      const ripple = document.createElement('div');
-      ripple.style.cssText = `
-        position: absolute;
-        width: ${maxDistance * 2}px;
-        height: ${maxDistance * 2}px;
-        border-radius: 50%;
-        background: radial-gradient(circle, rgba(${glowColor}, 0.4) 0%, rgba(${glowColor}, 0.2) 30%, transparent 70%);
-        left: ${x - maxDistance}px;
-        top: ${y - maxDistance}px;
-        pointer-events: none;
-        z-index: 1000;
-      `;
+        element.appendChild(ripple);
 
-      element.appendChild(ripple);
+        gsap.fromTo(
+          ripple,
+          {
+            scale: 0,
+            opacity: 1
+          },
+          {
+            scale: 1,
+            opacity: 0,
+            duration: 0.8,
+            ease: 'power2.out',
+            onComplete: () => ripple.remove()
+          }
+        );
+      }
 
-      gsap.fromTo(
-        ripple,
-        {
-          scale: 0,
-          opacity: 1
-        },
-        {
-          scale: 1,
-          opacity: 0,
-          duration: 0.8,
-          ease: 'power2.out',
-          onComplete: () => ripple.remove()
-        }
-      );
+      // Navigate to case study page
+      if (cardId && onCardClick) {
+        onCardClick(cardId);
+      }
     };
 
     element.addEventListener('mouseenter', handleMouseEnter);
@@ -303,12 +374,12 @@ const ParticleCard = ({
       element.removeEventListener('click', handleClick);
       clearAllParticles();
     };
-  }, [animateParticles, clearAllParticles, disableAnimations, enableTilt, enableMagnetism, clickEffect, glowColor]);
+  }, [animateParticles, clearAllParticles, disableAnimations, enableTilt, enableMagnetism, clickEffect, glowColor, cardId, onCardClick]);
 
   return (
     <div
       ref={cardRef}
-      className={`${className} relative overflow-hidden`}
+      className={`${className} relative overflow-hidden ${cardId ? 'cursor-pointer' : ''}`}
       style={{ ...style, position: 'relative', overflow: 'hidden' }}
     >
       {children}
@@ -450,8 +521,8 @@ const GlobalSpotlight = ({
 
 const BentoCardGrid = ({ children, gridRef }) => (
   <div
-    className="bento-section grid gap-2 p-3  select-none relative"
-    style={{ fontSize: 'clamp(1rem, 0.9rem + 0.5vw, 1.5rem)' }}
+    className="bento-section grid gap-2 p-3 select-none relative overflow-y-auto"
+    style={{ fontSize: 'clamp(1rem, 0.9rem + 0.5vw, 1.5rem)', maxHeight: '100vh', width: '100%' }}
     ref={gridRef}
   >
     {children}
@@ -489,6 +560,16 @@ const MagicBento = ({
   const gridRef = useRef(null);
   const isMobile = useMobileDetection();
   const shouldDisableAnimations = disableAnimations || isMobile;
+  const navigate = useNavigate();
+
+  const handleCardClick = (cardId: string) => {
+    // Remove -2 suffix to map duplicate cards to original case studies
+    const baseId = cardId.replace(/-2$/, '');
+    const caseStudy = caseStudiesData.find(cs => cs.id === baseId || cs.id === cardId);
+    if (caseStudy) {
+      navigate(`/case-study/${baseId}`, { state: { caseStudy } });
+    }
+  };
 
   return (
     <>
@@ -510,8 +591,8 @@ const MagicBento = ({
           
           .card-responsive {
             grid-template-columns: 1fr;
-            width: 90%;
-            margin: 0 auto;
+            width: 100%;
+            margin: 0;
             padding: 0.5rem;
           }
           
@@ -539,6 +620,21 @@ const MagicBento = ({
             .card-responsive .card:nth-child(6) {
               grid-column: 4;
               grid-row: 3;
+            }
+            
+            .card-responsive .card:nth-child(9) {
+              grid-column: span 2;
+              grid-row: span 2;
+            }
+            
+            .card-responsive .card:nth-child(10) {
+              grid-column: 1 / span 2;
+              grid-row: 5 / span 2;
+            }
+            
+            .card-responsive .card:nth-child(12) {
+              grid-column: 4;
+              grid-row: 6;
             }
           }
           
@@ -606,9 +702,9 @@ const MagicBento = ({
           @media (max-width: 599px) {
             .card-responsive {
               grid-template-columns: 1fr;
-              width: 90%;
-              margin: 0 auto;
-              padding: 0.5rem;
+              width: 100%;
+              margin: 0;
+              padding: 0;
             }
             
             .card-responsive .card {
@@ -632,7 +728,7 @@ const MagicBento = ({
       <BentoCardGrid gridRef={gridRef}>
         <div className="card-responsive grid gap-2">
           {cardData.map((card, index) => {
-            const baseClassName = `card flex flex-col justify-between relative aspect-[4/3] min-h-[200px] max-h-[420px] w-full max-w-full p-5 rounded-[20px] border border-solid font-light overflow-hidden transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:shadow-[0_8px_25px_rgba(0,0,0,0.15)] ${
+            const baseClassName = `card flex flex-col justify-between relative aspect-[4/3] min-h-[200px] max-h-[420px] w-full max-w-full p-5 rounded-[20px] border border-solid font-light overflow-hidden transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:shadow-[0_8px_25px_rgba(0,0,0,0.15)] cursor-pointer ${
               enableBorderGlow ? 'card--border-glow' : ''
             }`;
 
@@ -658,6 +754,8 @@ const MagicBento = ({
                   enableTilt={enableTilt}
                   clickEffect={clickEffect}
                   enableMagnetism={enableMagnetism}
+                  cardId={card.id}
+                  onCardClick={handleCardClick}
                 >
                   <div className="card__header flex justify-between gap-3 relative text-white">
                     <span className="card__label text-base">{card.label}</span>
@@ -742,48 +840,51 @@ const MagicBento = ({
                   };
 
                   const handleClick = e => {
-                    if (!clickEffect || shouldDisableAnimations) return;
+                    if (clickEffect && !shouldDisableAnimations) {
+                      const rect = el.getBoundingClientRect();
+                      const x = e.clientX - rect.left;
+                      const y = e.clientY - rect.top;
 
-                    const rect = el.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
+                      const maxDistance = Math.max(
+                        Math.hypot(x, y),
+                        Math.hypot(x - rect.width, y),
+                        Math.hypot(x, y - rect.height),
+                        Math.hypot(x - rect.width, y - rect.height)
+                      );
 
-                    const maxDistance = Math.max(
-                      Math.hypot(x, y),
-                      Math.hypot(x - rect.width, y),
-                      Math.hypot(x, y - rect.height),
-                      Math.hypot(x - rect.width, y - rect.height)
-                    );
+                      const ripple = document.createElement('div');
+                      ripple.style.cssText = `
+                        position: absolute;
+                        width: ${maxDistance * 2}px;
+                        height: ${maxDistance * 2}px;
+                        border-radius: 50%;
+                        background: radial-gradient(circle, rgba(${glowColor}, 0.4) 0%, rgba(${glowColor}, 0.2) 30%, transparent 70%);
+                        left: ${x - maxDistance}px;
+                        top: ${y - maxDistance}px;
+                        pointer-events: none;
+                        z-index: 1000;
+                      `;
 
-                    const ripple = document.createElement('div');
-                    ripple.style.cssText = `
-                      position: absolute;
-                      width: ${maxDistance * 2}px;
-                      height: ${maxDistance * 2}px;
-                      border-radius: 50%;
-                      background: radial-gradient(circle, rgba(${glowColor}, 0.4) 0%, rgba(${glowColor}, 0.2) 30%, transparent 70%);
-                      left: ${x - maxDistance}px;
-                      top: ${y - maxDistance}px;
-                      pointer-events: none;
-                      z-index: 1000;
-                    `;
+                      el.appendChild(ripple);
 
-                    el.appendChild(ripple);
+                      gsap.fromTo(
+                        ripple,
+                        {
+                          scale: 0,
+                          opacity: 1
+                        },
+                        {
+                          scale: 1,
+                          opacity: 0,
+                          duration: 0.8,
+                          ease: 'power2.out',
+                          onComplete: () => ripple.remove()
+                        }
+                      );
+                    }
 
-                    gsap.fromTo(
-                      ripple,
-                      {
-                        scale: 0,
-                        opacity: 1
-                      },
-                      {
-                        scale: 1,
-                        opacity: 0,
-                        duration: 0.8,
-                        ease: 'power2.out',
-                        onComplete: () => ripple.remove()
-                      }
-                    );
+                    // Navigate to case study page
+                    handleCardClick(card.id);
                   };
 
                   el.addEventListener('mousemove', handleMouseMove);
