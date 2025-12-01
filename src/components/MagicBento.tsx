@@ -95,7 +95,7 @@ const cardData = [
   }
 ];
 
-const createParticleElement = (x, y, color = DEFAULT_GLOW_COLOR) => {
+const createParticleElement = (x: number, y: number, color = DEFAULT_GLOW_COLOR) => {
   const el = document.createElement('div');
   el.className = 'particle';
   el.style.cssText = `
@@ -113,12 +113,12 @@ const createParticleElement = (x, y, color = DEFAULT_GLOW_COLOR) => {
   return el;
 };
 
-const calculateSpotlightValues = radius => ({
+const calculateSpotlightValues = (radius: number) => ({
   proximity: radius * 0.5,
   fadeDistance: radius * 0.75
 });
 
-const updateCardGlowProperties = (card, mouseX, mouseY, glow, radius) => {
+const updateCardGlowProperties = (card: HTMLElement, mouseX: number, mouseY: number, glow: number, radius: number) => {
   const rect = card.getBoundingClientRect();
   const relativeX = ((mouseX - rect.left) / rect.width) * 100;
   const relativeY = ((mouseY - rect.top) / rect.height) * 100;
@@ -156,13 +156,13 @@ const ParticleCard = ({
   cardId,
   onCardClick
 }: ParticleCardProps) => {
-  const cardRef = useRef(null);
-  const particlesRef = useRef([]);
-  const timeoutsRef = useRef([]);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const particlesRef = useRef<HTMLDivElement[]>([]);
+  const timeoutsRef = useRef<NodeJS.Timeout[]>([]);
   const isHoveredRef = useRef(false);
-  const memoizedParticles = useRef([]);
+  const memoizedParticles = useRef<HTMLDivElement[]>([]);
   const particlesInitialized = useRef(false);
-  const magnetismAnimationRef = useRef(null);
+  const magnetismAnimationRef = useRef<gsap.core.Tween | null>(null);
 
   const initializeParticles = useCallback(() => {
     if (particlesInitialized.current || !cardRef.current) return;
@@ -204,7 +204,7 @@ const ParticleCard = ({
       const timeoutId = setTimeout(() => {
         if (!isHoveredRef.current || !cardRef.current) return;
 
-        const clone = particle.cloneNode(true);
+        const clone = particle.cloneNode(true) as HTMLDivElement;
         cardRef.current.appendChild(clone);
         particlesRef.current.push(clone);
 
@@ -276,7 +276,7 @@ const ParticleCard = ({
       }
     };
 
-    const handleMouseMove = e => {
+    const handleMouseMove = (e: MouseEvent) => {
       if (!enableTilt && !enableMagnetism) return;
 
       const rect = element.getBoundingClientRect();
@@ -311,7 +311,7 @@ const ParticleCard = ({
       }
     };
 
-    const handleClick = e => {
+    const handleClick = (e: MouseEvent) => {
       if (clickEffect) {
         const rect = element.getBoundingClientRect();
         const x = e.clientX - rect.left;
@@ -393,8 +393,14 @@ const GlobalSpotlight = ({
   enabled = true,
   spotlightRadius = DEFAULT_SPOTLIGHT_RADIUS,
   glowColor = DEFAULT_GLOW_COLOR
+}: {
+  gridRef: React.RefObject<HTMLDivElement | null>;
+  disableAnimations?: boolean;
+  enabled?: boolean;
+  spotlightRadius?: number;
+  glowColor?: string;
 }) => {
-  const spotlightRef = useRef(null);
+  const spotlightRef = useRef<HTMLDivElement | null>(null);
   const isInsideSection = useRef(false);
 
   useEffect(() => {
@@ -422,9 +428,9 @@ const GlobalSpotlight = ({
       mix-blend-mode: screen;
     `;
     document.body.appendChild(spotlight);
-    spotlightRef.current = spotlight;
+    spotlightRef.current = spotlight as HTMLDivElement;
 
-    const handleMouseMove = e => {
+    const handleMouseMove = (e: MouseEvent) => {
       if (!spotlightRef.current || !gridRef.current) return;
 
       const section = gridRef.current.closest('.bento-section');
@@ -441,8 +447,8 @@ const GlobalSpotlight = ({
           duration: 0.3,
           ease: 'power2.out'
         });
-        cards.forEach(card => {
-          card.style.setProperty('--glow-intensity', '0');
+        cards.forEach((card: Element) => {
+          (card as HTMLElement).style.setProperty('--glow-intensity', '0');
         });
         return;
       }
@@ -450,8 +456,8 @@ const GlobalSpotlight = ({
       const { proximity, fadeDistance } = calculateSpotlightValues(spotlightRadius);
       let minDistance = Infinity;
 
-      cards.forEach(card => {
-        const cardElement = card;
+      cards.forEach((card: Element) => {
+        const cardElement = card as HTMLElement;
         const cardRect = cardElement.getBoundingClientRect();
         const centerX = cardRect.left + cardRect.width / 2;
         const centerY = cardRect.top + cardRect.height / 2;
@@ -494,8 +500,8 @@ const GlobalSpotlight = ({
 
     const handleMouseLeave = () => {
       isInsideSection.current = false;
-      gridRef.current?.querySelectorAll('.card').forEach(card => {
-        card.style.setProperty('--glow-intensity', '0');
+      gridRef.current?.querySelectorAll('.card').forEach((card: Element) => {
+        (card as HTMLElement).style.setProperty('--glow-intensity', '0');
       });
       if (spotlightRef.current) {
         gsap.to(spotlightRef.current, {
@@ -512,14 +518,16 @@ const GlobalSpotlight = ({
     return () => {
       document.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseleave', handleMouseLeave);
-      spotlightRef.current?.parentNode?.removeChild(spotlightRef.current);
+      if (spotlightRef.current?.parentNode) {
+        spotlightRef.current.parentNode.removeChild(spotlightRef.current);
+      }
     };
   }, [gridRef, disableAnimations, enabled, spotlightRadius, glowColor]);
 
   return null;
 };
 
-const BentoCardGrid = ({ children, gridRef }) => (
+const BentoCardGrid = ({ children, gridRef }: { children: React.ReactNode; gridRef: React.RefObject<HTMLDivElement | null> }) => (
   <div
     className="bento-section grid gap-2 p-3 select-none relative overflow-y-auto"
     style={{ fontSize: 'clamp(1rem, 0.9rem + 0.5vw, 1.5rem)', maxHeight: '100vh', width: '100%' }}
@@ -557,7 +565,7 @@ const MagicBento = ({
   clickEffect = true,
   enableMagnetism = true
 }) => {
-  const gridRef = useRef(null);
+  const gridRef = useRef<HTMLDivElement>(null);
   const isMobile = useMobileDetection();
   const shouldDisableAnimations = disableAnimations || isMobile;
   const navigate = useNavigate();
@@ -782,7 +790,7 @@ const MagicBento = ({
                 ref={el => {
                   if (!el) return;
 
-                  const handleMouseMove = e => {
+                  const handleMouseMove = (e: MouseEvent) => {
                     if (shouldDisableAnimations) return;
 
                     const rect = el.getBoundingClientRect();
@@ -839,7 +847,7 @@ const MagicBento = ({
                     }
                   };
 
-                  const handleClick = e => {
+                  const handleClick = (e: MouseEvent) => {
                     if (clickEffect && !shouldDisableAnimations) {
                       const rect = el.getBoundingClientRect();
                       const x = e.clientX - rect.left;
