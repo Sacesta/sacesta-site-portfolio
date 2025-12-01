@@ -2,10 +2,13 @@ import { useRef, useEffect, useState, useCallback } from 'react';
 import { gsap } from 'gsap';
 import { useNavigate } from 'react-router-dom';
 import { caseStudiesData } from '../data/caseStudies';
+import visitAhmedabadBg from '../assets/visit-ahmedabad-bg.png';
+import esimPlatformBg from '../assets/esim-platform-bg.png';
+import shividBg from '../assets/shivid-bg.png';
 
 const DEFAULT_PARTICLE_COUNT = 12;
 const DEFAULT_SPOTLIGHT_RADIUS = 300;
-const DEFAULT_GLOW_COLOR = '132, 0, 255';
+const DEFAULT_GLOW_COLOR = '255, 255, 255';
 const MOBILE_BREAKPOINT = 768;
 
 const cardData = [
@@ -14,7 +17,8 @@ const cardData = [
     color: '#060010',
     title: 'Visit Ahmedabad',
     description: 'Where heritage storytelling meets modern digital engineering',
-    label: 'Tourism Platform'
+    label: 'Tourism Platform',
+    backgroundImage: visitAhmedabadBg
   },
   {
     id: 'dashboard',
@@ -56,7 +60,8 @@ const cardData = [
     color: '#060010',
     title: 'eSIM Platform — Global Connectivity',
     description: 'Reimagining how people connect — anywhere, anytime',
-    label: 'Telecom Platform'
+    label: 'Telecom Platform',
+    backgroundImage: esimPlatformBg
   },
   {
     id: 'evoke-dholavira',
@@ -91,7 +96,8 @@ const cardData = [
     color: '#060010',
     title: 'ShivID – Identity Reimagined',
     description: 'A next-generation identity layer powering authentication, authorization, and user lifecycle management with enterprise-grade accuracy',
-    label: 'Identity Platform'
+    label: 'Identity Platform',
+    backgroundImage: shividBg
   }
 ];
 
@@ -141,6 +147,7 @@ interface ParticleCardProps {
   enableMagnetism?: boolean;
   cardId?: string;
   onCardClick?: (cardId: string) => void;
+  backgroundImage?: string;
 }
 
 const ParticleCard = ({
@@ -154,7 +161,8 @@ const ParticleCard = ({
   clickEffect = false,
   enableMagnetism = false,
   cardId,
-  onCardClick
+  onCardClick,
+  backgroundImage
 }: ParticleCardProps) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const particlesRef = useRef<HTMLDivElement[]>([]);
@@ -311,21 +319,35 @@ const ParticleCard = ({
       }
     };
 
-    const handleClick = (e: MouseEvent) => {
-      if (clickEffect) {
-        const rect = element.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
+    element.addEventListener('mouseenter', handleMouseEnter);
+    element.addEventListener('mouseleave', handleMouseLeave);
+    element.addEventListener('mousemove', handleMouseMove);
 
-        const maxDistance = Math.max(
-          Math.hypot(x, y),
-          Math.hypot(x - rect.width, y),
-          Math.hypot(x, y - rect.height),
-          Math.hypot(x - rect.width, y - rect.height)
-        );
+    return () => {
+      isHoveredRef.current = false;
+      element.removeEventListener('mouseenter', handleMouseEnter);
+      element.removeEventListener('mouseleave', handleMouseLeave);
+      element.removeEventListener('mousemove', handleMouseMove);
+      clearAllParticles();
+    };
+  }, [animateParticles, clearAllParticles, disableAnimations, enableTilt, enableMagnetism, clickEffect, glowColor, cardId, onCardClick]);
 
-        const ripple = document.createElement('div');
-        ripple.style.cssText = `
+  const handleContainerClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (clickEffect && !disableAnimations) {
+      const element = e.currentTarget;
+      const rect = element.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      const maxDistance = Math.max(
+        Math.hypot(x, y),
+        Math.hypot(x - rect.width, y),
+        Math.hypot(x, y - rect.height),
+        Math.hypot(x - rect.width, y - rect.height)
+      );
+
+      const ripple = document.createElement('div');
+      ripple.style.cssText = `
           position: absolute;
           width: ${maxDistance * 2}px;
           height: ${maxDistance * 2}px;
@@ -337,52 +359,49 @@ const ParticleCard = ({
           z-index: 1000;
         `;
 
-        element.appendChild(ripple);
+      element.appendChild(ripple);
 
-        gsap.fromTo(
-          ripple,
-          {
-            scale: 0,
-            opacity: 1
-          },
-          {
-            scale: 1,
-            opacity: 0,
-            duration: 0.8,
-            ease: 'power2.out',
-            onComplete: () => ripple.remove()
-          }
-        );
-      }
+      gsap.fromTo(
+        ripple,
+        {
+          scale: 0,
+          opacity: 1
+        },
+        {
+          scale: 1,
+          opacity: 0,
+          duration: 0.8,
+          ease: 'power2.out',
+          onComplete: () => ripple.remove()
+        }
+      );
+    }
 
-      // Navigate to case study page
-      if (cardId && onCardClick) {
-        onCardClick(cardId);
-      }
-    };
-
-    element.addEventListener('mouseenter', handleMouseEnter);
-    element.addEventListener('mouseleave', handleMouseLeave);
-    element.addEventListener('mousemove', handleMouseMove);
-    element.addEventListener('click', handleClick);
-
-    return () => {
-      isHoveredRef.current = false;
-      element.removeEventListener('mouseenter', handleMouseEnter);
-      element.removeEventListener('mouseleave', handleMouseLeave);
-      element.removeEventListener('mousemove', handleMouseMove);
-      element.removeEventListener('click', handleClick);
-      clearAllParticles();
-    };
-  }, [animateParticles, clearAllParticles, disableAnimations, enableTilt, enableMagnetism, clickEffect, glowColor, cardId, onCardClick]);
+    // Navigate to case study page
+    if (cardId && onCardClick) {
+      onCardClick(cardId);
+    }
+  };
 
   return (
     <div
       ref={cardRef}
       className={`${className} relative overflow-hidden ${cardId ? 'cursor-pointer' : ''}`}
       style={{ ...style, position: 'relative', overflow: 'hidden' }}
+      onClick={handleContainerClick}
     >
-      {children}
+      {backgroundImage && (
+        <div
+          className="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-500 hover:scale-110"
+          style={{
+            backgroundImage: `url(${backgroundImage})`,
+            opacity: 0.6
+          }}
+        />
+      )}
+      <div className="relative z-10 w-full h-full flex flex-col justify-between">
+        {children}
+      </div>
     </div>
   );
 };
@@ -736,9 +755,8 @@ const MagicBento = ({
       <BentoCardGrid gridRef={gridRef}>
         <div className="card-responsive grid gap-2">
           {cardData.map((card, index) => {
-            const baseClassName = `card flex flex-col justify-between relative aspect-[4/3] min-h-[200px] max-h-[420px] w-full max-w-full p-5 rounded-[20px] border border-solid font-light overflow-hidden transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:shadow-[0_8px_25px_rgba(0,0,0,0.15)] cursor-pointer ${
-              enableBorderGlow ? 'card--border-glow' : ''
-            }`;
+            const baseClassName = `card flex flex-col justify-between relative aspect-[4/3] min-h-[200px] max-h-[420px] w-full max-w-full p-5 rounded-[20px] border border-solid font-light overflow-hidden transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:shadow-[0_8px_25px_rgba(0,0,0,0.15)] cursor-pointer ${enableBorderGlow ? 'card--border-glow' : ''
+              }`;
 
             const cardStyle = {
               backgroundColor: card.color || 'var(--background-dark)',
@@ -764,6 +782,7 @@ const MagicBento = ({
                   enableMagnetism={enableMagnetism}
                   cardId={card.id}
                   onCardClick={handleCardClick}
+                  backgroundImage={card.backgroundImage}
                 >
                   <div className="card__header flex justify-between gap-3 relative text-white">
                     <span className="card__label text-base">{card.label}</span>
@@ -847,21 +866,25 @@ const MagicBento = ({
                     }
                   };
 
-                  const handleClick = (e: MouseEvent) => {
-                    if (clickEffect && !shouldDisableAnimations) {
-                      const rect = el.getBoundingClientRect();
-                      const x = e.clientX - rect.left;
-                      const y = e.clientY - rect.top;
+                  el.addEventListener('mousemove', handleMouseMove);
+                  el.addEventListener('mouseleave', handleMouseLeave);
+                }}
+                onClick={(e) => {
+                  if (clickEffect && !shouldDisableAnimations) {
+                    const el = e.currentTarget;
+                    const rect = el.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
 
-                      const maxDistance = Math.max(
-                        Math.hypot(x, y),
-                        Math.hypot(x - rect.width, y),
-                        Math.hypot(x, y - rect.height),
-                        Math.hypot(x - rect.width, y - rect.height)
-                      );
+                    const maxDistance = Math.max(
+                      Math.hypot(x, y),
+                      Math.hypot(x - rect.width, y),
+                      Math.hypot(x, y - rect.height),
+                      Math.hypot(x - rect.width, y - rect.height)
+                    );
 
-                      const ripple = document.createElement('div');
-                      ripple.style.cssText = `
+                    const ripple = document.createElement('div');
+                    ripple.style.cssText = `
                         position: absolute;
                         width: ${maxDistance * 2}px;
                         height: ${maxDistance * 2}px;
@@ -873,49 +896,55 @@ const MagicBento = ({
                         z-index: 1000;
                       `;
 
-                      el.appendChild(ripple);
+                    el.appendChild(ripple);
 
-                      gsap.fromTo(
-                        ripple,
-                        {
-                          scale: 0,
-                          opacity: 1
-                        },
-                        {
-                          scale: 1,
-                          opacity: 0,
-                          duration: 0.8,
-                          ease: 'power2.out',
-                          onComplete: () => ripple.remove()
-                        }
-                      );
-                    }
+                    gsap.fromTo(
+                      ripple,
+                      {
+                        scale: 0,
+                        opacity: 1
+                      },
+                      {
+                        scale: 1,
+                        opacity: 0,
+                        duration: 0.8,
+                        ease: 'power2.out',
+                        onComplete: () => ripple.remove()
+                      }
+                    );
+                  }
 
-                    // Navigate to case study page
-                    handleCardClick(card.id);
-                  };
-
-                  el.addEventListener('mousemove', handleMouseMove);
-                  el.addEventListener('mouseleave', handleMouseLeave);
-                  el.addEventListener('click', handleClick);
+                  // Navigate to case study page
+                  handleCardClick(card.id);
                 }}
               >
-                <div className="card__header flex justify-between gap-3 relative text-white">
-                  <span className="card__label text-base">{card.label}</span>
-                </div>
-                <div className="card__content flex flex-col relative text-white">
-                  <h3 className={`card__title font-normal text-base m-0 mb-1 ${textAutoHide ? 'text-clamp-1' : ''}`}>
-                    {card.title}
-                  </h3>
-                  <p className={`card__description text-xs leading-5 opacity-90 ${textAutoHide ? 'text-clamp-2' : ''}`}>
-                    {card.description}
-                  </p>
+                {card.backgroundImage && (
+                  <div
+                    className="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-500 hover:scale-110"
+                    style={{
+                      backgroundImage: `url(${card.backgroundImage})`,
+                      opacity: 0.6
+                    }}
+                  />
+                )}
+                <div className="relative z-10 w-full h-full flex flex-col justify-between">
+                  <div className="card__header flex justify-between gap-3 relative text-white">
+                    <span className="card__label text-base">{card.label}</span>
+                  </div>
+                  <div className="card__content flex flex-col relative text-white">
+                    <h3 className={`card__title font-normal text-base m-0 mb-1 ${textAutoHide ? 'text-clamp-1' : ''}`}>
+                      {card.title}
+                    </h3>
+                    <p className={`card__description text-xs leading-5 opacity-90 ${textAutoHide ? 'text-clamp-2' : ''}`}>
+                      {card.description}
+                    </p>
+                  </div>
                 </div>
               </div>
             );
           })}
         </div>
-      </BentoCardGrid>
+      </BentoCardGrid >
     </>
   );
 };
