@@ -925,105 +925,125 @@ export const caseStudiesData: CaseStudyData[] = [
     liveUrl: 'https://bharat-upline-fe-main.vercel.app/login'
   },
   {
-    id: 'ayris-assure',
-    title: 'Ayris Assure — Precision in Card Compliance',
-    subtitle: 'Engineering trust, transparency, and total governance in financial card testing',
-    description: 'A mission-critical platform enabling banks, fintechs, and payment institutions to manage issuer test cards, validate card controls, and maintain strict compliance across complex card ecosystems.',
+    id: 'zenn-ai',
+    title: 'Zenn AI — Voice & Wellness Assistant',
+    subtitle: 'AI-powered voice and text chat for wellness applications with multi-platform deployment',
+    description: 'A comprehensive Node.js/Express API providing AI-powered voice and text chat for wellness applications like yoga instruction and fitness coaching. Features phone/email OTP authentication, LangGraph AI integration for context-aware conversations, and full voice processing pipeline using AWS services.',
     problem: {
       title: 'The Problem',
-      description: 'Before Ayris Assure, test card management was chaotic: Card data lived in Excel sheets, No unified control over active or blocked cards, SME and Manager approvals were inconsistent, Card control updates weren\'t tracked, Auto-release rules weren\'t automated, Errors during manual card updates caused compliance issues, No visibility into card history or responsible users. Financial institutions needed a secure, rule-driven, fully auditable system to govern all issuer test cards across departments.'
+      description: 'Wellness applications needed intelligent, context-aware assistants but faced critical challenges: No unified system for voice and text interactions, Manual authentication flows created friction, Lack of context retention across conversations, No voice processing pipeline for real-time interactions, Scattered chat histories without thread management, Limited multi-platform support. Yoga apps, fitness coaches, and wellness platforms required a scalable backend that could handle voice-to-voice AI interactions while maintaining conversation context and user profiles seamlessly.'
     },
     userBase: {
       title: 'User Base',
-      description: 'The system supports a multi-tier identity structure: Profile Editor — Creates profiles, Uploads matching schema JSON, Adds cards to valid profiles. SME — Validates card controls, Approves or rejects profiles, Performs updates on assigned card parameters. Manager — Has final approval authority, Manages card release and escalations. Admins — Configure release logic, Manage issuers, features, products, Oversee audit and system health. Third-party test teams (via exports) — Consume valid test cards for sandbox and QA cycles. Each role interacts through tightly restricted access logic.'
+      description: 'The platform serves multiple user segments: End Users — Yoga practitioners seeking guided sessions, Fitness enthusiasts needing personalized coaching, Wellness seekers wanting mental health conversations. They interact via Flutter mobile app (APK) and React.js web interface. Administrators — Manage user profiles, Monitor AI performance, Configure system settings. Developers — Integrate via REST APIs for custom wellness applications. The system supports multi-threaded conversations per user, ensuring personalized experiences across different wellness contexts.'
     },
     approach: {
       title: 'Our Approach',
-      description: 'We engineered Ayris Assure with absolute precision: A profile-based card matching engine, JSON-driven feature-product-issuer validation, Card lifecycle automation, Auto-block → auto-active → auto-release flows, Cron jobs for date-based triggers, Multi-step review + approval pipelines, Exhaustive audit logs with timestamped actions. The architecture ensures zero ambiguity, zero duplicates, and zero compliance deviations.'
+      description: 'We architected Zenn AI Backend as a comprehensive wellness AI engine: Multi-channel authentication with phone/email OTP via Twilio and Nodemailer, LangGraph integration with "yoga_assistant" AI for contextual, domain-specific responses, Complete voice pipeline: AWS Transcribe (STT) → AI processing → AWS Polly (TTS), Multi-threaded chat system with full history storage and sequence tracking, MySQL database for scalable user management and conversation persistence, AWS S3 for audio file storage with automatic cleanup. The architecture ensures seamless voice-to-voice interactions while maintaining conversation intelligence across sessions.'
     },
     detailedAnalysis: {
       title: 'The Full Story',
       paragraphs: [
-        'Ayris Assure emerged from deep operational chaos — hundreds of test cards circulating without visibility, undocumented changes, and no framework to ensure testing integrity. This required a complete architectural rethinking.',
-        'Every card is assigned under a Profile, defined by three parameters: Feature Name, Product Name, Issuer Name. The system validates profile creation by ensuring: Matching combination exists, JSON schema uploaded is valid, No duplicate active profiles exist. If a new profile shares the same combination, the last active profile auto-archives — preserving compliance and preventing duplicate ecosystems.'
+        'Zenn AI Backend emerged from the need to create a production-ready wellness assistant that could understand context, remember conversations, and interact naturally through both voice and text.',
+        'The system architecture follows a complete workflow: Users authenticate via phone/email OTP, receive JWT tokens for secure sessions, engage in multi-threaded conversations with context-aware AI, and experience seamless voice interactions through a full transcription → AI → synthesis pipeline. Every conversation thread maintains its own history, enabling personalized wellness guidance across different topics like yoga poses, workout plans, or mental health support.'
       ],
       sections: [
         {
-          title: 'Card Lifecycle Intelligence',
+          title: 'Authentication & User Management',
           paragraphs: [
-            'Card States: Assigned, Active, Blocked, Archived, Released (auto). Card behavior is governed by: Start Date, End Date, Block Reason, Activation rules, SME-level control updates. Automation: Cron jobs monitor all cards daily: If End Date = today, card moves to Blocked. If Blocked but Start Date = today, card reactivates. If End Date expired by 1 day, system auto-releases the card. Transaction count reduces OTB after each usage. OTB syncs daily with third-party databases. The result: a self-governing card ecosystem.'
+            'The authentication system supports dual channels: Phone OTP via Twilio SMS and Email OTP via Nodemailer. Upon OTP verification, the system automatically creates user profiles if they don\'t exist, generates JWT tokens for secure API access, stores verification status and session data. User profiles include: Verification status, Session management, Profile metadata. This enables frictionless onboarding while maintaining security standards.'
           ]
         },
         {
-          title: 'SME Control Update Workflow',
+          title: 'AI Chat System with LangGraph',
           paragraphs: [
-            'Only SME can update: Merchant category, Control type, Velocity limits, OTB, Sub-controls, Flags (cross-border, ecom, chip, swipe). Each change triggers logging: User, Time, Old value → New value, Reason. This ensures full traceability.'
+            'The chat system integrates LangGraph SDK with a specialized "yoga_assistant" AI model. Features include: Context-aware responses based on conversation history, Multi-chat threads per user with independent conversation contexts, Full history storage with sequence tracking, Endpoints for sending queries (POST /api/auth/chat-question) and retrieving history (POST /api/auth/chat-list). Each thread maintains its own sequence, allowing users to have separate conversations about different wellness topics simultaneously. The AI understands yoga terminology, fitness concepts, and wellness contexts to deliver personalized guidance.'
           ]
         },
         {
-          title: 'Profile Approval Flow',
+          title: 'Complete Voice Processing Pipeline',
           paragraphs: [
-            'Profile Editor creates a new Profile. Adds matching JSON. Adds Cards via structured form. Profile assigned → SME validation. SME approves or rejects. Manager finalizes if required. Once approved, the profile becomes test-ready.'
+            'The voice system provides three key endpoints: Voice-to-Text (POST /api/voice/voice-to-text) — Uses AWS Transcribe for accurate audio transcription, supports multiple audio formats (WebM, MP3, etc.), handles format detection automatically. Text-to-Voice (POST /api/voice/text-to-voice) — Uses AWS Polly for natural voice synthesis, supports long text chunking for seamless audio generation, returns public S3 URLs for audio playback. Voice-to-Voice (POST /api/voice/voice-to-voice) — Complete pipeline: User records audio → AWS Transcribe converts to text → AI processes query → AWS Polly synthesizes response → Audio URL returned. All audio files auto-upload to S3 with public URLs and temporary storage cleanup.'
           ]
         },
         {
-          title: 'Card Assignment & History Visibility',
+          title: 'Multi-Platform Frontend Support',
           paragraphs: [
-            'Every card includes: Lifecycle history, Ticket-level notes, Assigned SME, Release history, Timestamps for every state change. Test teams finally gain a single view of truth.'
+            'Mobile App (Flutter): Cross-platform native app compiled as Android APK, Features voice recording and playback using native plugins, Interactive chat interface with text and voice input, OTP login integration with backend, Local state management and native device permissions for microphone access. Web App (React.js): React 18 with functional components and hooks, SCSS/Sass for modular styling, Ant Design (Antd) UI library for professional components, Login and OTP verification forms, Multi-thread chat interface, Voice recording and playback controls, Responsive design for desktop and mobile browsers, React Router DOM for SPA navigation, Axios for HTTP requests with streaming support.'
+          ]
+        },
+        {
+          title: 'AWS Infrastructure & Deployment',
+          paragraphs: [
+            'The system is deployed on AWS EC2 with comprehensive infrastructure: EC2 Instance (98.86.74.102) with secure access, IAM user (serenityai-dev) for AWS service access, S3 buckets for audio file storage with lifecycle policies, AWS Transcribe for speech-to-text processing, AWS Polly for text-to-speech synthesis, MySQL database for user and chat data persistence. The deployment supports scalable user management, automatic resource cleanup, and high availability for production wellness applications.'
           ]
         }
       ],
-      quote: 'When financial products require absolute precision, Ayris Assure delivers a system built for clarity, control, and end-to-end compliance.'
+      quote: 'Wellness deserves intelligence. Zenn AI delivers context-aware conversations and seamless voice interactions — making every wellness journey personal and accessible.'
     },
     workflow: [
       {
         step: '01',
-        title: 'Discovery & Operational Mapping',
+        title: 'Discovery & Architecture Planning',
         duration: 'Week 1-2',
-        description: 'We participated in workflow interviews across compliance, QA, card issuance, and SME teams to map the true lifecycle of test cards.',
-        deliverables: ['Role matrices', 'Card state diagrams', 'Auto-release logic', 'Profile creation blueprint'],
+        description: 'We analyzed wellness application requirements: Voice interaction patterns, Authentication flows, Conversation context needs, Multi-platform deployment strategies. This informed the API design and database schema.',
+        deliverables: ['API endpoint specifications', 'Database schema design', 'Voice pipeline architecture', 'Authentication flow diagrams'],
         color: 'blue'
       },
       {
         step: '02',
-        title: 'UX & Process Clarity',
+        title: 'Authentication & User Management',
         duration: 'Week 3-4',
-        description: 'The UI required zero-friction precision: High-clarity status tags, Validations preventing wrong card assignment, JSON upload panel, Control update drawer, SME-only edit restrictions, Timeline-based history viewer. Complex logic presented in clean, composable screens.',
-        deliverables: ['Status system UI', 'JSON upload interface', 'Control update UI', 'History viewer'],
+        description: 'Built dual-channel OTP system: Twilio SMS integration for phone OTP, Nodemailer for email OTP, JWT token generation and validation, Automatic user profile creation, Secure session management.',
+        deliverables: ['OTP service modules', 'JWT middleware', 'User profile system', 'Session management'],
         color: 'purple'
       },
       {
         step: '03',
-        title: 'Card Intelligence Engine Development',
-        duration: 'Week 5-10',
-        description: 'Engineering focused on: Profile matching logic, Cron-driven automation, Card state engine, Multi-role middleware, Audit log infrastructure, OTB sync, Release pipeline. The backend acts as the compliance brain of the organization.',
-        deliverables: ['Profile matching engine', 'Cron automation', 'Card state engine', 'Audit system'],
+        title: 'AI Chat System Integration',
+        duration: 'Week 5-8',
+        description: 'Integrated LangGraph SDK and built chat infrastructure: Yoga assistant AI configuration, Multi-threaded conversation system, Chat history storage with sequence tracking, Context-aware response generation, MySQL database optimization for chat data.',
+        deliverables: ['LangGraph integration', 'Chat controller', 'Thread management system', 'History storage'],
         color: 'green'
       },
       {
         step: '04',
-        title: 'Deployment & Compliance Hardening',
-        duration: 'Week 11-14',
-        description: 'We delivered: Encrypted card storage, Secure RBAC implementation, Daily backup rotation, Notification system, Real-time error monitoring, Multi-environment sandbox support. Ayris Assure is now hardened for financial-grade reliability.',
-        deliverables: ['Encryption implementation', 'RBAC system', 'Backup system', 'Monitoring'],
+        title: 'Voice Processing Pipeline',
+        duration: 'Week 9-12',
+        description: 'Developed complete voice system: AWS Transcribe integration for STT, AWS Polly integration for TTS, Audio format detection and conversion, S3 upload and URL management, Voice-to-voice pipeline orchestration, Long text chunking for Polly.',
+        deliverables: ['Transcribe service', 'Polly service', 'Audio upload system', 'Voice-to-voice pipeline'],
         color: 'blue'
+      },
+      {
+        step: '05',
+        title: 'Frontend Development & Deployment',
+        duration: 'Week 13-16',
+        description: 'Built multi-platform frontends: Flutter mobile app with voice/chat features, React.js web app with Ant Design components, SCSS styling system, API integration with error handling, Responsive design implementation. Deployed backend on AWS EC2 with infrastructure setup.',
+        deliverables: ['Flutter APK', 'React web application', 'AWS EC2 deployment', 'Production configuration'],
+        color: 'green'
       }
     ],
     techStack: [
-      { name: 'React.js (Next.js optional)', description: 'Admin dashboards', icon: 'code-2', iconColor: 'text-blue-400' },
-      { name: 'Node.js (Express)', description: 'Card lifecycle engine', icon: 'server', iconColor: 'text-green-400' },
-      { name: 'MongoDB', description: 'Card data + logs', icon: 'database', iconColor: 'text-emerald-400' },
-      { name: 'Cron + Node Schedulers', description: 'Automated card-state management', icon: 'zap', iconColor: 'text-yellow-400' },
-      { name: 'JWT + RBAC middleware', description: 'Role security', icon: 'smartphone', iconColor: 'text-purple-400' },
-      { name: 'AWS S3', description: 'JSON schema and document storage', icon: 'hard-drive', iconColor: 'text-orange-400' },
-      { name: 'Docker + Nginx', description: 'Production deployment', icon: 'wind', iconColor: 'text-cyan-400' }
+      { name: 'Node.js + Express.js', description: 'REST API server with CORS and middleware', icon: 'server', iconColor: 'text-green-400' },
+      { name: 'LangGraph SDK', description: 'AI conversation management', icon: 'zap', iconColor: 'text-yellow-400' },
+      { name: 'MySQL', description: 'Users, chats, and conversation storage', icon: 'database', iconColor: 'text-emerald-400' },
+      { name: 'AWS Transcribe', description: 'Speech-to-text processing', icon: 'smartphone', iconColor: 'text-purple-400' },
+      { name: 'AWS Polly', description: 'Text-to-speech synthesis', icon: 'hard-drive', iconColor: 'text-orange-400' },
+      { name: 'AWS S3', description: 'Audio file storage', icon: 'hard-drive', iconColor: 'text-blue-300' },
+      { name: 'Twilio', description: 'SMS OTP delivery', icon: 'code-2', iconColor: 'text-blue-400' },
+      { name: 'Nodemailer', description: 'Email OTP delivery', icon: 'wind', iconColor: 'text-cyan-400' },
+      { name: 'JWT + Bcryptjs', description: 'Secure authentication', icon: 'zap', iconColor: 'text-yellow-300' },
+      { name: 'Flutter', description: 'Cross-platform mobile app (APK)', icon: 'smartphone', iconColor: 'text-indigo-400' },
+      { name: 'React.js + SCSS', description: 'Web application frontend', icon: 'code-2', iconColor: 'text-cyan-400' },
+      { name: 'Ant Design (Antd)', description: 'UI component library', icon: 'wind', iconColor: 'text-purple-300' },
+      { name: 'AWS EC2', description: 'Production deployment', icon: 'server', iconColor: 'text-green-300' }
     ],
     impact: [
-      { value: '100%', label: 'Traceability for Every Card' },
-      { value: '95%', label: 'Reduction in Manual Oversight' },
-      { value: '100%', label: 'Compliance-Grade Audit Integrity' }
+      { value: 'Multi-Platform', label: 'Flutter APK + React Web Support' },
+      { value: 'Voice-to-Voice', label: 'Complete AI Pipeline' },
+      { value: 'Context-Aware', label: 'Multi-Thread Conversations' }
     ],
-    liveUrl: 'https://assure-stage.ayrisglobal.com/'
+    liveUrl: '#'
   },
   {
     id: 'ai-diagnostics',

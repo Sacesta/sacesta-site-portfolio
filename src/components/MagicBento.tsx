@@ -2,9 +2,12 @@ import { useRef, useEffect, useState, useCallback } from 'react';
 import { gsap } from 'gsap';
 import { useNavigate } from 'react-router-dom';
 import { caseStudiesData } from '../data/caseStudies';
-import visitAhmedabadBg from '../assets/visit-ahmedabad-bg.png';
 import esimPlatformBg from '../assets/esim-platform-bg.png';
+import zenaiBg from '../assets/zenai.png';
+import mayuriBg from '../assets/mayuri.png';
+import evokeBg from '../assets/evoke.png';
 import shividBg from '../assets/shivid-bg.png';
+import xmayxBg from '../assets/xmyax.png';
 
 const DEFAULT_PARTICLE_COUNT = 12;
 const DEFAULT_SPOTLIGHT_RADIUS = 300;
@@ -12,48 +15,50 @@ const DEFAULT_GLOW_COLOR = '255, 255, 255';
 const MOBILE_BREAKPOINT = 768;
 
 const cardData = [
-  {
-    id: 'analytics',
-    color: '#060010',
-    title: 'Visit Ahmedabad',
-    description: 'Where heritage storytelling meets modern digital engineering',
-    label: 'Tourism Platform',
-    backgroundImage: visitAhmedabadBg
-  },
-  {
-    id: 'dashboard',
-    color: '#060010',
-    title: 'PIC Event Management Platform',
-    description: 'Engineering a seamless event backbone for thousands of athletes, coordinators, and administrators',
-    label: 'Event Platform'
-  },
+  // {
+  //   id: 'analytics',
+  //   color: '#060010',
+  //   title: 'Visit Ahmedabad',
+  //   description: 'Where heritage storytelling meets modern digital engineering',
+  //   label: 'Tourism Platform',
+  //   backgroundImage: visitAhmedabadBg
+  // },
+  // {
+  //   id: 'dashboard',
+  //   color: '#060010',
+  //   title: 'PIC Event Management Platform',
+  //   description: 'Engineering a seamless event backbone for thousands of athletes, coordinators, and administrators',
+  //   label: 'Event Platform'
+  // },
   {
     id: 'collaboration',
     color: '#060010',
     title: 'Mayuri Sharma Admin Platform',
     description: 'Transforming a creator\'s knowledge into a scalable, structured, and beautifully organized education platform',
-    label: 'CMS Platform'
+    label: 'CMS Platform',
+    backgroundImage: mayuriBg
   },
-  {
-    id: 'automation',
-    color: '#060010',
-    title: 'FindSecure — Security Intelligence Reimagined',
-    description: 'Where compliance, intelligence, and operational control converge in one secure platform',
-    label: 'Security Platform'
-  },
-  {
-    id: 'integration',
-    color: '#060010',
-    title: 'ComeHome AI — Intelligent Property Discovery',
-    description: 'Turning scattered property listings into intelligent, human-centered discovery paths',
-    label: 'Real Estate Platform'
-  },
+  // {
+  //   id: 'automation',
+  //   color: '#060010',
+  //   title: 'FindSecure — Security Intelligence Reimagined',
+  //   description: 'Where compliance, intelligence, and operational control converge in one secure platform',
+  //   label: 'Security Platform'
+  // },
+  // {
+  //   id: 'integration',
+  //   color: '#060010',
+  //   title: 'ComeHome AI — Intelligent Property Discovery',
+  //   description: 'Turning scattered property listings into intelligent, human-centered discovery paths',
+  //   label: 'Real Estate Platform'
+  // },
   {
     id: 'security',
     color: '#060010',
     title: 'ShivID – Identity Reimagined',
     description: 'A next-generation identity layer powering authentication, authorization, and user lifecycle management with enterprise-grade accuracy',
-    label: 'Identity Platform'
+    label: 'Identity Platform',
+    backgroundImage: shividBg
   },
   {
     id: 'esim-platform',
@@ -68,37 +73,40 @@ const cardData = [
     color: '#060010',
     title: 'Evoke Dholavira — Digital Window',
     description: 'Where archaeology meets digital artistry',
-    label: 'Heritage Platform'
+    label: 'Heritage Platform',
+    backgroundImage: evokeBg
   },
+  // {
+  //   id: 'bharat-upline',
+  //   color: '#060010',
+  //   title: 'Bharat Upline — Utility Engine',
+  //   description: 'Powering India\'s everyday transactions through a robust, scalable digital backbone',
+  //   label: 'Utility Platform'
+  // },
   {
-    id: 'bharat-upline',
+    id: 'zenn-ai',
     color: '#060010',
-    title: 'Bharat Upline — Utility Engine',
-    description: 'Powering India\'s everyday transactions through a robust, scalable digital backbone',
-    label: 'Utility Platform'
-  },
-  {
-    id: 'ayris-assure',
-    color: '#060010',
-    title: 'Ayris Assure — Card Compliance',
-    description: 'Engineering trust, transparency, and total governance in financial card testing',
-    label: 'Fintech Platform'
+    title: 'Zenn AI — Voice & Wellness Assistant',
+    description: 'AI-powered voice and text chat for wellness applications with multi-platform deployment',
+    label: 'AI Wellness Platform',
+    backgroundImage: zenaiBg
   },
   {
     id: 'ai-diagnostics',
     color: '#060010',
     title: 'AI Diagnostics Scanner',
     description: 'Where medical data becomes clarity, and clarity becomes faster diagnosis',
-    label: 'Healthcare Platform'
+    label: 'Healthcare Platform',
+    backgroundImage: xmayxBg
   },
-  {
-    id: 'security-2',
-    color: '#060010',
-    title: 'ShivID – Identity Reimagined',
-    description: 'A next-generation identity layer powering authentication, authorization, and user lifecycle management with enterprise-grade accuracy',
-    label: 'Identity Platform',
-    backgroundImage: shividBg
-  }
+  // {
+  //   id: 'security-2',
+  //   color: '#060010',
+  //   title: 'ShivID – Identity Reimagined',
+  //   description: 'A next-generation identity layer powering authentication, authorization, and user lifecycle management with enterprise-grade accuracy',
+  //   label: 'Identity Platform',
+  //   backgroundImage: shividBg
+  // }
 ];
 
 const createParticleElement = (x: number, y: number, color = DEFAULT_GLOW_COLOR) => {
