@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 const quotes = [
-  "Good things take 3 seconds. Great things take us.",
+  " good things takes time, great things takes us .",
   "This is where boring proposals come to die.",
   "Loading the ‘Shut up and take my money’ portfolio…",
   "If we could, we would hire ourselves!",

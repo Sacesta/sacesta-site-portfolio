@@ -52,14 +52,7 @@ const cardData = [
   //   description: 'Turning scattered property listings into intelligent, human-centered discovery paths',
   //   label: 'Real Estate Platform'
   // },
-  {
-    id: 'security',
-    color: '#060010',
-    title: 'ShivID – Identity Reimagined',
-    description: 'A next-generation identity layer powering authentication, authorization, and user lifecycle management with enterprise-grade accuracy',
-    label: 'Identity Platform',
-    backgroundImage: shividBg
-  },
+
   {
     id: 'esim-platform',
     color: '#060010',
@@ -67,6 +60,15 @@ const cardData = [
     description: 'Reimagining how people connect — anywhere, anytime',
     label: 'Telecom Platform',
     backgroundImage: esimPlatformBg
+  },
+
+    {
+    id: 'security',
+    color: '#060010',
+    title: 'ShivID – Identity Reimagined',
+    description: 'A next-generation identity layer powering authentication, authorization, and user lifecycle management with enterprise-grade accuracy',
+    label: 'Identity Platform',
+    backgroundImage: shividBg
   },
   {
     id: 'evoke-dholavira',
@@ -419,13 +421,15 @@ const GlobalSpotlight = ({
   disableAnimations = false,
   enabled = true,
   spotlightRadius = DEFAULT_SPOTLIGHT_RADIUS,
-  glowColor = DEFAULT_GLOW_COLOR
+  glowColor = DEFAULT_GLOW_COLOR,
+  isMobile = false
 }: {
   gridRef: React.RefObject<HTMLDivElement | null>;
   disableAnimations?: boolean;
   enabled?: boolean;
   spotlightRadius?: number;
   glowColor?: string;
+  isMobile?: boolean;
 }) => {
   const spotlightRef = useRef<HTMLDivElement | null>(null);
   const isInsideSection = useRef(false);
@@ -433,12 +437,13 @@ const GlobalSpotlight = ({
   useEffect(() => {
     if (disableAnimations || !gridRef?.current || !enabled) return;
 
+    const spotlightSize = isMobile ? 400 : 800;
     const spotlight = document.createElement('div');
     spotlight.className = 'global-spotlight';
     spotlight.style.cssText = `
       position: fixed;
-      width: 800px;
-      height: 800px;
+      width: ${spotlightSize}px;
+      height: ${spotlightSize}px;
       border-radius: 50%;
       pointer-events: none;
       background: radial-gradient(circle,
@@ -549,15 +554,20 @@ const GlobalSpotlight = ({
         spotlightRef.current.parentNode.removeChild(spotlightRef.current);
       }
     };
-  }, [gridRef, disableAnimations, enabled, spotlightRadius, glowColor]);
+  }, [gridRef, disableAnimations, enabled, spotlightRadius, glowColor, isMobile]);
 
   return null;
 };
 
-const BentoCardGrid = ({ children, gridRef }: { children: React.ReactNode; gridRef: React.RefObject<HTMLDivElement | null> }) => (
+const BentoCardGrid = ({ children, gridRef, isMobile }: { children: React.ReactNode; gridRef: React.RefObject<HTMLDivElement | null>; isMobile: boolean }) => (
   <div
     className="bento-section grid gap-2 p-3 select-none relative overflow-y-auto"
-    style={{ fontSize: 'clamp(1rem, 0.9rem + 0.5vw, 1.5rem)', maxHeight: '100vh', width: '100%' }}
+    style={{ 
+      fontSize: 'clamp(0.875rem, 0.8rem + 0.5vw, 1.5rem)', 
+      maxHeight: '100vh', 
+      width: '100%',
+      padding: isMobile ? '0.5rem' : '0.75rem'
+    }}
     ref={gridRef}
   >
     {children}
@@ -628,18 +638,21 @@ const MagicBento = ({
             grid-template-columns: 1fr;
             width: 100%;
             margin: 0;
-            padding: 0.5rem;
+            padding: 0;
+            gap: 0.75rem;
           }
           
-          @media (min-width: 600px) {
+          @media (min-width: 640px) {
             .card-responsive {
               grid-template-columns: repeat(2, 1fr);
+              gap: 1rem;
             }
           }
           
           @media (min-width: 1024px) {
             .card-responsive {
               grid-template-columns: repeat(4, 1fr);
+              gap: 0.75rem;
             }
             
             .card-responsive .card:nth-child(3) {
@@ -734,17 +747,70 @@ const MagicBento = ({
             text-overflow: ellipsis;
           }
           
-          @media (max-width: 599px) {
+          .mobile-card {
+            aspect-ratio: auto !important;
+          }
+          
+          @media (max-width: 639px) {
+            .bento-section {
+              padding: 0.5rem !important;
+              overflow-y: auto;
+              -webkit-overflow-scrolling: touch;
+            }
+            
             .card-responsive {
               grid-template-columns: 1fr;
               width: 100%;
               margin: 0;
               padding: 0;
+              gap: 0.75rem;
             }
             
             .card-responsive .card {
               width: 100%;
-              min-height: 180px;
+              min-height: 200px;
+              max-height: 280px;
+              padding: 1rem;
+              aspect-ratio: auto;
+              touch-action: manipulation;
+            }
+            
+            .card:hover {
+              transform: none !important;
+            }
+            
+            .card__label {
+              font-size: 0.75rem !important;
+            }
+            
+            .card__title {
+              font-size: 0.875rem !important;
+              line-height: 1.3 !important;
+            }
+            
+            .card__description {
+              font-size: 0.7rem !important;
+              line-height: 1.4 !important;
+            }
+          }
+          
+          @media (min-width: 640px) and (max-width: 1023px) {
+            .card-responsive .card {
+              min-height: 220px;
+              max-height: 320px;
+              padding: 1.25rem;
+            }
+            
+            .card__label {
+              font-size: 0.875rem !important;
+            }
+            
+            .card__title {
+              font-size: 0.9375rem !important;
+            }
+            
+            .card__description {
+              font-size: 0.75rem !important;
             }
           }
         `}
@@ -757,14 +823,14 @@ const MagicBento = ({
           enabled={enableSpotlight}
           spotlightRadius={spotlightRadius}
           glowColor={glowColor}
+          isMobile={isMobile}
         />
       )}
 
-      <BentoCardGrid gridRef={gridRef}>
-        <div className="card-responsive grid gap-2">
+      <BentoCardGrid gridRef={gridRef} isMobile={isMobile}>
+        <div className="card-responsive grid">
           {cardData.map((card, index) => {
-            const baseClassName = `card flex flex-col justify-between relative aspect-[4/3] min-h-[200px] max-h-[420px] w-full max-w-full p-5 rounded-[20px] border border-solid font-light overflow-hidden transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:shadow-[0_8px_25px_rgba(0,0,0,0.15)] cursor-pointer ${enableBorderGlow ? 'card--border-glow' : ''
-              }`;
+            const baseClassName = `card flex flex-col justify-between relative aspect-[4/3] min-h-[200px] max-h-[420px] w-full max-w-full p-5 rounded-[20px] border border-solid font-light overflow-hidden transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:shadow-[0_8px_25px_rgba(0,0,0,0.15)] cursor-pointer ${enableBorderGlow ? 'card--border-glow' : ''} ${isMobile ? 'mobile-card' : ''}`;
 
             const cardStyle = {
               backgroundColor: card.color || 'var(--background-dark)',
