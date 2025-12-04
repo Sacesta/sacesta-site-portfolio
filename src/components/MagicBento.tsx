@@ -8,6 +8,11 @@ import mayuriBg from '../assets/mayuri.png';
 import evokeBg from '../assets/evoke.png';
 import shividBg from '../assets/shivid-bg.png';
 import xmayxBg from '../assets/xmyax.png';
+import crmBg from '../assets/crmbg.png';
+import seacatBg from '../assets/seacatbg.png';
+import visit from '../assets/visitahmdavadbg.png';
+import picbg from '../assets/picbg.png';
+import comehomebg from '../assets/comehombg.png';
 
 const DEFAULT_PARTICLE_COUNT = 12;
 const DEFAULT_SPOTLIGHT_RADIUS = 300;
@@ -15,43 +20,15 @@ const DEFAULT_GLOW_COLOR = '255, 255, 255';
 const MOBILE_BREAKPOINT = 768;
 
 const cardData = [
-  // {
-  //   id: 'analytics',
-  //   color: '#060010',
-  //   title: 'Visit Ahmedabad',
-  //   description: 'Where heritage storytelling meets modern digital engineering',
-  //   label: 'Tourism Platform',
-  //   backgroundImage: visitAhmedabadBg
-  // },
-  // {
-  //   id: 'dashboard',
-  //   color: '#060010',
-  //   title: 'PIC Event Management Platform',
-  //   description: 'Engineering a seamless event backbone for thousands of athletes, coordinators, and administrators',
-  //   label: 'Event Platform'
-  // },
   {
     id: 'collaboration',
     color: '#060010',
     title: 'Mayuri Sharma Admin Platform',
-    description: 'Transforming a creator\'s knowledge into a scalable, structured, and beautifully organized education platform',
+    description:
+      "Transforming a creator's knowledge into a scalable, structured, and beautifully organized education platform",
     label: 'CMS Platform',
-    backgroundImage: mayuriBg
+    backgroundImage: mayuriBg,
   },
-  // {
-  //   id: 'automation',
-  //   color: '#060010',
-  //   title: 'FindSecure — Security Intelligence Reimagined',
-  //   description: 'Where compliance, intelligence, and operational control converge in one secure platform',
-  //   label: 'Security Platform'
-  // },
-  // {
-  //   id: 'integration',
-  //   color: '#060010',
-  //   title: 'ComeHome AI — Intelligent Property Discovery',
-  //   description: 'Turning scattered property listings into intelligent, human-centered discovery paths',
-  //   label: 'Real Estate Platform'
-  // },
 
   {
     id: 'esim-platform',
@@ -59,16 +36,17 @@ const cardData = [
     title: 'eSIM Platform — Global Connectivity',
     description: 'Reimagining how people connect — anywhere, anytime',
     label: 'Telecom Platform',
-    backgroundImage: esimPlatformBg
+    backgroundImage: esimPlatformBg,
   },
 
-    {
+  {
     id: 'security',
     color: '#060010',
     title: 'ShivID – Identity Reimagined',
-    description: 'A next-generation identity layer powering authentication, authorization, and user lifecycle management with enterprise-grade accuracy',
+    description:
+      'A next-generation identity layer powering authentication, authorization, and user lifecycle management with enterprise-grade accuracy',
     label: 'Identity Platform',
-    backgroundImage: shividBg
+    backgroundImage: shividBg,
   },
   {
     id: 'evoke-dholavira',
@@ -76,39 +54,82 @@ const cardData = [
     title: 'Evoke Dholavira — Digital Window',
     description: 'Where archaeology meets digital artistry',
     label: 'Heritage Platform',
-    backgroundImage: evokeBg
+    backgroundImage: evokeBg,
   },
-  // {
-  //   id: 'bharat-upline',
-  //   color: '#060010',
-  //   title: 'Bharat Upline — Utility Engine',
-  //   description: 'Powering India\'s everyday transactions through a robust, scalable digital backbone',
-  //   label: 'Utility Platform'
-  // },
+
   {
     id: 'zenn-ai',
     color: '#060010',
     title: 'Zenn AI — Voice & Wellness Assistant',
-    description: 'AI-powered voice and text chat for wellness applications with multi-platform deployment',
+    description:
+      'AI-powered voice and text chat for wellness applications with multi-platform deployment',
     label: 'AI Wellness Platform',
-    backgroundImage: zenaiBg
+    backgroundImage: zenaiBg,
   },
   {
     id: 'ai-diagnostics',
     color: '#060010',
-    title: 'AI Diagnostics Scanner',
+    title: 'AI Diagnostics Scanner — Interpreting Health with Intelligence',
     description: 'Where medical data becomes clarity, and clarity becomes faster diagnosis',
     label: 'Healthcare Platform',
-    backgroundImage: xmayxBg
+    backgroundImage: xmayxBg,
   },
-  // {
-  //   id: 'security-2',
-  //   color: '#060010',
-  //   title: 'ShivID – Identity Reimagined',
-  //   description: 'A next-generation identity layer powering authentication, authorization, and user lifecycle management with enterprise-grade accuracy',
-  //   label: 'Identity Platform',
-  //   backgroundImage: shividBg
-  // }
+    {
+    id: 'analytics',
+    color: '#060010',
+    title: 'Visit Ahmedabad',
+    description: 'Where heritage storytelling meets modern digital engineering',
+    label: 'Tourism Platform',
+    backgroundImage: visit,
+  },
+    {
+    id: 'dashboard',
+    color: '#060010',
+    title: 'PIC Event Management Platform',
+    description:
+      'Engineering a seamless event backbone for thousands of athletes, coordinators, and administrators',
+    label: 'Event Platform',
+    backgroundImage: picbg,
+  },
+  {
+    id: 'seacatboats',
+    color: '#060010',
+    title: 'SeaCatBoats — Power, Precision & Performance On Water',
+    description: 'Where craftsmanship meets cutting-edge digital experience',
+    label: 'Marine Platform',
+    backgroundImage: seacatBg,
+  },
+
+
+
+  {
+    id: 'hustlerguys-crm',
+    color: '#060010',
+    title: 'HustlerGuys CRM — Your Entire Business, One Smart System',
+    description: 'Where chaos becomes clarity, and workflows become growth',
+    label: 'CRM & ERP Platform',
+    backgroundImage: crmBg,
+  },
+ 
+
+  {
+    id: 'automation',
+    color: '#060010',
+    title: 'FindSecure — Security Intelligence Reimagined',
+    description:
+      'Where compliance, intelligence, and operational control converge in one secure platform',
+    label: 'Security Platform',
+  },
+  {
+    id: 'integration',
+    color: '#060010',
+    title: 'ComeHome AI — Intelligent Property Discovery',
+    description:
+      'Turning scattered property listings into intelligent, human-centered discovery paths',
+    label: 'Real Estate Platform',
+    backgroundImage: comehomebg,
+  },
+ 
 ];
 
 const createParticleElement = (x: number, y: number, color = DEFAULT_GLOW_COLOR) => {
@@ -131,10 +152,16 @@ const createParticleElement = (x: number, y: number, color = DEFAULT_GLOW_COLOR)
 
 const calculateSpotlightValues = (radius: number) => ({
   proximity: radius * 0.5,
-  fadeDistance: radius * 0.75
+  fadeDistance: radius * 0.75,
 });
 
-const updateCardGlowProperties = (card: HTMLElement, mouseX: number, mouseY: number, glow: number, radius: number) => {
+const updateCardGlowProperties = (
+  card: HTMLElement,
+  mouseX: number,
+  mouseY: number,
+  glow: number,
+  radius: number,
+) => {
   const rect = card.getBoundingClientRect();
   const relativeX = ((mouseX - rect.left) / rect.width) * 100;
   const relativeY = ((mouseY - rect.top) / rect.height) * 100;
@@ -172,7 +199,7 @@ const ParticleCard = ({
   enableMagnetism = false,
   cardId,
   onCardClick,
-  backgroundImage
+  backgroundImage,
 }: ParticleCardProps) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const particlesRef = useRef<HTMLDivElement[]>([]);
@@ -187,7 +214,7 @@ const ParticleCard = ({
 
     const { width, height } = cardRef.current.getBoundingClientRect();
     memoizedParticles.current = Array.from({ length: particleCount }, () =>
-      createParticleElement(Math.random() * width, Math.random() * height, glowColor)
+      createParticleElement(Math.random() * width, Math.random() * height, glowColor),
     );
     particlesInitialized.current = true;
   }, [particleCount, glowColor]);
@@ -197,7 +224,7 @@ const ParticleCard = ({
     timeoutsRef.current = [];
     magnetismAnimationRef.current?.kill();
 
-    particlesRef.current.forEach(particle => {
+    particlesRef.current.forEach((particle) => {
       gsap.to(particle, {
         scale: 0,
         opacity: 0,
@@ -205,7 +232,7 @@ const ParticleCard = ({
         ease: 'back.in(1.7)',
         onComplete: () => {
           particle.parentNode?.removeChild(particle);
-        }
+        },
       });
     });
     particlesRef.current = [];
@@ -226,7 +253,11 @@ const ParticleCard = ({
         cardRef.current.appendChild(clone);
         particlesRef.current.push(clone);
 
-        gsap.fromTo(clone, { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, ease: 'back.out(1.7)' });
+        gsap.fromTo(
+          clone,
+          { scale: 0, opacity: 0 },
+          { scale: 1, opacity: 1, duration: 0.3, ease: 'back.out(1.7)' },
+        );
 
         gsap.to(clone, {
           x: (Math.random() - 0.5) * 100,
@@ -235,7 +266,7 @@ const ParticleCard = ({
           duration: 2 + Math.random() * 2,
           ease: 'none',
           repeat: -1,
-          yoyo: true
+          yoyo: true,
         });
 
         gsap.to(clone, {
@@ -243,7 +274,7 @@ const ParticleCard = ({
           duration: 1.5,
           ease: 'power2.inOut',
           repeat: -1,
-          yoyo: true
+          yoyo: true,
         });
       }, index * 100);
 
@@ -266,7 +297,7 @@ const ParticleCard = ({
           rotateY: 5,
           duration: 0.3,
           ease: 'power2.out',
-          transformPerspective: 1000
+          transformPerspective: 1000,
         });
       }
     };
@@ -280,7 +311,7 @@ const ParticleCard = ({
           rotateX: 0,
           rotateY: 0,
           duration: 0.3,
-          ease: 'power2.out'
+          ease: 'power2.out',
         });
       }
 
@@ -289,7 +320,7 @@ const ParticleCard = ({
           x: 0,
           y: 0,
           duration: 0.3,
-          ease: 'power2.out'
+          ease: 'power2.out',
         });
       }
     };
@@ -312,7 +343,7 @@ const ParticleCard = ({
           rotateY,
           duration: 0.1,
           ease: 'power2.out',
-          transformPerspective: 1000
+          transformPerspective: 1000,
         });
       }
 
@@ -324,7 +355,7 @@ const ParticleCard = ({
           x: magnetX,
           y: magnetY,
           duration: 0.3,
-          ease: 'power2.out'
+          ease: 'power2.out',
         });
       }
     };
@@ -340,7 +371,17 @@ const ParticleCard = ({
       element.removeEventListener('mousemove', handleMouseMove);
       clearAllParticles();
     };
-  }, [animateParticles, clearAllParticles, disableAnimations, enableTilt, enableMagnetism, clickEffect, glowColor, cardId, onCardClick]);
+  }, [
+    animateParticles,
+    clearAllParticles,
+    disableAnimations,
+    enableTilt,
+    enableMagnetism,
+    clickEffect,
+    glowColor,
+    cardId,
+    onCardClick,
+  ]);
 
   const handleContainerClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (clickEffect && !disableAnimations) {
@@ -353,7 +394,7 @@ const ParticleCard = ({
         Math.hypot(x, y),
         Math.hypot(x - rect.width, y),
         Math.hypot(x, y - rect.height),
-        Math.hypot(x - rect.width, y - rect.height)
+        Math.hypot(x - rect.width, y - rect.height),
       );
 
       const ripple = document.createElement('div');
@@ -375,15 +416,15 @@ const ParticleCard = ({
         ripple,
         {
           scale: 0,
-          opacity: 1
+          opacity: 1,
         },
         {
           scale: 1,
           opacity: 0,
           duration: 0.8,
           ease: 'power2.out',
-          onComplete: () => ripple.remove()
-        }
+          onComplete: () => ripple.remove(),
+        },
       );
     }
 
@@ -402,16 +443,14 @@ const ParticleCard = ({
     >
       {backgroundImage && (
         <div
-          className="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-500 hover:scale-110"
+          className='absolute inset-0 z-0 bg-cover bg-center transition-transform duration-500 hover:scale-110'
           style={{
             backgroundImage: `url(${backgroundImage})`,
-            opacity: 0.6
+            // opacity: 0.6,
           }}
         />
       )}
-      <div className="relative z-10 w-full h-full flex flex-col justify-between">
-        {children}
-      </div>
+      <div className='relative z-10 w-full h-full flex flex-col justify-between'>{children}</div>
     </div>
   );
 };
@@ -422,7 +461,7 @@ const GlobalSpotlight = ({
   enabled = true,
   spotlightRadius = DEFAULT_SPOTLIGHT_RADIUS,
   glowColor = DEFAULT_GLOW_COLOR,
-  isMobile = false
+  isMobile = false,
 }: {
   gridRef: React.RefObject<HTMLDivElement | null>;
   disableAnimations?: boolean;
@@ -468,7 +507,11 @@ const GlobalSpotlight = ({
       const section = gridRef.current.closest('.bento-section');
       const rect = section?.getBoundingClientRect();
       const mouseInside =
-        rect && e.clientX >= rect.left && e.clientX <= rect.right && e.clientY >= rect.top && e.clientY <= rect.bottom;
+        rect &&
+        e.clientX >= rect.left &&
+        e.clientX <= rect.right &&
+        e.clientY >= rect.top &&
+        e.clientY <= rect.bottom;
 
       isInsideSection.current = mouseInside || false;
       const cards = gridRef.current.querySelectorAll('.card');
@@ -477,7 +520,7 @@ const GlobalSpotlight = ({
         gsap.to(spotlightRef.current, {
           opacity: 0,
           duration: 0.3,
-          ease: 'power2.out'
+          ease: 'power2.out',
         });
         cards.forEach((card: Element) => {
           (card as HTMLElement).style.setProperty('--glow-intensity', '0');
@@ -494,7 +537,8 @@ const GlobalSpotlight = ({
         const centerX = cardRect.left + cardRect.width / 2;
         const centerY = cardRect.top + cardRect.height / 2;
         const distance =
-          Math.hypot(e.clientX - centerX, e.clientY - centerY) - Math.max(cardRect.width, cardRect.height) / 2;
+          Math.hypot(e.clientX - centerX, e.clientY - centerY) -
+          Math.max(cardRect.width, cardRect.height) / 2;
         const effectiveDistance = Math.max(0, distance);
 
         minDistance = Math.min(minDistance, effectiveDistance);
@@ -513,7 +557,7 @@ const GlobalSpotlight = ({
         left: e.clientX,
         top: e.clientY,
         duration: 0.1,
-        ease: 'power2.out'
+        ease: 'power2.out',
       });
 
       const targetOpacity =
@@ -526,7 +570,7 @@ const GlobalSpotlight = ({
       gsap.to(spotlightRef.current, {
         opacity: targetOpacity,
         duration: targetOpacity > 0 ? 0.2 : 0.5,
-        ease: 'power2.out'
+        ease: 'power2.out',
       });
     };
 
@@ -539,7 +583,7 @@ const GlobalSpotlight = ({
         gsap.to(spotlightRef.current, {
           opacity: 0,
           duration: 0.3,
-          ease: 'power2.out'
+          ease: 'power2.out',
         });
       }
     };
@@ -559,14 +603,22 @@ const GlobalSpotlight = ({
   return null;
 };
 
-const BentoCardGrid = ({ children, gridRef, isMobile }: { children: React.ReactNode; gridRef: React.RefObject<HTMLDivElement | null>; isMobile: boolean }) => (
+const BentoCardGrid = ({
+  children,
+  gridRef,
+  isMobile,
+}: {
+  children: React.ReactNode;
+  gridRef: React.RefObject<HTMLDivElement | null>;
+  isMobile: boolean;
+}) => (
   <div
-    className="bento-section grid gap-2 p-3 select-none relative overflow-y-auto"
-    style={{ 
-      fontSize: 'clamp(0.875rem, 0.8rem + 0.5vw, 1.5rem)', 
-      maxHeight: '100vh', 
+    className='bento-section grid gap-2 p-3 select-none relative overflow-y-auto'
+    style={{
+      fontSize: 'clamp(0.875rem, 0.8rem + 0.5vw, 1.5rem)',
+      maxHeight: '100vh',
       width: '100%',
-      padding: isMobile ? '0.5rem' : '0.75rem'
+      padding: isMobile ? '0.5rem' : '0.75rem',
     }}
     ref={gridRef}
   >
@@ -600,7 +652,7 @@ const MagicBento = ({
   enableTilt = false,
   glowColor = DEFAULT_GLOW_COLOR,
   clickEffect = true,
-  enableMagnetism = true
+  enableMagnetism = true,
 }) => {
   const gridRef = useRef<HTMLDivElement>(null);
   const isMobile = useMobileDetection();
@@ -610,7 +662,7 @@ const MagicBento = ({
   const handleCardClick = (cardId: string) => {
     // Remove -2 suffix to map duplicate cards to original case studies
     const baseId = cardId.replace(/-2$/, '');
-    const caseStudy = caseStudiesData.find(cs => cs.id === baseId || cs.id === cardId);
+    const caseStudy = caseStudiesData.find((cs) => cs.id === baseId || cs.id === cardId);
     if (caseStudy) {
       navigate(`/case-study/${baseId}`, { state: { caseStudy } });
     }
@@ -747,6 +799,29 @@ const MagicBento = ({
             text-overflow: ellipsis;
           }
           
+          .card__label,
+          .card__title,
+          .card__description {
+            color: rgba(0, 0, 0, 0.95) !important;
+            font-weight: 600 !important;
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8), 0 0 4px rgba(255, 255, 255, 0.5) !important;
+          }
+          
+          .card__title {
+            font-weight: 700 !important;
+            color: rgba(0, 0, 0, 1) !important;
+          }
+          
+          .card__description {
+            color: rgba(0, 0, 0, 0.9) !important;
+            font-weight: 500 !important;
+          }
+          
+          .card__label {
+            font-weight: 600 !important;
+            color: rgba(0, 0, 0, 0.95) !important;
+          }
+          
           .mobile-card {
             aspect-ratio: auto !important;
           }
@@ -781,16 +856,25 @@ const MagicBento = ({
             
             .card__label {
               font-size: 0.75rem !important;
+              color: rgba(0, 0, 0, 0.95) !important;
+              font-weight: 600 !important;
+              text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8), 0 0 4px rgba(255, 255, 255, 0.5) !important;
             }
             
             .card__title {
               font-size: 0.875rem !important;
               line-height: 1.3 !important;
+              color: rgba(0, 0, 0, 1) !important;
+              font-weight: 700 !important;
+              text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8), 0 0 4px rgba(255, 255, 255, 0.5) !important;
             }
             
             .card__description {
               font-size: 0.7rem !important;
               line-height: 1.4 !important;
+              color: rgba(0, 0, 0, 0.9) !important;
+              font-weight: 500 !important;
+              text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8), 0 0 4px rgba(255, 255, 255, 0.5) !important;
             }
           }
           
@@ -803,14 +887,23 @@ const MagicBento = ({
             
             .card__label {
               font-size: 0.875rem !important;
+              color: rgba(0, 0, 0, 0.95) !important;
+              font-weight: 600 !important;
+              text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8), 0 0 4px rgba(255, 255, 255, 0.5) !important;
             }
             
             .card__title {
               font-size: 0.9375rem !important;
+              color: rgba(0, 0, 0, 1) !important;
+              font-weight: 700 !important;
+              text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8), 0 0 4px rgba(255, 255, 255, 0.5) !important;
             }
             
             .card__description {
               font-size: 0.75rem !important;
+              color: rgba(0, 0, 0, 0.9) !important;
+              font-weight: 500 !important;
+              text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8), 0 0 4px rgba(255, 255, 255, 0.5) !important;
             }
           }
         `}
@@ -828,7 +921,7 @@ const MagicBento = ({
       )}
 
       <BentoCardGrid gridRef={gridRef} isMobile={isMobile}>
-        <div className="card-responsive grid">
+        <div className='card-responsive grid'>
           {cardData.map((card, index) => {
             const baseClassName = `card flex flex-col justify-between relative aspect-[4/3] min-h-[200px] max-h-[420px] w-full max-w-full p-5 rounded-[20px] border border-solid font-light overflow-hidden transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:shadow-[0_8px_25px_rgba(0,0,0,0.15)] cursor-pointer ${enableBorderGlow ? 'card--border-glow' : ''} ${isMobile ? 'mobile-card' : ''}`;
 
@@ -839,7 +932,7 @@ const MagicBento = ({
               '--glow-x': '50%',
               '--glow-y': '50%',
               '--glow-intensity': '0',
-              '--glow-radius': '200px'
+              '--glow-radius': '200px',
             };
 
             if (enableStars) {
@@ -858,15 +951,17 @@ const MagicBento = ({
                   onCardClick={handleCardClick}
                   backgroundImage={card.backgroundImage}
                 >
-                  <div className="card__header flex justify-between gap-3 relative text-white">
-                    <span className="card__label text-base">{card.label}</span>
+                  <div className='card__header flex justify-between gap-3 relative text-black'>
+                    <span className='card__label text-base text-black font-semibold'>{card.label}</span>
                   </div>
-                  <div className="card__content flex flex-col relative text-white">
-                    <h3 className={`card__title font-normal text-base m-0 mb-1 ${textAutoHide ? 'text-clamp-1' : ''}`}>
+                  <div className='card__content flex flex-col relative text-black'>
+                    <h3
+                      className={`card__title font-bold text-base m-0 mb-1 text-black ${textAutoHide ? 'text-clamp-1' : ''}`}
+                    >
                       {card.title}
                     </h3>
                     <p
-                      className={`card__description text-xs leading-5 opacity-90 ${textAutoHide ? 'text-clamp-2' : ''}`}
+                      className={`card__description text-xs leading-5 opacity-90 text-black font-medium ${textAutoHide ? 'text-clamp-2' : ''}`}
                     >
                       {card.description}
                     </p>
@@ -880,7 +975,7 @@ const MagicBento = ({
                 key={index}
                 className={baseClassName}
                 style={cardStyle}
-                ref={el => {
+                ref={(el) => {
                   if (!el) return;
 
                   const handleMouseMove = (e: MouseEvent) => {
@@ -901,7 +996,7 @@ const MagicBento = ({
                         rotateY,
                         duration: 0.1,
                         ease: 'power2.out',
-                        transformPerspective: 1000
+                        transformPerspective: 1000,
                       });
                     }
 
@@ -913,7 +1008,7 @@ const MagicBento = ({
                         x: magnetX,
                         y: magnetY,
                         duration: 0.3,
-                        ease: 'power2.out'
+                        ease: 'power2.out',
                       });
                     }
                   };
@@ -926,7 +1021,7 @@ const MagicBento = ({
                         rotateX: 0,
                         rotateY: 0,
                         duration: 0.3,
-                        ease: 'power2.out'
+                        ease: 'power2.out',
                       });
                     }
 
@@ -935,7 +1030,7 @@ const MagicBento = ({
                         x: 0,
                         y: 0,
                         duration: 0.3,
-                        ease: 'power2.out'
+                        ease: 'power2.out',
                       });
                     }
                   };
@@ -954,7 +1049,7 @@ const MagicBento = ({
                       Math.hypot(x, y),
                       Math.hypot(x - rect.width, y),
                       Math.hypot(x, y - rect.height),
-                      Math.hypot(x - rect.width, y - rect.height)
+                      Math.hypot(x - rect.width, y - rect.height),
                     );
 
                     const ripple = document.createElement('div');
@@ -976,15 +1071,15 @@ const MagicBento = ({
                       ripple,
                       {
                         scale: 0,
-                        opacity: 1
+                        opacity: 1,
                       },
                       {
                         scale: 1,
                         opacity: 0,
                         duration: 0.8,
                         ease: 'power2.out',
-                        onComplete: () => ripple.remove()
-                      }
+                        onComplete: () => ripple.remove(),
+                      },
                     );
                   }
 
@@ -994,22 +1089,26 @@ const MagicBento = ({
               >
                 {card.backgroundImage && (
                   <div
-                    className="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-500 hover:scale-110"
+                    className='absolute inset-0 z-0 bg-cover bg-center transition-transform duration-500 hover:scale-110'
                     style={{
                       backgroundImage: `url(${card.backgroundImage})`,
-                      opacity: 0.6
+                      opacity: 0.6,
                     }}
                   />
                 )}
-                <div className="relative z-10 w-full h-full flex flex-col justify-between">
-                  <div className="card__header flex justify-between gap-3 relative text-white">
-                    <span className="card__label text-base">{card.label}</span>
+                <div className='relative z-10 w-full h-full flex flex-col justify-between'>
+                  <div className='card__header flex justify-between gap-3 relative text-black'>
+                    <span className='card__label text-base text-black font-semibold'>{card.label}</span>
                   </div>
-                  <div className="card__content flex flex-col relative text-white">
-                    <h3 className={`card__title font-normal text-base m-0 mb-1 ${textAutoHide ? 'text-clamp-1' : ''}`}>
+                  <div className='card__content flex flex-col relative text-black'>
+                    <h3
+                      className={`card__title font-bold text-base m-0 mb-1 text-black ${textAutoHide ? 'text-clamp-1' : ''}`}
+                    >
                       {card.title}
                     </h3>
-                    <p className={`card__description text-xs leading-5 opacity-90 ${textAutoHide ? 'text-clamp-2' : ''}`}>
+                    <p
+                      className={`card__description text-xs leading-5 opacity-90 text-black font-medium ${textAutoHide ? 'text-clamp-2' : ''}`}
+                    >
                       {card.description}
                     </p>
                   </div>
@@ -1018,7 +1117,7 @@ const MagicBento = ({
             );
           })}
         </div>
-      </BentoCardGrid >
+      </BentoCardGrid>
     </>
   );
 };

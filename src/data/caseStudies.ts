@@ -50,7 +50,7 @@ export const caseStudiesData: CaseStudyData[] = [
     id: 'analytics',
     title: 'Visit Ahmedabad',
     subtitle: 'Where heritage storytelling meets modern digital engineering',
-    description: 'A next-generation tourism intelligence platform designed to transform how travelers discover, explore, and emotionally connect with the cultural capital of Gujarat.',
+    description: 'Visit Ahmedabad reimagines city tourism by bringing together immersive visuals, hyper-organized data, personalized discovery paths, and lightning-fast performance. The platform acts as both a digital companion for travelers and a strategic content engine for tourism authorities.',
     problem: {
       title: 'The Problem',
       description: 'Tourism content for Ahmedabad existed across scattered blogs, offline brochures, and legacy portals that lacked structure, visual clarity, and real-time maintainability. Travelers struggled to plan coherent itineraries, and local tourism bodies had no modern CMS to showcase monuments, festivals, food culture, or hidden gems. The goal was to centralize everything into a fast, elegant, SEO-optimized platform that could scale as the city modernized.'
@@ -66,14 +66,19 @@ export const caseStudiesData: CaseStudyData[] = [
     detailedAnalysis: {
       title: 'The Full Story',
       paragraphs: [
-        'Visit Ahmedabad was never about building pages. It was about crafting a digital identity for a city.',
-        'Early analysis showed that 70% of tourism searches revolve around: "Top places to visit", "Local food spots", "Heritage & culture", "One-day itinerary". But existing platforms lacked depth and failed to capture cultural nuance. Our solution introduced a hierarchical content system built around: Places, Categories, Experiences, Food Trails, Events, Itineraries. This structure allowed semantic SEO, internal linking flows, and predictable crawlers paths.'
+        'Visit Ahmedabad was never about building pages. It was about crafting a digital identity for a city.'
       ],
       sections: [
         {
+          title: 'Architectural Insight',
+          paragraphs: [
+            'Early analysis showed that 70% of tourism searches revolve around: "Top places to visit", "Local food spots", "Heritage & culture", "One-day itinerary". But existing platforms lacked depth and failed to capture cultural nuance. Our solution introduced a hierarchical content system built around: Places, Categories, Experiences, Food Trails, Events, Itineraries. This structure allowed semantic SEO, internal linking flows, and predictable crawlers paths.'
+          ]
+        },
+        {
           title: 'Engineering the Experience',
           paragraphs: [
-            'Static pages weren\'t enough — we engineered an immersive experience: Geographical mapping layers for future map-based navigation. Image compression pipeline enabling fast loads without compromising travel photography. Pre-rendered content paths ensuring instant page transitions. Intuitive micro animations grounding user attention on what matters.'
+            'Static pages weren\'t enough — we engineered an immersive experience: Geographical mapping layers for future map-based navigation, Image compression pipeline enabling fast loads without compromising travel photography, Pre-rendered content paths ensuring instant page transitions, Intuitive micro animations grounding user attention on what matters.'
           ]
         },
         {
@@ -137,104 +142,11 @@ export const caseStudiesData: CaseStudyData[] = [
     impact: [
       { value: '0.9s', label: 'Average Load Time' },
       { value: '+120%', label: 'User Engagement' },
-      { value: '98/100', label: 'SEO Score' }
+      { value: '98/100', label: 'SEO Score' },
+      { value: '40%', label: 'Lower Bounce Rate' },
+      { value: 'Fully CMS', label: 'Controlled Updates' }
     ],
     liveUrl: 'https://www.visitamdavad.com/'
-  },
-  {
-    id: 'dashboard',
-    title: 'PIC Event Management Platform',
-    subtitle: 'Engineering a seamless event backbone for thousands of athletes, coordinators, and administrators',
-    description: 'A fully orchestrated event intelligence and participant-management system built to power large-scale sporting and corporate events with precision, automation, and real-time operational visibility.',
-    problem: {
-      title: 'The Problem',
-      description: 'The client managed multi-category athletic events—marathons, cycling races, duathlons—using manual workflows. Registration data came through Google forms, payments had to be validated by hand, and event-day synchronization between categories, waves, and timing partners caused frequent delays. Operational fatigue increased with scale. They needed a system capable of: Automated participant onboarding, Category-specific logic, Bib allocation, Payment tracking, Event kit distribution, Real-time dashboards. The old tools were simply not built for the complexity of modern sporting events.'
-    },
-    userBase: {
-      title: 'User Base',
-      description: 'The platform serves a multi-layer ecosystem: Participants registering across categories, age groups, and distances. Event admins managing configurations, rules, and communication. Volunteers & Race marshals needing instant check-in and tracking tools. Timing partners requiring structured exports. Finance teams verifying transactions and refunds. This diverse user base required an interface that is fast, intuitive, and deeply structured.'
-    },
-    approach: {
-      title: 'Our Approach',
-      description: 'We didn\'t build "just another registration system." We engineered an end-to-end event infrastructure platform with: A dynamic category engine supporting unlimited sports formats. Automated payment reconciliation via integrated gateways. Real-time bib generation & numbering logic. Bulk import/export tools for operational teams. Admin dashboards with live metrics. A communication system for event updates. Secure participant verification workflows. The architecture ensured every module—registration, kit issuance, timing exports—worked together seamlessly.'
-    },
-    detailedAnalysis: {
-      title: 'The Full Story',
-      paragraphs: [
-        'The PIC platform emerged from a deep understanding of event volatility. Sporting events are dynamic: categories shift, participants edit details last-minute, weather forces operational changes, and timing partners require pristine data structures.',
-        'We constructed a modular event engine that supports: Unlimited event types: running, cycling, duathlon, corporate sports. Hierarchical subcategories. Gender & age filters. Wave and batch assignments. Custom registration forms. Real-time payment verification. Every rule could be configured without code changes.'
-      ],
-      sections: [
-        {
-          title: 'Data Flow Engineering',
-          paragraphs: [
-            'The biggest challenge was ensuring data accuracy at scale. We implemented: A multi-stage registration pipeline. Payment status synchronization using webhooks. Deduplication logic to prevent double entries. A versioned participant profile system. Export pipelines for timing chips and third-party systems. This eliminated work that previously required days of manual cleanup.'
-          ]
-        },
-        {
-          title: 'Race-Day Experience Optimization',
-          paragraphs: [
-            'On event day, speed is survival. We engineered: A QR-based kit collection system. Instant participant verification. Bib distribution scanners. Volunteer-friendly UIs. Error-proofed search for thousands of participants. These optimizations reduced kit distribution time by 60%.'
-          ]
-        },
-        {
-          title: 'Scalability & Reliability',
-          paragraphs: [
-            'The platform is capable of: Handling 10,000+ registrations. Multi-event concurrency. Zero-downtime deployment. Real-time dashboards for every stakeholder. With cloud-native deployment, the system remains stable even under traffic surges from last-minute participants.'
-          ]
-        }
-      ],
-      quote: 'The PIC platform is more than software—it is the unseen engine that powers a flawless event-day experience.'
-    },
-    workflow: [
-      {
-        step: '01',
-        title: 'Discovery & Field Immersion',
-        duration: 'Week 1-2',
-        description: 'We shadowed the organizing team through an entire event cycle—registration, kit prep, check-ins—to map pain points accurately.',
-        deliverables: ['Detailed event lifecycle map', 'Volunteer workflows', 'Category matrix', 'Operational bottleneck analysis'],
-        color: 'blue'
-      },
-      {
-        step: '02',
-        title: 'Information Architecture & UX Blueprints',
-        duration: 'Week 3-4',
-        description: 'We created detailed UX flows covering: Full registration lifecycle, Admin event creation, Multi-category participant logic, Field-team dashboards, Financial verification flows.',
-        deliverables: ['Wireframes for 60+ screens', 'Registration flows', 'Admin dashboards', 'Financial workflows'],
-        color: 'purple'
-      },
-      {
-        step: '03',
-        title: 'Interface & Visual System',
-        duration: 'Week 5-6',
-        description: 'A clean, operational UI was designed: High-contrast layouts for outdoor event usage. Oversized inputs for volunteers using gloves or in bright sunlight. Zero-clutter admin design for high-speed filtering. Data tables engineered for thousands of rows without lag.',
-        deliverables: ['High-contrast UI design', 'Volunteer-friendly interfaces', 'Admin dashboards', 'Data table optimization'],
-        color: 'green'
-      },
-      {
-        step: '04',
-        title: 'Engineering & Deployment',
-        duration: 'Week 7-12',
-        description: 'Development focused on: Component-driven frontend. API architecture handling heavy filtering. Payment integration. Bulk Excel workflows. Real-time dashboards. Event-day QR systems. Load testing simulated peak traffic to ensure system stability.',
-        deliverables: ['Component-driven frontend', 'Payment integration', 'QR verification system', 'Real-time dashboards'],
-        color: 'blue'
-      }
-    ],
-    techStack: [
-      { name: 'React.js', description: 'Frontend UI engine', icon: 'code-2', iconColor: 'text-blue-400' },
-      { name: 'Node.js & Express', description: 'REST API backend', icon: 'server', iconColor: 'text-green-400' },
-      { name: 'MongoDB', description: 'Participant and event data storage', icon: 'database', iconColor: 'text-emerald-400' },
-      { name: 'AWS S3', description: 'Storage for documents/bib exports', icon: 'hard-drive', iconColor: 'text-orange-400' },
-      { name: 'Payment Gateway APIs', description: 'Automated reconciliation', icon: 'zap', iconColor: 'text-yellow-400' },
-      { name: 'QR Engine', description: 'Participant verification', icon: 'smartphone', iconColor: 'text-purple-400' },
-      { name: 'Vercel / AWS', description: 'High-performance hosting', icon: 'wind', iconColor: 'text-cyan-400' }
-    ],
-    impact: [
-      { value: '62%', label: 'Reduction in Kit Distribution Time' },
-      { value: '4x', label: 'Faster Payment Validation' },
-      { value: '99.9%', label: 'Uptime Across Event Cycles' }
-    ],
-    liveUrl: 'https://event-pic-fe.vercel.app/'
   },
   {
     id: 'collaboration',
@@ -436,7 +348,7 @@ export const caseStudiesData: CaseStudyData[] = [
     id: 'integration',
     title: 'ComeHome AI — Intelligent Property Discovery',
     subtitle: 'Turning scattered property listings into intelligent, human-centered discovery paths',
-    description: 'A next-generation property recommendation engine that blends real estate data, behavioral insights, and AI-driven personalization into one seamless home-finding experience.',
+    description: 'ComeHome AI transforms real estate browsing from a tiring, fragmented hunt into a personalized exploration journey. By combining structured property data, geolocation intelligence, and a recommendation engine trained on user behavior, the platform helps buyers find the right home faster — and helps developers maximize visibility across their inventory.',
     problem: {
       title: 'The Problem',
       description: 'Real estate buyers often struggle with: Inconsistent property information, Outdated listings across portals, Manual filtering and repetitive searches, No personalization based on preferences, Zero central management for developers, Poor quality images and missing details. The industry lacked a smart engine that could understand user intent, refine recommendations, and unify developer-side management. ComeHome AI was engineered to become that intelligent layer.'
@@ -452,10 +364,16 @@ export const caseStudiesData: CaseStudyData[] = [
     detailedAnalysis: {
       title: 'The Full Story',
       paragraphs: [
-        'Real estate browsing is inherently overwhelming. Buyers jump between apps, chat with agents, revisit PDFs, and only then form decisions. ComeHome AI set out to collapse this entire journey into one cohesive, intelligent platform.',
-        'Properties were standardized using a structured metadata layer: Bedrooms, bathrooms, carpet area, Lifestyle tags, Commute-focused filters, School/hospital proximity, Developer trust score. This allowed the recommendation engine to operate with precision.'
+        'Real estate browsing is inherently overwhelming. Buyers jump between apps, chat with agents, revisit PDFs, and only then form decisions.',
+        'ComeHome AI set out to collapse this entire journey into one cohesive, intelligent platform.'
       ],
       sections: [
+        {
+          title: 'Property Intelligence Architecture',
+          paragraphs: [
+            'Properties were standardized using a structured metadata layer: Bedrooms, bathrooms, carpet area, Lifestyle tags, Commute-focused filters, School/hospital proximity, Developer trust score. This allowed the recommendation engine to operate with precision.'
+          ]
+        },
         {
           title: 'AI-Powered Personalization',
           paragraphs: [
@@ -495,7 +413,7 @@ export const caseStudiesData: CaseStudyData[] = [
       {
         step: '02',
         title: 'UX & Information Flow Design',
-        duration: 'Week 3-5',
+        duration: 'Week 3-4',
         description: 'Our UX plan introduced: Visual-first property cards, Sticky comparison tray, Preference-learning indicators, Location-based clustering, Amenity icons, Instant map + list hybrid browsing. Wireframes were refined into 60+ polished layouts.',
         deliverables: ['Visual-first UI design', 'Comparison system', 'Map integration', '60+ polished layouts'],
         color: 'purple'
@@ -529,7 +447,9 @@ export const caseStudiesData: CaseStudyData[] = [
     impact: [
       { value: '3x', label: 'Faster Property Discovery' },
       { value: '40%', label: 'More Developer Engagement' },
-      { value: '70%', label: 'Reduction in Drop-off Rates' }
+      { value: '70%', label: 'Reduction in Drop-off Rates' },
+      { value: 'High-Trust', label: 'Verified Listings' },
+      { value: 'Seamless', label: 'Scalability for New Cities' }
     ],
     liveUrl: '#'
   },
@@ -728,6 +648,329 @@ export const caseStudiesData: CaseStudyData[] = [
       { value: '98/100', label: 'SEO Score' }
     ],
     liveUrl: 'https://esimfox.com/en'
+  },
+  {
+    id: 'hustlerguys-crm',
+    title: 'HustlerGuys CRM — Your Entire Business, One Smart System',
+    subtitle: 'Where chaos becomes clarity, and workflows become growth',
+    description: 'A full-stack CRM and ERP platform built to centralize sales, projects, staff, leads, support, accounting, contracts, tasks, and reporting — engineered for growing businesses that need structure, speed, and control.',
+    problem: {
+      title: 'The Problem',
+      description: 'Growing companies typically face: Leads scattered across WhatsApp, email, Excel. No visibility into sales pipelines. Projects and tasks tracked in 5 different tools. Delayed billing and collection issues. Minimal staff accountability. No single dashboard to oversee operations. Zero automation for follow-ups and renewals. HustlerGuys needed a central operating system to run their entire workflow end to end.'
+    },
+    userBase: {
+      title: 'User Base',
+      description: 'The platform serves every functional role: Sales Teams — Lead capture, Pipeline movement, Follow-ups & reminders, Deal closures. Project Managers & Delivery Teams — Project timelines, Task assignment, Status monitoring. HR & Admin — Staff records, Attendance, Tickets & support. Finance & Accounts — Expenses, Subscription management, Invoices. Founders & Leadership — Unified reporting, Profitability tracking, Team performance analytics. Each team gets a tailor-made module aligned to its workflow.'
+    },
+    approach: {
+      title: 'Our Approach',
+      description: 'We built HustlerGuys CRM as a multi-module enterprise system, featuring: End-to-end lead management, Multi-stage sales funnels, Project + task workflow engine, Support and ticketing system, HR panel with staff permissions, Contract and subscription modules, Expense and financial tracking, Automated reminders & notifications, Full activity logs. Designed for real-world operations, not theoretical workflows.'
+    },
+    detailedAnalysis: {
+      title: 'The Full Story',
+      paragraphs: [
+        'HustlerGuys was scaling fast — but operations were scattered.',
+        'We architected a unified CRM that connects every part of the business.'
+      ],
+      sections: [
+        {
+          title: 'Lead Management & Sales Pipeline',
+          paragraphs: [
+            'Features include: Lead import & capture, Contact details + source tracking, Custom pipeline stages, Kanban movement, Hot/warm/cold qualification, Automated reminders, Follow-up logs, Deal closure tracking. Sales teams gained total visibility and control.'
+          ]
+        },
+        {
+          title: 'Project & Task Management Engine',
+          paragraphs: [
+            'Once deals close, projects move into structured execution: Project creation, Team assignment, Milestone planning, Checklists, Status updates, Real-time progress bars, Member-specific dashboards. This replaced messy WhatsApp updates and untracked work.'
+          ]
+        },
+        {
+          title: 'Support & Ticketing System',
+          paragraphs: [
+            'Clients can raise support requests which are: Categorized, Prioritized, Assigned to staff, Time-tracked, Closed with history. Zero missed tickets. Zero guesswork.'
+          ]
+        },
+        {
+          title: 'HR & Staff Performance Module',
+          paragraphs: [
+            'The HR system includes: Staff roles & permissions, Attendance or check-ins, Staff task reports, Performance snapshots, Activity logs. Leadership finally gets measurable, transparent staff data.'
+          ]
+        },
+        {
+          title: 'Finance, Contracts & Subscriptions',
+          paragraphs: [
+            'A powerful financial suite: Subscription creation, Recurring billing reminders, Contract management, Expense entry, Profitability indicators, Invoice tracking. Finance teams save hours every week.'
+          ]
+        },
+        {
+          title: 'Dashboard & Reporting Suite',
+          paragraphs: [
+            'A unified view of the entire company: Sales funnel visualization, Lead heatmap, Income vs expenses, Project load, Team activity, Contract deadlines, Tickets pending. Leadership sees everything at a glance.'
+          ]
+        }
+      ],
+      quote: 'HustlerGuys CRM became a complete business operating system — enabling structure, growth, and performance transparency.'
+    },
+    workflow: [
+      {
+        step: '01',
+        title: 'Discovery & Workflow Mapping',
+        duration: 'Week 1-2',
+        description: 'We mapped internal processes: Lead → Sales → Project → Support → Billing, HR and Admin workflows, Approval chains, Reporting needs. This became the blueprint.',
+        deliverables: ['Process mapping', 'Workflow documentation', 'Approval chain design', 'Reporting requirements'],
+        color: 'blue'
+      },
+      {
+        step: '02',
+        title: 'UX Alignment with Real Operations',
+        duration: 'Week 3-4',
+        description: 'We designed: Clean navigation, Minimal clicks to reach key modules, Role-specific dashboards, Mobile-friendly views. Usability came before aesthetics.',
+        deliverables: ['Navigation system', 'Role-based dashboards', 'Mobile UI design', 'User flow optimization'],
+        color: 'purple'
+      },
+      {
+        step: '03',
+        title: 'Multi-Module Development',
+        duration: 'Week 5-12',
+        description: 'Engineering focused on: Lead pipeline engine, Task + project workflow, Subscription logic, Permission-based access, Ticketing backend, Reporting algorithms. Each module is a standalone micro-system yet fully integrated.',
+        deliverables: ['Lead management system', 'Project workflow engine', 'Subscription module', 'Permission system', 'Ticketing backend', 'Reporting engine'],
+        color: 'green'
+      },
+      {
+        step: '04',
+        title: 'Deploy, Train, and Scale',
+        duration: 'Week 13-16',
+        description: 'We delivered: Secure deployment, User training, Role-based onboarding, Multi-device testing, Performance tuning. The CRM is built to scale as HustlerGuys grows.',
+        deliverables: ['Production deployment', 'User training materials', 'Onboarding system', 'Performance optimization'],
+        color: 'blue'
+      }
+    ],
+    techStack: [
+      { name: 'React.js', description: 'Modern admin dashboard', icon: 'code-2', iconColor: 'text-blue-400' },
+      { name: 'Node.js + Express', description: 'Core backend', icon: 'server', iconColor: 'text-green-400' },
+      { name: 'MongoDB / PostgreSQL', description: 'Business data', icon: 'database', iconColor: 'text-emerald-400' },
+      { name: 'Redis', description: 'Caching for speed', icon: 'smartphone', iconColor: 'text-purple-400' },
+      { name: 'JWT Authentication', description: 'Secure access', icon: 'zap', iconColor: 'text-yellow-400' },
+      { name: 'AWS / Vercel', description: 'Deployment', icon: 'hard-drive', iconColor: 'text-orange-400' },
+      { name: 'Cloudinary', description: 'Media management', icon: 'wind', iconColor: 'text-cyan-400' }
+    ],
+    impact: [
+      { value: 'Full', label: 'Operational Visibility' },
+      { value: '60%', label: 'Faster Sales Follow-ups' },
+      { value: 'Unified', label: 'Workspace Replacing 6+ Tools' }
+    ],
+    liveUrl: '#'
+  },
+  {
+    id: 'seacatboats',
+    title: 'SeaCatBoats — Power, Precision & Performance On Water',
+    subtitle: 'Where craftsmanship meets cutting-edge digital experience',
+    description: 'A modern digital showcase for one of America\'s most innovative hybrid catamaran manufacturers — combining engineering excellence, AFTEC™ tunnel technology, and fully-interactive 3D boat customization.',
+    problem: {
+      title: 'The Problem',
+      description: 'Marine buyers are discerning. They expect: High-detail product visualization, Complete specifications for every model, Accurate representation of build options, A luxury-level digital experience, A way to explore custom configurations before speaking to sales. SeaCat\'s old web presence lacked: A modern identity, Mobile responsiveness, A configurator, Performance-optimized media, A structured spec database. They needed a platform that matched the premium quality of their vessels.'
+    },
+    userBase: {
+      title: 'User Base',
+      description: 'The platform serves: Boat Buyers & Enthusiasts — Explore models, Customize builds, Compare specs, Submit inquiries. Dealers & Sales Teams — Receive qualified leads, Showcase configurations, Present technical specs. Admin & Marketing Teams — Update images, Manage model content, Publish new releases. Every user pathway needed speed, clarity, and immersion.'
+    },
+    approach: {
+      title: 'Our Approach',
+      description: 'We engineered SeaCatBoats as a marine-grade product experience platform with: High-resolution media layers, AFTEC™ tunnel technology explanation modules, 3D customization system, Optimized pages for every model, Performance-first engineering, Mobile-first layouts for buyers on the go. The result blends storytelling, engineering detail, and interactive functionality.'
+    },
+    detailedAnalysis: {
+      title: 'The Full Story',
+      paragraphs: [
+        'Boat buyers don\'t just want specs — they want emotion, performance, and trust.',
+        'SeaCatBoats bridges these needs with an elegant digital experience.'
+      ],
+      sections: [
+        {
+          title: 'Model Showcase Architecture',
+          paragraphs: [
+            'Each SeaCat model page includes: Hero banners, Detailed engine options, Hull specifications, Seating layouts, Storage maps, Performance curves, Offshore capability insights, AFTEC™ tunnel airflow diagrams. Every section is modular, easy to update, and SEO-optimized.'
+          ]
+        },
+        {
+          title: '3D "Build Your Boat" Customizer',
+          paragraphs: [
+            'The customizer was engineered as a standalone experience: Select hull colors, Choose deck layouts, Add accessories, Change engine packages, Preview in real time, Generate lead + configuration sheet. Buyers get a high-end, showroom-like experience right from their browser.'
+          ]
+        },
+        {
+          title: 'Visual Storytelling & Media Engine',
+          paragraphs: [
+            'We optimized: Drone videos, High-resolution photography, Walkaround galleries, On-water performance shots. Media loads instantly thanks to: Lazy loading, Smart compression, CDN delivery, Progressive rendering.'
+          ]
+        },
+        {
+          title: 'Brand Identity & UI/UX',
+          paragraphs: [
+            'The design direction reflects: Offshore performance, Luxury finishing, Bold typography, Metallic accents, Ocean-inspired gradients. The experience is premium but still lightweight and easy to navigate.'
+          ]
+        },
+        {
+          title: 'Lead Management System',
+          paragraphs: [
+            'Every interaction feeds into a structured lead pipeline: Inquiry submission, Custom build request, Dealer routing, Automated notifications, CRM-friendly exports. Sales teams receive complete buyer context — increasing conversion rates.'
+          ]
+        }
+      ],
+      quote: 'SeaCatBoats now offers a digital experience that reflects the performance and craftsmanship of their hybrid catamarans.'
+    },
+    workflow: [
+      {
+        step: '01',
+        title: 'Industry Research & Buyer Behavior Mapping',
+        duration: 'Week 1-2',
+        description: 'We studied premium boat brands and user expectations across: Marine configuration tools, Technical spec pages, On-water performance presentations.',
+        deliverables: ['Model structure framework', 'Brand identity blueprint', 'Buyer persona mapping'],
+        color: 'blue'
+      },
+      {
+        step: '02',
+        title: 'UX & Structure Planning',
+        duration: 'Week 3-4',
+        description: 'We crafted layouts for: Model detail pages, Configurator UI, Spec tables, AFTEC™ technology section, Interactive galleries. The user journey flows like a modern car configurator.',
+        deliverables: ['Model page templates', 'Configurator wireframes', 'Spec table designs', 'Gallery layouts', 'Technology section UI'],
+        color: 'purple'
+      },
+      {
+        step: '03',
+        title: 'Development & 3D Engine Integration',
+        duration: 'Week 5-10',
+        description: 'Engineering tasks included: Component-based React structure, Dynamic spec modules, Custom 3D rendering pipeline, Lead form automation, SEO & performance optimization. Every module is scalable for new boat models.',
+        deliverables: ['React component system', '3D configurator engine', 'Spec modules', 'Lead capture system', 'SEO optimization'],
+        color: 'green'
+      },
+      {
+        step: '04',
+        title: 'Deployment & Optimization',
+        duration: 'Week 11-12',
+        description: 'We ensured: Ultra-fast load times, Mobile-first rendering, CDN-based media delivery, Lighthouse optimization, Continuous deployment workflows. The final system is lightweight, visually rich, and high-performance.',
+        deliverables: ['Performance optimization', 'CDN setup', 'Mobile optimization', 'Lighthouse improvements', 'CI/CD pipeline'],
+        color: 'blue'
+      }
+    ],
+    techStack: [
+      { name: 'React.js', description: 'Frontend experience', icon: 'code-2', iconColor: 'text-blue-400' },
+      { name: 'Next.js', description: 'SSR + SEO optimization', icon: 'code-2', iconColor: 'text-blue-400' },
+      { name: 'Tailwind CSS', description: 'Component styling', icon: 'wind', iconColor: 'text-cyan-400' },
+      { name: 'Three.js', description: '3D boat configurator', icon: 'zap', iconColor: 'text-yellow-400' },
+      { name: 'Node.js / Express', description: 'Lead capture APIs', icon: 'server', iconColor: 'text-green-400' },
+      { name: 'MongoDB', description: 'Model + builder data', icon: 'database', iconColor: 'text-emerald-400' },
+      { name: 'Cloudinary', description: 'Image optimization', icon: 'smartphone', iconColor: 'text-purple-400' },
+      { name: 'Vercel', description: 'Global deployment', icon: 'hard-drive', iconColor: 'text-orange-400' }
+    ],
+    impact: [
+      { value: '2.5×', label: 'Increase in Inquiries' },
+      { value: 'Premium', label: 'Brand Positioning' },
+      { value: 'High', label: '3D Configurator Engagement' }
+    ],
+    liveUrl: '#'
+  },
+  {
+    id: 'dashboard',
+    title: 'PIC Event Management Platform',
+    subtitle: 'Engineering a seamless event backbone for thousands of athletes, coordinators, and administrators',
+    description: 'The PIC Event Management Platform replaces fragmented spreadsheets and manual coordination with a unified digital command center. From participant onboarding to race-day execution, the system delivers operational clarity, instant data flow, and a frictionless experience for everyone involved.',
+    problem: {
+      title: 'The Problem',
+      description: 'The client managed multi-category athletic events—marathons, cycling races, duathlons—using manual workflows. Registration data came through Google forms, payments had to be validated by hand, and event-day synchronization between categories, waves, and timing partners caused frequent delays. Operational fatigue increased with scale. They needed a system capable of: Automated participant onboarding, Category-specific logic, Bib allocation, Payment tracking, Event kit distribution, Real-time dashboards. The old tools were simply not built for the complexity of modern sporting events.'
+    },
+    userBase: {
+      title: 'User Base',
+      description: 'The platform serves a multi-layer ecosystem: Participants registering across categories, age groups, and distances. Event admins managing configurations, rules, and communication. Volunteers & Race marshals needing instant check-in and tracking tools. Timing partners requiring structured exports. Finance teams verifying transactions and refunds. This diverse user base required an interface that is fast, intuitive, and deeply structured.'
+    },
+    approach: {
+      title: 'Our Approach',
+      description: 'We didn\'t build "just another registration system." We engineered an end-to-end event infrastructure platform with: A dynamic category engine supporting unlimited sports formats. Automated payment reconciliation via integrated gateways. Real-time bib generation & numbering logic. Bulk import/export tools for operational teams. Admin dashboards with live metrics. A communication system for event updates. Secure participant verification workflows. The architecture ensured every module—registration, kit issuance, timing exports—worked together seamlessly.'
+    },
+    detailedAnalysis: {
+      title: 'The Full Story',
+      paragraphs: [
+        'The PIC platform emerged from a deep understanding of event volatility. Sporting events are dynamic: categories shift, participants edit details last-minute, weather forces operational changes, and timing partners require pristine data structures.'
+      ],
+      sections: [
+        {
+          title: 'Architectural Foundation',
+          paragraphs: [
+            'We constructed a modular event engine that supports: Unlimited event types: running, cycling, duathlon, corporate sports, Hierarchical subcategories, Gender & age filters, Wave and batch assignments, Custom registration forms, Real-time payment verification. Every rule could be configured without code changes.'
+          ]
+        },
+        {
+          title: 'Data Flow Engineering',
+          paragraphs: [
+            'The biggest challenge was ensuring data accuracy at scale. We implemented: A multi-stage registration pipeline, Payment status synchronization using webhooks, Deduplication logic to prevent double entries, A versioned participant profile system, Export pipelines for timing chips and third-party systems. This eliminated work that previously required days of manual cleanup.'
+          ]
+        },
+        {
+          title: 'Race-Day Experience Optimization',
+          paragraphs: [
+            'On event day, speed is survival. We engineered: A QR-based kit collection system, Instant participant verification, Bib distribution scanners, Volunteer-friendly UIs, Error-proofed search for thousands of participants. These optimizations reduced kit distribution time by 60%.'
+          ]
+        },
+        {
+          title: 'Scalability & Reliability',
+          paragraphs: [
+            'The platform is capable of: Handling 10,000+ registrations, Multi-event concurrency, Zero-downtime deployment, Real-time dashboards for every stakeholder. With cloud-native deployment, the system remains stable even under traffic surges from last-minute participants.'
+          ]
+        }
+      ],
+      quote: 'The PIC platform is more than software—it is the unseen engine that powers a flawless event-day experience.'
+    },
+    workflow: [
+      {
+        step: '01',
+        title: 'Discovery & Field Immersion',
+        duration: 'Week 1-2',
+        description: 'We shadowed the organizing team through an entire event cycle—registration, kit prep, check-ins—to map pain points accurately.',
+        deliverables: ['Detailed event lifecycle map', 'Volunteer workflows', 'Category matrix', 'Operational bottleneck analysis'],
+        color: 'blue'
+      },
+      {
+        step: '02',
+        title: 'Information Architecture & UX Blueprints',
+        duration: 'Week 3-4',
+        description: 'We created detailed UX flows covering: Full registration lifecycle, Admin event creation, Multi-category participant logic, Field-team dashboards, Financial verification flows.',
+        deliverables: ['Wireframes for 60+ screens', 'Registration flows', 'Admin dashboards', 'Financial workflows'],
+        color: 'purple'
+      },
+      {
+        step: '03',
+        title: 'Interface & Visual System',
+        duration: 'Week 5-6',
+        description: 'A clean, operational UI was designed: High-contrast layouts for outdoor event usage. Oversized inputs for volunteers using gloves or in bright sunlight. Zero-clutter admin design for high-speed filtering. Data tables engineered for thousands of rows without lag.',
+        deliverables: ['High-contrast UI design', 'Volunteer-friendly interfaces', 'Admin dashboards', 'Data table optimization'],
+        color: 'green'
+      },
+      {
+        step: '04',
+        title: 'Engineering & Deployment',
+        duration: 'Week 7-12',
+        description: 'Development focused on: Component-driven frontend. API architecture handling heavy filtering. Payment integration. Bulk Excel workflows. Real-time dashboards. Event-day QR systems. Load testing simulated peak traffic to ensure system stability.',
+        deliverables: ['Component-driven frontend', 'Payment integration', 'QR verification system', 'Real-time dashboards'],
+        color: 'blue'
+      }
+    ],
+    techStack: [
+      { name: 'React.js', description: 'Frontend UI engine', icon: 'code-2', iconColor: 'text-blue-400' },
+      { name: 'Node.js & Express', description: 'REST API backend', icon: 'server', iconColor: 'text-green-400' },
+      { name: 'MongoDB', description: 'Participant and event data storage', icon: 'database', iconColor: 'text-emerald-400' },
+      { name: 'AWS S3', description: 'Storage for documents/bib exports', icon: 'hard-drive', iconColor: 'text-orange-400' },
+      { name: 'Payment Gateway APIs', description: 'Automated reconciliation', icon: 'zap', iconColor: 'text-yellow-400' },
+      { name: 'QR Engine', description: 'Participant verification', icon: 'smartphone', iconColor: 'text-purple-400' },
+      { name: 'Vercel / AWS', description: 'High-performance hosting', icon: 'wind', iconColor: 'text-cyan-400' }
+    ],
+    impact: [
+      { value: '62%', label: 'Reduction in Kit Distribution Time' },
+      { value: '4x', label: 'Faster Payment Validation' },
+      { value: '40%', label: 'Fewer Participant Support Requests' },
+      { value: '99.9%', label: 'Uptime Across Event Cycles' },
+      { value: 'Near-Instant', label: 'Reporting for Timing Partners' }
+    ],
+    liveUrl: 'https://event-pic-fe.vercel.app/'
   },
   {
     id: 'evoke-dholavira',
@@ -1047,9 +1290,9 @@ export const caseStudiesData: CaseStudyData[] = [
   },
   {
     id: 'ai-diagnostics',
-    title: 'AI Diagnostics Scanner — Interpreting Health',
+    title: 'AI Diagnostics Scanner — Interpreting Health with Intelligence',
     subtitle: 'Where medical data becomes clarity, and clarity becomes faster diagnosis',
-    description: 'A next-generation medical analysis engine that reads X-rays, blood reports, and diagnostic documents through AI — delivering structured results, probability-based findings, and actionable doctor-ready summaries.',
+    description: 'The AI Diagnostics Scanner automates the first layer of clinical interpretation by analyzing radiology images, pathology reports, and handwritten medical results. It combines computer vision with natural language processing to highlight anomalies, extract critical values, interpret ranges, and produce a trusted medical summary — all while maintaining hospital-grade compliance.',
     problem: {
       title: 'The Problem',
       description: 'Medical teams faced recurring challenges: X-ray interpretation requires radiologist availability, Blood reports vary widely in format and terminology, Doctors lose time scanning for abnormal values, Patients cannot understand their own reports, No unified system for structured report extraction, Manual interpretation is slow during high-volume OPD days. Healthcare needed a fast, consistent, AI-driven pre-diagnosis assistant.'
@@ -1065,10 +1308,15 @@ export const caseStudiesData: CaseStudyData[] = [
     detailedAnalysis: {
       title: 'The Full Story',
       paragraphs: [
-        'This project required building a system that respects medical nuance, handles unstructured data, and delivers reliable insights.',
-        'We implemented: CNN + Vision Transformer models (for chest and bone X-rays), Heatmaps that visualize areas of concern, Severity scoring, Multi-class detection: Pneumonia, TB indications, Lung opacity, Cardiomegaly, Fractures, Dental decay markers. Each image undergoes: Pre-processing, Contrast enhancement, Noise correction, AI inference, Result scoring. This produces a structured radiology insight.'
+        'This project required building a system that respects medical nuance, handles unstructured data, and delivers reliable insights.'
       ],
       sections: [
+        {
+          title: 'Radiology AI Engine',
+          paragraphs: [
+            'We implemented: CNN + Vision Transformer models (for chest and bone X-rays), Heatmaps that visualize areas of concern, Severity scoring, Multi-class detection: Pneumonia, TB indications, Lung opacity, Cardiomegaly, Fractures, Dental decay markers. Each image undergoes: Pre-processing, Contrast enhancement, Noise correction, AI inference, Result scoring. This produces a structured radiology insight.'
+          ]
+        },
         {
           title: 'Blood Report Interpretation Engine',
           paragraphs: [
@@ -1135,9 +1383,12 @@ export const caseStudiesData: CaseStudyData[] = [
       { name: 'Docker + GPU Runtime', description: 'Scalable inference', icon: 'hard-drive', iconColor: 'text-blue-300' }
     ],
     impact: [
-      { value: '80%', label: 'Reduction in Screening Time' },
+      { value: '80%', label: 'Reduction in Manual Screening Time' },
       { value: 'High', label: 'Confidence Anomaly Detection' },
-      { value: 'Instant', label: 'Report Extraction' }
+      { value: 'Instant', label: 'Extraction from Complex Formats' },
+      { value: 'Improved', label: 'Patient Understanding' },
+      { value: 'Lower', label: 'Doctor Burnout' },
+      { value: 'Clinic-Ready', label: 'Reliability' }
     ],
     liveUrl: '#'
   },
