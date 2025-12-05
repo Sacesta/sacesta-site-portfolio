@@ -7,7 +7,7 @@ import zenaiBg from '../assets/zenai.png';
 import mayuriBg from '../assets/mayuri.png';
 import evokeBg from '../assets/evoke.png';
 import shividBg from '../assets/shivid-bg.png';
-import xmayxBg from '../assets/xmyax.png';
+
 import crmBg from '../assets/crmbg.png';
 import seacatBg from '../assets/seacatbg.png';
 import visit from '../assets/visitahmdavadbg.png';
