@@ -33,24 +33,42 @@ function App() {
     setQuote(randomQuote);
   }, []);
 
-  return (
-    <div className="app-container" onClick={handleClick}  style={{ cursor: 'pointer' }}>
-      <div className="click-instruction" >
-         Click anywhere to continue 
-      </div>
+return (
+    <div className="app-container" onClick={handleClick}  style={{ cursor: 'pointer', position: 'relative', minHeight: '100vh' }}>
       {isMobile ? (
-        <div className="quote-container">
-          {quote && (
-            <DecryptedText
-              text={quote}
-              speed={50}
-              maxIterations={20}
-              className="decrypted-text"
-              animateOn="view"
-              revealDirection="start"
-            />
-          )}
-        </div>
+        <>
+          <div className="quote-container" style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            minHeight: '100vh',
+            padding: '40px 20px 80px',
+            textAlign: 'center'
+          }}>
+            {quote && (
+              <DecryptedText
+                text={quote}
+                speed={50}
+                maxIterations={20}
+                className="decrypted-text"
+                animateOn="view"
+                revealDirection="start"
+              />
+            )}
+          </div>
+          <div className="click-instruction mt-[60px]" style={{ 
+            position: 'fixed',
+            bottom: '30px',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            zIndex: 10,
+            fontSize: '14px',
+            opacity: 0.7,
+            whiteSpace: 'nowrap'
+          }}>
+             Click anywhere to continue 
+          </div>
+        </>
       ) : (
         <div className="desktop-scroll-container">
           <div style={{ height: '10vh' }}></div>
