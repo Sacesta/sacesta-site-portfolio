@@ -251,96 +251,102 @@ export const caseStudiesData: CaseStudyData[] = [
   },
   {
     id: 'automation',
-    title: 'FindSecure — Security Intelligence Reimagined',
-    subtitle: 'Where compliance, intelligence, and operational control converge in one secure platform',
-    description: 'A mission-critical security documentation, incident logging, and multi-entity verification system designed to streamline high-sensitivity workflows for government-adjacent operations.',
+    title: 'Bharat Upline — India\'s Utility Service Engine',
+    subtitle: 'Powering India\'s everyday transactions through a robust, scalable digital backbone',
+    description: 'A unified multi-service platform enabling recharge, bill payments, wallet settlements, and digital distribution for consumers and agents across India.',
     problem: {
       title: 'The Problem',
-      description: 'Critical security operations relied on manual documentation, unstructured communication, and inconsistent incident reporting. Sensitive data lived in shared drives without version control. Key challenges included: No standardized workflow for capturing incidents, Missing audit trails for compliance reviews, Delayed communication between security teams, Zero automation for repetitive verification tasks, Disorganized records with no central repository. These limitations increased operational risk and slowed down high-level decision making. A robust digital system was required.'
+      description: 'Utility service providers in India face chronic fragmentation: Different APIs for each service, Unreliable transaction settlements, Zero transparency for failed transactions, Manual reconciliation across partners, Slow wallet updates and delayed refunds, No enterprise-grade agent management system. Users needed simplicity. Agents needed stability. Partners needed accountability. The solution required a centralized, tamper-proof, real-time digital service engine.'
     },
     userBase: {
       title: 'User Base',
-      description: 'FindSecure serves a hierarchy of operational roles: Security Officers who log incidents, upload reports, and verify identity documents. Supervisors who handle approvals and escalate cases. Compliance Teams who audit logs and check policy enforcement. Administrators who manage roles, permissions, and sensitive configurations. External Partners with limited, controlled visibility via secure endpoints. The system enforces strict permission layers to ensure the right data reaches the right user at the right time.'
+      description: 'Bharat Upline serves a wide operational spectrum: Consumers — Quick bill pay, Recharges, Real-time status, Instant refunds when needed. Retail Agents & Distributors — Wallet additions, Commission tracking, Transaction history, Multi-service distribution. Admins & Finance Teams — Settlement pipelines, Transaction monitoring, Service health dashboards, Partner API oversight. Each user type interacts with the platform at different intensities, demanding performance, clarity, and trust.'
     },
     approach: {
       title: 'Our Approach',
-      description: 'We engineered FindSecure as a security-first operational platform, built upon: A hardened access-control system, Enterprise-level encryption for sensitive uploads, Immutable activity trails, Dynamic incident-logging modules, Real-time dashboards for command-level clarity, Modular expansion for future compliance standards. Every interaction is logged, validated, and versioned to maintain absolute operational integrity.'
+      description: 'We architected Bharat Upline as a multi-rail digital transaction engine, with: Unified API layer for all services, Real-time transaction orchestration, Wallet + commission system, Fail-safe retry mechanisms, Distributor + retailer hierarchies, Secure logging and reconciliation modules, Analytics dashboards for visibility. This ensured high availability even during peak transactional loads.'
     },
     detailedAnalysis: {
       title: 'The Full Story',
       paragraphs: [
-        'FindSecure began as a simple need for better documentation but evolved into a full-spectrum security intelligence framework when deeper challenges surfaced during discovery.',
-        'Legacy systems showed patterns: Incidents were recorded post-factum, not in real time, Cross-team communication lagged by hours, Documentation inconsistencies created ambiguity, Sensitive PDFs lacked traceability, Approvals were informal and undocumented. The organization needed an auditable, standardized, and defensible workflow.'
+        'The Indian utility service ecosystem is inherently volatile — telecom APIs fail randomly, electricity boards maintain inconsistent protocols, and transaction statuses often arrive late.',
+        'Our job was not just to build a platform, but to design a resilient financial transaction kernel.'
       ],
       sections: [
         {
-          title: 'Engineering the Core Security Engine',
+          title: 'Centralized Transaction Engine',
           paragraphs: [
-            'We built a multi-module architecture: 1. Incident Logging Module — Structured forms, Severity scoring, Automated timestamps, Evidence uploads, Multi-step approvals. Each entry produces a fully traceable digital record. 2. Document Verification Pipeline — Staff IDs, Authorization letters, Access badges, Clearance certificates. Documents are encrypted and linked to identity profiles. 3. Compliance & Audit Layer — Activity heatmaps, Escalation records, Weekly and monthly reports, Automated compliance scoring. Auditability became a core feature, not an afterthought.'
+            'We created a unified engine capable of: 1. Handling Every Service Type — Prepaid recharge, DTH, Landline, Electricity, Gas, Broadband, FASTag, Insurance renewals, And more. Each service mapped into a single, predictable orchestration flow. 2. Real-Time Status Syncing — We integrated: Callback listeners, Webhooks, Polling fallback, Delayed settlement handlers, Multi-retry queues. The system automatically resolves ambiguous states like PENDING or TIMEOUT. 3. Wallet & Commission Engine — Agents and distributors rely heavily on real-time wallet health. We engineered: Balance freeze policies, Instant deductions, Auto refunds on failed transactions, Tiered commission slabs, Distributor → Retailer flows. This engine alone reduced support tickets significantly.'
           ]
         },
         {
-          title: 'Analytics & Real-Time Visibility',
+          title: 'API Reliability & Failover Strategy',
           paragraphs: [
-            'FindSecure\'s dashboard surfaces: High-risk zones, Incident frequency trends, Pending approvals, Clearance expiry alerts, Operational bottlenecks. Security teams can now act on intelligence instead of reacting to chaos.'
+            'We built failover protocols: Tier-1 partner → Tier-2 fallback, Automatic rerouting on failure spikes, Smart retries, Transaction duplication prevention, Partner health monitoring. This ensured transaction success rates remained consistently high even on unstable external APIs.'
           ]
         },
         {
-          title: 'Scalable and Hardened Infrastructure',
+          title: 'Admin & Analytics Console',
           paragraphs: [
-            'The system supports: Multi-location rollouts, 10,000+ security records, Zero-downtime updates, Access governed by fine-grained RBAC, Secure API integration for partners. The architecture ensures long-term reliability and security resilience.'
+            'The admin system introduced: Real-time transaction heatmaps, API failure analysis, Commission rule editor, Wallet settlement history, Service uptime metrics, Escalation workflows. The console allowed operations teams to take quick, informed decisions.'
+          ]
+        },
+        {
+          title: 'Performance Engineering',
+          paragraphs: [
+            'To handle thousands of daily transactions: Redis caching prevented bottlenecks, Queue workers handled spikes, Horizontal scaling ensured reliability, Database indexes kept queries fast, CDN minimized UI delays. The system is engineered to handle 10x traffic without architectural changes.'
           ]
         }
       ],
-      quote: 'Security is built on clarity. FindSecure delivers it through structured workflows, hardened architecture, and intelligence-driven insights.'
+      quote: 'In a country where millions rely on digital utility services every day, Bharat Upline brings reliability, structure, and speed to the heart of essential transactions.'
     },
     workflow: [
       {
         step: '01',
-        title: 'Discovery & Situation Analysis',
+        title: 'Ecosystem Study & Data Mapping',
         duration: 'Week 1-2',
-        description: 'We conducted interviews with field officers, supervisors, and compliance teams.',
-        deliverables: ['Incident classification hierarchy', 'Data sensitivity map', 'Policy compliance matrix'],
+        description: 'We analyzed APIs from various telecom operators, electricity boards, and financial gateways.',
+        deliverables: ['Unified data schema', 'Retry strategies', 'Wallet structure framework'],
         color: 'blue'
       },
       {
         step: '02',
-        title: 'UX for High-Sensitivity Operations',
+        title: 'UX for Financial Clarity',
         duration: 'Week 3-4',
-        description: 'The UI focuses on clarity and error-proofing: Structured incident forms, High-contrast operational screens, Instant upload and tagging, Clear audit indicators, Notification system for escalations. The interface supports high-pressure environments where clarity is essential.',
-        deliverables: ['Structured forms', 'High-contrast UI', 'Upload system', 'Notification system'],
+        description: 'We designed transparent flows: Clear transaction states, Intuitive wallet dashboard, Commission previews, Categorized service screens, Simple bill entry flows. A user must always know what happened, why, and what to do next.',
+        deliverables: ['Transaction state flows', 'Wallet dashboard', 'Commission previews', 'Service screens'],
         color: 'purple'
       },
       {
         step: '03',
-        title: 'Engineering Secure Interaction Layers',
+        title: 'Building the Transaction Kernel',
         duration: 'Week 5-10',
-        description: 'We engineered: RBAC permission grids, Encrypted document pipelines, Approval chains, Incident status evolution, Activity signatures. All actions are hashed and stamped for compliance-grade traceability.',
-        deliverables: ['RBAC system', 'Encryption pipeline', 'Approval workflows', 'Activity logging'],
+        description: 'Engineering work included: Multi-service API layer, Wallet system, Status synchronization engine, Commission calculator, Admin modules, Retry queues. This formed the beating heart of Bharat Upline.',
+        deliverables: ['API layer', 'Wallet system', 'Status sync engine', 'Commission calculator', 'Admin modules'],
         color: 'green'
       },
       {
         step: '04',
-        title: 'Deployment & Hardening',
+        title: 'Deployment & Reliability Hardening',
         duration: 'Week 11-14',
-        description: 'Security hardening included: HTTPS enforcement, Data encryption at rest & transit, Admin activity logging, Rate limiters, Secure backups, Automated vulnerability checks. The result is a stable, tamper-resistant operational backbone.',
-        deliverables: ['Security hardening', 'Encryption implementation', 'Monitoring system', 'Backup system'],
+        description: 'We ensured: API monitoring, Containerized deployment, Error alerts, Backups, High-availability clustering, Real-time logs. The system is built like a financial-grade platform.',
+        deliverables: ['API monitoring', 'Containerized deployment', 'Error alerts', 'Backup system', 'High-availability setup'],
         color: 'blue'
       }
     ],
     techStack: [
-      { name: 'React.js', description: 'Operational dashboards', icon: 'code-2', iconColor: 'text-blue-400' },
-      { name: 'Node.js (Express)', description: 'Secure API layer', icon: 'server', iconColor: 'text-green-400' },
-      { name: 'MongoDB', description: 'Audit-grade database system', icon: 'database', iconColor: 'text-emerald-400' },
-      { name: 'JWT + Bcrypt', description: 'Authentication & encryption', icon: 'zap', iconColor: 'text-yellow-400' },
-      { name: 'AWS S3', description: 'Secure evidence and document storage', icon: 'hard-drive', iconColor: 'text-orange-400' },
-      { name: 'Docker + NGINX', description: 'Hardened deployment', icon: 'smartphone', iconColor: 'text-purple-400' },
-      { name: 'CloudWatch / Logging', description: 'Monitoring & alerts', icon: 'wind', iconColor: 'text-cyan-400' }
+      { name: 'Node.js + Express', description: 'Transaction orchestration engine', icon: 'server', iconColor: 'text-green-400' },
+      { name: 'React.js / Next.js', description: 'Consumer + Agent interfaces', icon: 'code-2', iconColor: 'text-blue-400' },
+      { name: 'MongoDB / PostgreSQL', description: 'Transaction and wallet data', icon: 'database', iconColor: 'text-emerald-400' },
+      { name: 'Redis', description: 'Queues and caching', icon: 'zap', iconColor: 'text-yellow-400' },
+      { name: 'Third-party APIs', description: 'Telecom & utility services', icon: 'wind', iconColor: 'text-cyan-400' },
+      { name: 'AWS or DigitalOcean', description: 'Reliable cloud deployment', icon: 'hard-drive', iconColor: 'text-orange-400' },
+      { name: 'Docker + PM2', description: 'Horizontal scaling and process management', icon: 'smartphone', iconColor: 'text-purple-400' }
     ],
     impact: [
-      { value: '80%', label: 'Faster Incident Reporting' },
-      { value: '100%', label: 'Traceability for Audits' },
-      { value: '50%', label: 'Reduction in Miscommunication' }
+      { value: '90%', label: 'Fewer Failed Transactions' },
+      { value: '2x', label: 'Faster Settlement' },
+      { value: '60%', label: 'Reduction in Support Load' }
     ],
     liveUrl: '#'
   },
@@ -1157,7 +1163,7 @@ export const caseStudiesData: CaseStudyData[] = [
       { name: 'MongoDB / PostgreSQL', description: 'Transaction and wallet data', icon: 'database', iconColor: 'text-emerald-400' },
       { name: 'Redis', description: 'Queues and caching', icon: 'smartphone', iconColor: 'text-purple-400' },
       { name: 'Third-party APIs', description: 'Telecom & utility services', icon: 'zap', iconColor: 'text-yellow-400' },
-      { name: 'AWS / DigitalOcean', description: 'Reliable cloud deployment', icon: 'hard-drive', iconColor: 'text-orange-400' },
+      { name: 'AWS or DigitalOcean', description: 'Reliable cloud deployment', icon: 'hard-drive', iconColor: 'text-orange-400' },
       { name: 'Docker + PM2', description: 'Horizontal scaling and process management', icon: 'wind', iconColor: 'text-cyan-400' }
     ],
     impact: [

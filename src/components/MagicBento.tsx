@@ -13,6 +13,8 @@ import seacatBg from '../assets/seacatbg.png';
 import visit from '../assets/visitahmdavadbg.png';
 import picbg from '../assets/picbg.png';
 import comehomebg from '../assets/comehombg.png';
+import xray from '../assets/xray.png';
+import bharatupline from '../assets/bharatupline.png';
 
 const DEFAULT_PARTICLE_COUNT = 12;
 const DEFAULT_SPOTLIGHT_RADIUS = 300;
@@ -72,7 +74,7 @@ const cardData = [
     title: 'AI Diagnostics Scanner — Interpreting Health with Intelligence',
     description: 'Where medical data becomes clarity, and clarity becomes faster diagnosis',
     label: 'Healthcare Platform',
-    backgroundImage: xmayxBg,
+    backgroundImage: xray,
   },
     {
     id: 'analytics',
@@ -115,10 +117,11 @@ const cardData = [
   {
     id: 'automation',
     color: '#060010',
-    title: 'FindSecure — Security Intelligence Reimagined',
+    title: 'Bharat Upline — India\'s Utility Service Engine',
     description:
-      'Where compliance, intelligence, and operational control converge in one secure platform',
-    label: 'Security Platform',
+      'A unified multi-service platform enabling recharge, bill payments, wallet settlements, and digital distribution for consumers and agents across India',
+    label: 'Utility Platform',
+    backgroundImage: bharatupline,
   },
   {
     id: 'integration',
@@ -799,27 +802,43 @@ const MagicBento = ({
             text-overflow: ellipsis;
           }
           
+          .card {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif !important;
+          }
+          
           .card__label,
           .card__title,
           .card__description {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif !important;
             color: rgba(0, 0, 0, 0.95) !important;
             font-weight: 600 !important;
             text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8), 0 0 4px rgba(255, 255, 255, 0.5) !important;
+            letter-spacing: -0.01em !important;
           }
           
           .card__title {
             font-weight: 700 !important;
             color: rgba(0, 0, 0, 1) !important;
+            line-height: 1.4 !important;
+            letter-spacing: -0.02em !important;
+            font-size: 1.125rem !important;
           }
           
           .card__description {
             color: rgba(0, 0, 0, 0.9) !important;
             font-weight: 500 !important;
+            line-height: 1.5 !important;
+            letter-spacing: -0.01em !important;
+            font-size: 0.9375rem !important;
           }
           
           .card__label {
             font-weight: 600 !important;
             color: rgba(0, 0, 0, 0.95) !important;
+            letter-spacing: 0.02em !important;
+            text-transform: uppercase !important;
+            font-size: 0.75rem !important;
+            line-height: 1.3 !important;
           }
           
           .mobile-card {
@@ -843,8 +862,8 @@ const MagicBento = ({
             
             .card-responsive .card {
               width: 100%;
-              min-height: 200px;
-              max-height: 280px;
+              min-height: 320px;
+              max-height: 420px;
               padding: 1rem;
               aspect-ratio: auto;
               touch-action: manipulation;
@@ -855,26 +874,31 @@ const MagicBento = ({
             }
             
             .card__label {
-              font-size: 0.75rem !important;
+              font-size: 0.8125rem !important;
               color: rgba(0, 0, 0, 0.95) !important;
               font-weight: 600 !important;
               text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8), 0 0 4px rgba(255, 255, 255, 0.5) !important;
+              letter-spacing: 0.03em !important;
+              line-height: 1.3 !important;
             }
             
             .card__title {
-              font-size: 0.875rem !important;
-              line-height: 1.3 !important;
+              font-size: 1.125rem !important;
+              line-height: 1.5 !important;
               color: rgba(0, 0, 0, 1) !important;
               font-weight: 700 !important;
               text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8), 0 0 4px rgba(255, 255, 255, 0.5) !important;
+              letter-spacing: -0.02em !important;
+              margin-bottom: 0.5rem !important;
             }
             
             .card__description {
-              font-size: 0.7rem !important;
-              line-height: 1.4 !important;
+              font-size: 0.875rem !important;
+              line-height: 1.6 !important;
               color: rgba(0, 0, 0, 0.9) !important;
               font-weight: 500 !important;
               text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8), 0 0 4px rgba(255, 255, 255, 0.5) !important;
+              letter-spacing: -0.01em !important;
             }
           }
           
@@ -890,20 +914,27 @@ const MagicBento = ({
               color: rgba(0, 0, 0, 0.95) !important;
               font-weight: 600 !important;
               text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8), 0 0 4px rgba(255, 255, 255, 0.5) !important;
+              letter-spacing: 0.02em !important;
+              line-height: 1.3 !important;
             }
             
             .card__title {
-              font-size: 0.9375rem !important;
+              font-size: 1.25rem !important;
+              line-height: 1.5 !important;
               color: rgba(0, 0, 0, 1) !important;
               font-weight: 700 !important;
               text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8), 0 0 4px rgba(255, 255, 255, 0.5) !important;
+              letter-spacing: -0.02em !important;
+              margin-bottom: 0.5rem !important;
             }
             
             .card__description {
-              font-size: 0.75rem !important;
+              font-size: 0.9375rem !important;
+              line-height: 1.6 !important;
               color: rgba(0, 0, 0, 0.9) !important;
               font-weight: 500 !important;
               text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8), 0 0 4px rgba(255, 255, 255, 0.5) !important;
+              letter-spacing: -0.01em !important;
             }
           }
         `}
