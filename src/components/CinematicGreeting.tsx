@@ -6,7 +6,7 @@ interface CinematicGreetingProps {
 }
 
 const phrases = [
-  "Hello. You’re exactly where you’re meant to be.",
+  "Hello \nYou’re exactly where you’re meant to be",
   "Welcome to Sacesta",
   "Your Trusted Technical Partner"
 ];

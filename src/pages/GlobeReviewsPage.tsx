@@ -2,12 +2,14 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import ReviewsGlobe from '../components/ReviewsGlobe';
-import { ChevronRight, Globe2, Star, Quote } from 'lucide-react';
+import { ChevronRight, Star, Quote } from 'lucide-react';
 import { ClientReview } from '../data/reviews';
 import { cn } from '../lib/utils';
+import useIsMobile from '../hooks/useIsMobile';
 
 export default function GlobeReviewsPage() {
   const navigate = useNavigate();
+  const isMobile = useIsMobile();
   const [hoveredReview, setHoveredReview] = useState<ClientReview | null>(null);
 
   const reviewLocationDisplay = (location: string) => {
@@ -33,29 +35,31 @@ export default function GlobeReviewsPage() {
             transition={{ duration: 0.8 }}
             className="flex flex-col items-center text-center max-w-4xl mx-auto"
         >
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 mb-4 backdrop-blur-xl pointer-events-auto">
-                <Globe2 className="w-3.5 h-3.5 text-indigo-400" />
-                <span className="text-[9px] uppercase tracking-[0.4em] text-gray-300 font-bold">Global Presence</span>
-            </div>
-            <h1 className="text-3xl md:text-6xl font-black tracking-tighter mb-4 bg-gradient-to-b from-white via-white to-white/40 bg-clip-text text-transparent pointer-events-auto">
-                Trusted <span className="text-white">Around the World</span>
+            <h1 className="text-3xl md:text-7xl font-black tracking-tighter mb-4 bg-gradient-to-b from-white via-white to-white/40 bg-clip-text text-transparent pointer-events-auto">
+                Trusted <span className="text-white">Worldwide</span>
             </h1>
-            <p className="text-gray-400 text-[10px] md:text-sm max-w-lg mx-auto leading-relaxed pointer-events-auto font-light opacity-60">
-                Partnering with visionaries across every continent to deliver exceptional technical solutions.
+            <p className="text-gray-400 text-[10px] md:text-base max-w-2xl mx-auto leading-relaxed pointer-events-auto font-light opacity-60">
+                Exceptional technical solutions, trusted on every continent.
             </p>
         </motion.div>
       </div>
 
-      {/* GLOBE SECTION - Maximized Size */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+      {/* GLOBE SECTION - Maximized Size & Responsive Shift */}
+      <div className={cn(
+        "absolute inset-0 flex items-center justify-center pointer-events-none transition-transform duration-1000",
+        isMobile ? "translate-y-[80px]" : "translate-y-[160px]"
+      )}>
         <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
-            className="w-full aspect-square max-w-[min(85vh,95vw)] relative pointer-events-auto"
+            className="w-full aspect-square max-w-[min(98vh,100vw)] relative pointer-events-auto"
         >
             <div className="absolute inset-0 bg-indigo-500/5 blur-[150px] rounded-full -z-10" />
-            <ReviewsGlobe onHoverReview={setHoveredReview} />
+            <ReviewsGlobe 
+              onHoverReview={setHoveredReview} 
+              scale={isMobile ? 300 : 400} 
+            />
         </motion.div>
       </div>
 

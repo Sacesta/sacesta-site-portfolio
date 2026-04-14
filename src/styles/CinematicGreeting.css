@@ -56,6 +56,8 @@
   padding: 0 20px;
   position: relative;
   z-index: 10;
+  white-space: pre-line;
+  line-height: 1.6;
 }
 
 .greeting-text.active {

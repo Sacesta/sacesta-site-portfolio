@@ -81,6 +81,21 @@
   color: #fff;
 }
 
+@media (max-width: 1024px) {
+  .nav-center-text {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .minimal-nav {
+    padding: 0 20px;
+  }
+  .nav-socials {
+    gap: 16px;
+  }
+}
+
 .nav-socials {
   display: flex;
   gap: 24px;

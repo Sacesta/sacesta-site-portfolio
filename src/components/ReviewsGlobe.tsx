@@ -14,9 +14,10 @@ const geoUrl = "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json";
 
 export interface ReviewsGlobeProps {
     onHoverReview: (review: ClientReview | null) => void;
+    scale?: number;
 }
 
-export default function ReviewsGlobe({ onHoverReview }: ReviewsGlobeProps) {
+export default function ReviewsGlobe({ onHoverReview, scale = 300 }: ReviewsGlobeProps) {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [rotation, setRotation] = useState(0);
 
@@ -35,25 +36,25 @@ export default function ReviewsGlobe({ onHoverReview }: ReviewsGlobeProps) {
         <ComposableMap
           projection="geoOrthographic"
           projectionConfig={{
-            scale: 250,
+            scale: scale,
             rotate: [rotation, -20, 0]
           }}
           style={{ width: "100%", height: "100%" }}
         >
-          <Sphere stroke="rgba(255,255,255,0.05)" strokeWidth={0.5} fill="transparent" id="sphere" />
-          <Graticule stroke="rgba(255,255,255,0.03)" strokeWidth={0.5} />
+          <Sphere stroke="rgba(255, 255, 255, 0.2)" strokeWidth={0.5} fill="rgba(10, 10, 26, 0.8)" id="sphere" />
+          <Graticule stroke="rgba(255, 255, 255, 0.1)" strokeWidth={0.5} />
           <Geographies geography={geoUrl}>
             {({ geographies }: { geographies: any[] }) =>
               geographies.map((geo: { rsmKey: string }) => (
                 <Geography
                   key={geo.rsmKey}
                   geography={geo}
-                  fill="#111"
-                  stroke="#222"
+                  fill="rgba(255, 255, 255, 0.15)"
+                  stroke="rgba(255, 255, 255, 0.4)"
                   strokeWidth={0.5}
                   style={{
                     default: { outline: "none" },
-                    hover: { fill: "#1a1a1a", outline: "none" },
+                    hover: { fill: "rgba(255, 255, 255, 0.25)", outline: "none" },
                     pressed: { outline: "none" },
                   }}
                 />
