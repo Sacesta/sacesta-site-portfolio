@@ -1,24 +1,14 @@
-
-
-
-import MagicBento from "@/components/MagicBento";
+import Navbar from "../components/Navbar";
+import PortfolioGrid from "../components/PortfolioGrid";
+import "../styles/Showcase.css";
 
 export default function Portfolio() {
     return (
-        <div className="portfolio-container">
-            <MagicBento
-                textAutoHide={true}
-                enableStars={true}
-                enableSpotlight={true}
-                enableBorderGlow={true}
-                enableTilt={true}
-                enableMagnetism={false}
-                clickEffect={true}
-                spotlightRadius={300}
-                particleCount={15}
-                glowColor="255, 255, 255"
-            />
-
+        <div className="premium-showcase-container">
+            <div className="portfolio-glow-top" />
+            <div className="portfolio-glow-bottom" />
+            <Navbar />
+            <PortfolioGrid />
         </div>
     );
 }

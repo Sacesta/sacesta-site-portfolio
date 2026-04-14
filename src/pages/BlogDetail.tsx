@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
-import { blogData } from './Blogs';
+import { blogData, Blog } from '../data/blogs';
 import '../styles/BlogDetail.css';
 
 const BlogDetail: React.FC = () => {
@@ -10,7 +10,7 @@ const BlogDetail: React.FC = () => {
   const [, setScrollProgress] = useState(0);
   
   // Get blog data from navigation state or find by ID
-  const blog = location.state?.blog || blogData.find(b => b.id === parseInt(id || ''));
+  const blog: Blog | undefined = location.state?.blog || blogData.find(b => b.id === parseInt(id || ''));
 
   useEffect(() => {
     // Scroll progress handler
