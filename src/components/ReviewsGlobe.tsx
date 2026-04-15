@@ -9,6 +9,7 @@ import {
 } from 'react-simple-maps';
 import { motion } from 'framer-motion';
 import { reviewsData, ClientReview } from '../data/reviews';
+import useIsMobile from '../hooks/useIsMobile';
 
 const geoUrl = "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json";
 
@@ -20,15 +21,17 @@ export interface ReviewsGlobeProps {
 export default function ReviewsGlobe({ onHoverReview, scale = 300 }: ReviewsGlobeProps) {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [rotation, setRotation] = useState(0);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
+    if (isMobile) return; // Stop rotation on mobile to prevent lag
     const interval = setInterval(() => {
       if (!selectedId) {
         setRotation(prev => (prev + 0.3) % 360);
       }
     }, 50);
     return () => clearInterval(interval);
-  }, [selectedId]);
+  }, [selectedId, isMobile]);
 
   return (
     <div className="relative w-full aspect-square max-w-4xl mx-auto overflow-visible">
