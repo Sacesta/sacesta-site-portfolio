@@ -44,11 +44,11 @@ export default function ReviewsGlobe({ onHoverReview, onClickReview }: ReviewsGl
         config={{
           radius: 2,
           autoRotateSpeed: 0.2,
-          atmosphereColor: "#6366f1",
+          atmosphereColor: "#0284c7",
           atmosphereIntensity: 5,
           showAtmosphere: false,
-          pointLightIntensity: 1.5,
-          ambientIntensity: 0.7,
+          pointLightIntensity: 2.0,
+          ambientIntensity: 1.0,
         }}
         onMarkerClick={handleMarkerClick}
         onMarkerHover={handleMarkerHover}

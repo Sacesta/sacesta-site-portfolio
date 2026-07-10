@@ -2,16 +2,16 @@
 
 /* Base Styles */
 .blog-detail-page {
-  background-color: #050505;
-  color: #ffffff;
+  background-color: #f8fafc;
+  color: #1e293b;
   font-family: 'Inter', sans-serif;
   min-height: 100vh;
 }
 
 /* Custom Scrollbar */
 .blog-detail-page::-webkit-scrollbar { width: 6px; }
-.blog-detail-page::-webkit-scrollbar-track { background: #0a0a0a; }
-.blog-detail-page::-webkit-scrollbar-thumb { background: #333; }
+.blog-detail-page::-webkit-scrollbar-track { background: #f8fafc; }
+.blog-detail-page::-webkit-scrollbar-thumb { background: #cbd5e1; }
 .blog-detail-page::-webkit-scrollbar-thumb:hover { background: #DFFF00; }
 
 /* Noise Grain Overlay */
@@ -210,12 +210,12 @@
 .blog-main-content {
   position: relative;
   min-height: 100vh;
-  border-left: 1px solid rgba(39, 39, 42, 0.5);
-  border-right: 1px solid rgba(39, 39, 42, 0.5);
+  border-left: 1px solid rgba(0, 0, 0, 0.06);
+  border-right: 1px solid rgba(0, 0, 0, 0.06);
   max-width: 1536px;
   margin-left: auto;
   margin-right: auto;
-  background: #050505;
+  background: #ffffff;
 }
 
 /* Header Section */
@@ -895,9 +895,9 @@
 .related-news-section {
   padding: 6rem 0;
   overflow: hidden;
-  background: #050505;
+  background: #f8fafc;
   position: relative;
-  border-bottom: 1px solid #27272a;
+  border-bottom: 1px solid #e2e8f0;
 }
 
 .gradient-overlay {
@@ -911,12 +911,12 @@
 
 .left-gradient {
   left: 0;
-  background: linear-gradient(to right, #050505, transparent);
+  background: linear-gradient(to right, #f8fafc, transparent);
 }
 
 .right-gradient {
   right: 0;
-  background: linear-gradient(to left, #050505, transparent);
+  background: linear-gradient(to left, #f8fafc, transparent);
 }
 
 .section-header {
@@ -983,7 +983,7 @@
   /* Show scrollbar */
   -ms-overflow-style: auto;
   scrollbar-width: thin;
-  scrollbar-color: #333 #0a0a0a;
+  scrollbar-color: #cbd5e1 #f8fafc;
 }
 
 .cards-scroll-container::-webkit-scrollbar {
@@ -992,12 +992,12 @@
 }
 
 .cards-scroll-container::-webkit-scrollbar-track {
-  background: #0a0a0a;
+  background: #f8fafc;
   border-radius: 3px;
 }
 
 .cards-scroll-container::-webkit-scrollbar-thumb {
-  background: #333;
+  background: #cbd5e1;
   border-radius: 3px;
 }
 

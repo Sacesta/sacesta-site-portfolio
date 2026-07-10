@@ -18,6 +18,12 @@ import xray from '../assets/xray.png';
 import bharatupline from '../assets/bharatupline.png';
 import comehomebg from '../assets/comehombg.png';
 
+// New Project Assets
+import manlab from '../assets/manlab.png';
+import fisAdvisory from '../assets/fis-advisory.png';
+import velvetTravel from '../assets/velvet-travel.png';
+import ghlWidget from '../assets/ghl-widget.png';
+
 const seacatBoatsBg = seacatBg;
 
 const assetMap: Record<string, string> = {
@@ -35,6 +41,10 @@ const assetMap: Record<string, string> = {
   'automation': bharatupline,
   'bharat-upline': bharatupline,
   'integration': comehomebg,
+  'manlab-telehealth': manlab,
+  'fis-advisory': fisAdvisory,
+  'velvet-travel-world': velvetTravel,
+  'ghl-widget': ghlWidget,
 };
 
 import { CaseStudyData } from '../data/caseStudies';
@@ -67,11 +77,11 @@ const PortfolioCard: React.FC<{ study: CaseStudyData; index: number }> = ({ stud
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.5, delay: (index % 3) * 0.05, ease: [0.16, 1, 0.3, 1] }}
     >
       <div className="card-spotlight" />
-      <div className="card-image-wrapper">
-        <img src={image} alt={study.title} className="card-image" />
+      <div className="premium-card-image-wrapper">
+        <img src={image} alt={study.title} className="premium-card-image" />
       </div>
       <div className="card-info">
         <h3 className="card-title">{study.title}</h3>

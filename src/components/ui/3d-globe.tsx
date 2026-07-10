@@ -187,8 +187,8 @@ function Marker({
         >
           <div
             className={cn(
-              "group cursor-pointer flex items-center justify-center rounded-full bg-white text-indigo-900 font-black shadow-[0_0_15px_rgba(255,255,255,0.4)] transition-all duration-300 hover:bg-indigo-500 hover:text-white hover:scale-150",
-              hovered && "ring-2 ring-indigo-400 shadow-[0_0_20px_rgba(99,102,241,0.6)]"
+              "group cursor-pointer flex items-center justify-center rounded-full bg-white text-slate-900 font-black shadow-[0_0_15px_rgba(255,255,255,0.4)] transition-all duration-300 hover:bg-[#0284c7] hover:text-white hover:scale-150",
+              hovered && "ring-2 ring-sky-400 shadow-[0_0_20px_rgba(2,132,199,0.6)]"
             )}
             style={{
               width: "14px",
@@ -282,6 +282,8 @@ function RotatingGlobe({
           bumpScale={config.bumpScale * 0.05}
           roughness={0.7}
           metalness={0.0}
+          emissive="#334155"
+          emissiveIntensity={0.65}
         />
       </mesh>
 
@@ -384,7 +386,7 @@ function Scene({ markers, config, onMarkerClick, onMarkerHover }: SceneProps) {
 
   // Set initial camera position (pulled back to accommodate markers)
   React.useEffect(() => {
-    camera.position.set(0, 0, config.radius * 3.5);
+    camera.position.set(0, 0, config.radius * 3.1);
     camera.lookAt(0, 0, 0);
   }, [camera, config.radius]);
 
@@ -393,14 +395,19 @@ function Scene({ markers, config, onMarkerClick, onMarkerHover }: SceneProps) {
       {/* Lighting */}
       <ambientLight intensity={config.ambientIntensity} />
       <directionalLight
-        position={[config.radius * 5, config.radius * 2, config.radius * 5]}
-        intensity={config.pointLightIntensity}
+        position={[0, 0, config.radius * 5]}
+        intensity={config.pointLightIntensity * 1.2}
         color="#ffffff"
       />
       <directionalLight
-        position={[-config.radius * 3, config.radius, -config.radius * 2]}
-        intensity={config.pointLightIntensity * 0.3}
-        color="#88ccff"
+        position={[config.radius * 5, config.radius * 3, config.radius * 5]}
+        intensity={config.pointLightIntensity * 0.8}
+        color="#ffffff"
+      />
+      <directionalLight
+        position={[-config.radius * 5, -config.radius * 3, config.radius * 5]}
+        intensity={config.pointLightIntensity * 0.8}
+        color="#e0f2fe"
       />
 
       {/* Rotating Globe with Markers */}
@@ -507,7 +514,7 @@ export function Globe3D({
           fov: 45,
           near: 0.1,
           far: 1000,
-          position: [0, 0, mergedConfig.radius * 3.5],
+          position: [0, 0, mergedConfig.radius * 3.1],
         }}
         style={{
           background: mergedConfig.backgroundColor || "transparent",

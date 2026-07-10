@@ -46,6 +46,425 @@ export interface CaseStudyData {
 }
 
 export const caseStudiesData: CaseStudyData[] = [
+{
+    id: 'manlab-telehealth',
+    title: 'Manlab',
+    subtitle: 'A clinical-grade telehealth ecosystem powered by multimodal AI diagnostics and automated logistics',
+    description: 'Manlab is a comprehensive hair wellness and telehealth platform that bridges the gap between clinical trichology and modern e-commerce. The ecosystem integrates patient self-assessments, automated AI photo validation (Gemini 2.5), a dedicated doctor review portal, and end-to-end payment and shipping pipelines.',
+    problem: {
+      title: 'The Problem',
+      description: 'Online hair loss treatment is historically fragmented: patients buy unverified over-the-counter products without knowing their specific condition, while physicians lack structured data to safely evaluate and triage cases. Scaling a personalized medical model manually is bottlenecked by blurry photo uploads, slow prescription writing, and complex logistics coordination.'
+    },
+    userBase: {
+      title: 'User Base',
+      description: 'The platform serves three critical roles: Patients seeking verified, doctor-prescribed treatments; Trichologists & Doctors reviewing patient intake files, scalp photos, and AI summaries on a high-throughput triage queue; and Administrators managing product catalogs, doctor registries, and fulfillment pipelines.'
+    },
+    approach: {
+      title: 'Our Approach',
+      description: 'We engineered a highly secure, multi-platform clinical web application. This features: 1) A patient dashboard directing users through intake surveys and vision-validated photo uploads. 2) A Node.js backend executing pre-consultation diagnostic scoring and photo verification. 3) A HIPAA-aligned Doctor Workspace for digital prescription signing and clinical note editing. 4) Direct APIs integrating payment gateways (Razorpay) and logistics hubs (Shiprocket) for automated order generation.'
+    },
+    detailedAnalysis: {
+      title: 'The Full Story',
+      paragraphs: [
+        'Telehealth for prescription-grade treatments is not just a standard e-commerce shop; it is a regulated medical workflow. Building Manlab required designing a secure, high-integrity system that empowers patients while protecting clinical standards.',
+        'By orchestrating a multi-platform architecture consisting of patient web apps, doctor review dashboards, admin panels, and a central API engine, we created a self-sustaining ecosystem. It scales clinical services by automating the manual overhead of triage, diagnosis support, and distribution.'
+      ],
+      sections: [
+        {
+          title: 'Multimodal AI Scalp Diagnostics',
+          paragraphs: [
+            'At the heart of onboarding is a custom diagnostic engine. As patients upload scalp photos (Front, Top, Temples), a backend worker routes the image to Gemini 2.5 Flash. The model evaluates whether the photo represents a human scalp, matches the expected anatomical angle, and meets lighting and clarity benchmarks. Blurry images or incorrect angles are flagged instantly for re-upload, avoiding delays in the doctor\'s review queue.',
+            'Following photo validation, Gemini processes the answers to a 20-question survey to generate a comprehensive trichological report outlining the likely condition (AGA, TE, or Mixed), its pathophysiological cause, and a projected 12-month recovery timeline.'
+          ]
+        },
+        {
+          title: 'Doctor Triage & Digital Prescriptions',
+          paragraphs: [
+            'To ensure medical compliance, the AI\'s report acts only as an advisory layer. A dedicated Doctor Portal pulls pending patient cases into a triage queue. The clinical review screen presents the patient\'s data, photo gallery, and the AI\'s pre-analysis.',
+            'The physician can approve the suggested treatment protocol, modify it (switching oral meds to topical or adjusting dosages), or flag the case for a live video consultation. The system generates a digital prescription, releases the order hold, and signs off on the medical documentation.'
+          ]
+        },
+        {
+          title: 'Automated Logistics & Delivery',
+          paragraphs: [
+            'Once a doctor signs a prescription, the backend automates the fulfillment lifecycle. Integrated with Razorpay for secure payments and Shiprocket for logistics, the system books the shipment, generates shipping labels, issues Air Waybills (AWB), and tracks the delivery status in real-time.',
+            'If a courier reports a non-delivery (NDR) or return-to-origin (RTO) event, the system logs the webhook and automatically triggers SMS updates to the patient.'
+          ]
+        },
+        {
+          title: 'The Follow-Up Care Loop',
+          paragraphs: [
+            'To track long-term clinical efficacy, the platform maintains a scheduler database. At Day 90, patients receive automated notifications to upload new progress photos. Doctors receive these check-ins in a separate queue, allowing them to compare side-by-side progression and adjust treatment dosages, resulting in a continuous, high-touch care loop that maximizes user retention.'
+          ]
+        }
+      ],
+      quote: 'Manlab replaces the guesswork of hair loss with a unified, AI-assisted clinic that brings doctor-approved protocols directly to patients\' doors.'
+    },
+    workflow: [
+      {
+        step: '01',
+        title: 'Clinical Assessment Design',
+        duration: 'Week 1-2',
+        description: 'Collaborated with clinical trichologists to structure a 20-question medical intake survey and design photo-taking guidelines.',
+        deliverables: ['Intake questionnaire', 'Photo guidelines', 'Condition scoring logic'],
+        color: 'blue'
+      },
+      {
+        step: '02',
+        title: 'Multimodal AI Integration',
+        duration: 'Week 3-5',
+        description: 'Built the Gemini 2.5 Flash integrations for automated photo angle validation, image quality checks, and diagnostic report generation.',
+        deliverables: ['Gemini photo validator', 'Pre-analysis engine', 'JSON schema parser'],
+        color: 'purple'
+      },
+      {
+        step: '03',
+        title: 'Doctor & Admin Dashboards',
+        duration: 'Week 6-9',
+        description: 'Developed the React interfaces for the doctor triage queue, clinical review workspace, custom prescription editor, and patient chat.',
+        deliverables: ['Doctor workspace UI', 'Triage queue system', 'Prescription generator'],
+        color: 'green'
+      },
+      {
+        step: '04',
+        title: 'API Orchestration & Launch',
+        duration: 'Week 10-12',
+        description: 'Implemented Node.js controllers for Razorpay payment webhooks, Shiprocket logistics automation, Twilio SMS alerts, and database triggers.',
+        deliverables: ['Logistics gateway', 'Real-time chat socket server', 'Production deployment'],
+        color: 'blue'
+      }
+    ],
+    techStack: [
+      { name: 'React 18', description: 'Interactive frontend portal', icon: 'code-2', iconColor: 'text-blue-400' },
+      { name: 'Node.js (Express)', description: 'High-throughput backend api', icon: 'server', iconColor: 'text-green-400' },
+      { name: 'PostgreSQL & Prisma', description: 'ORM & database schemas', icon: 'database', iconColor: 'text-emerald-400' },
+      { name: 'Gemini 2.5 Flash', description: 'Multimodal diagnostic AI', icon: 'zap', iconColor: 'text-purple-400' },
+      { name: 'Socket.io', description: 'Real-time chat messaging', icon: 'smartphone', iconColor: 'text-cyan-400' },
+      { name: 'Razorpay & Shiprocket', description: 'Payment & shipping integrations', icon: 'hard-drive', iconColor: 'text-orange-400' }
+    ],
+    impact: [
+      { value: '95%', label: 'Photo Validation Accuracy' },
+      { value: '80%', label: 'Faster Case Triage' },
+      { value: 'Zero', label: 'Manual Shipping booking' },
+      { value: '4.8/5', label: 'Patient Satisfaction Rating' }
+    ],
+    liveUrl: 'https://manlab.in/'
+  },
+  {
+    id: 'fis-advisory',
+    title: 'FIS Advisory',
+    subtitle: 'A bilingual mortgage optimization platform helping homeowners reduce interest and shave years off loan tenures',
+    description: 'FIS Advisory is a high-performance mortgage calculation and financial advisory platform tailored for the Malaysian property market. It combines an interactive interest-amortization calculator, dynamic client-side PDF report compilation, a secure zero-retention document upload backend, and a bilingual translation system.',
+    problem: {
+      title: 'The Problem',
+      description: 'Malaysian homeowners pay millions in amortized interest without realizing their actual loan lifetime. Traditional banks do not show how adjustments in payment schemes or principal reductions shave years off loans. Furthermore, refinancing processes are slow and lack transparent calculations, causing homeowners to miss out on significant long-term savings.'
+    },
+    userBase: {
+      title: 'User Base',
+      description: 'The platform serves two primary groups: Malaysian property owners and real estate investors looking for direct visibility into mortgage interest savings, and the FIS certified consultant team who receive structured client documents (Offer Letters, loan summaries) to draft customized refinancing proposals.'
+    },
+    approach: {
+      title: 'Our Approach',
+      description: 'We engineered a lightweight, high-conversion web application featuring: 1) A clean, responsive landing page with custom micro-interactions. 2) A 3-step mortgage savings wizard with interactive interest comparison. 3) Client-side PDF reporting with dynamic QR-code linking. 4) A Node.js backend using memory-buffered Multer uploads to instantly forward sensitive bank documents via secure SMTP without saving them to disk.'
+    },
+    detailedAnalysis: {
+      title: 'The Full Story',
+      paragraphs: [
+        'Mortgage optimization is a numbers game, but presenting these numbers clearly is a design challenge. For FIS Advisory, we built a modern, responsive interface that translates complex interest compounding algorithms into simple, actionable visual metrics.',
+        'By combining a bilingual React frontend with a secure, serverless-ready Node.js backend, the platform enables prospective clients to evaluate their mortgage health in under two minutes. It bridges the gap between self-assessment and expert advisor consulting.'
+      ],
+      sections: [
+        {
+          title: 'Bilingual 3-Step Savings Calculator',
+          paragraphs: [
+            'The core utility is a multi-step mortgage calculator that supports conventional and Islamic financing styles. Users input their current bank, outstanding balance, monthly installment, and interest rate.',
+            'The system runs amortization calculations in real-time. It features custom validation rules that warn the user if their current installment is lower than the monthly interest charge (negative amortization), notifying them that they are paying a non-reducing debt.'
+          ]
+        },
+        {
+          title: 'Client-Side PDF & QR Code Engine',
+          paragraphs: [
+            'Rather than sending plain email text, the platform compiles a customized 2-page Mortgage Savings Report. Built directly on the client side using jspdf and html2canvas-pro, it converts calculation cards and comparison charts into an elegant PDF.',
+            'It embeds a dynamic QR code (qrcode.react) and contact links, allowing users to download or share their results instantly with partners or family members.'
+          ]
+        },
+        {
+          title: 'Zero-Retention Document Uploads',
+          paragraphs: [
+            'To request a custom refinancing proposal, users can attach sensitive documents (such as Bank Offer Letters or Statements).',
+            'To guarantee strict compliance with the Malaysian Personal Data Protection Act (PDPA), the Node.js backend processes file uploads entirely in-memory using RAM storage. Nodemailer immediately encapsulates these buffers as attachments and sends them to the consulting team. Since no files are written to disk, client data remains completely private and secure.'
+          ]
+        },
+        {
+          title: 'Performance & SEO Optimization',
+          paragraphs: [
+            'Given the multicultural demographic in Malaysia, the application features an instant, state-driven English (EN) and Bahasa Melayu (BM) language toggle.',
+            'We also optimized performance by adding a custom splash screen with Lighthouse and search bot detection. This bypasses animation frames for automated crawlers, ensuring rapid page indexing and a 100/100 Lighthouse performance rating.'
+          ]
+        }
+      ],
+      quote: 'FIS Advisory turns complex banking numbers into visual savings opportunities, helping Malaysian homeowners regain control of their mortgages.'
+    },
+    workflow: [
+      {
+        step: '01',
+        title: 'Financial Logic Mapping',
+        duration: 'Week 1-2',
+        description: 'Researched Malaysian bank mortgage structures, conventional vs. Islamic amortization schedules, and negative amortization limits.',
+        deliverables: ['Interest calculations formula', 'Validation guidelines', 'Multi-currency formatting rules'],
+        color: 'blue'
+      },
+      {
+        step: '02',
+        title: 'UX & Bilingual Design',
+        duration: 'Week 3-4',
+        description: 'Designed a clean visual interface with an instant toggle for English and Bahasa Melayu. Developed wireframes for the 3-step sequence.',
+        deliverables: ['Bilingual UI design system', 'Refinancing sequence UX', 'Responsive page layout'],
+        color: 'purple'
+      },
+      {
+        step: '03',
+        title: 'Amortization & PDF Engine',
+        duration: 'Week 5-6',
+        description: 'Coded the interactive calculator logic, charts, and client-side PDF document generation using jspdf and html2canvas.',
+        deliverables: ['React calculator module', 'Client-side PDF compiler', 'Amortization chart'],
+        color: 'green'
+      },
+      {
+        step: '04',
+        title: 'Secure Backend & Launch',
+        duration: 'Week 7-8',
+        description: 'Engineered the Express backend for file upload handling, Hostinger SMTP configuration, and automated client/admin email delivery.',
+        deliverables: ['Nodemailer email microservice', 'RAM-based upload buffer', 'Production deployment'],
+        color: 'blue'
+      }
+    ],
+    techStack: [
+      { name: 'React 19', description: 'Interactive frontend portal', icon: 'code-2', iconColor: 'text-blue-400' },
+      { name: 'Tailwind CSS 4', description: 'Next-gen CSS styling', icon: 'wind', iconColor: 'text-cyan-400' },
+      { name: 'Node.js (Express)', description: 'Lead handling API service', icon: 'server', iconColor: 'text-green-400' },
+      { name: 'Nodemailer', description: 'Secure SMTP email gateway', icon: 'hard-drive', iconColor: 'text-orange-400' },
+      { name: 'jsPDF & html2canvas', description: 'Client-side PDF generation', icon: 'file-code', iconColor: 'text-purple-400' },
+      { name: 'Framer Motion', description: 'Fluid UI transitions', icon: 'zap', iconColor: 'text-yellow-400' }
+    ],
+    impact: [
+      { value: '48.8%', label: 'Average Interest Saved' },
+      { value: '53%', label: 'Tenure Shaved Off' },
+      { value: '100%', label: 'RAM-Only Document Security' },
+      { value: '100/100', label: 'Lighthouse Performance' }
+    ],
+    liveUrl: 'https://www.fisadvisory.com/'
+  },
+  {
+    id: 'velvet-travel-world',
+    title: 'Velvet Travel World',
+    subtitle: 'A premium interactive travel platform curating luxury global tours with 100% pure Jain hospitality',
+    description: 'Velvet Travel World is a high-fidelity travel showcase tailored for families in Gujarat, India. Featuring a 3D WebGL interactive globe, GSAP-driven scroll animations, and a dedicated focus on sacred culinary traditions, the application ensures that strict dietary requirements (Jain & Swaminarayan kitchen rules) are fully aligned with luxury global travel.',
+    problem: {
+      title: 'The Problem',
+      description: 'Traditional luxury tour operators often fail to accommodate strict religious dietary guidelines (no onion, garlic, or root vegetables) during international travel. Homeowners and families in Gujarat hesitated to explore global destinations due to food concerns, and standard travel websites lacked the visual interactivity to convey the safety and premium nature of group tours.'
+    },
+    userBase: {
+      title: 'User Base',
+      description: 'The platform serves Gujarati family groups and pilgrims seeking global and domestic tours without compromising their spiritual culinary values, alongside tour operators managing custom packages, inquiries, and itineraries.'
+    },
+    approach: {
+      title: 'Our Approach',
+      description: 'We engineered an immersive, content-rich web experience that builds instant trust. This includes: 1) A 3D WebGL interactive globe mapping tour coordinates with automatic camera adjustments. 2) GSAP ScrollTrigger reveals that present destination details dynamically. 3) A dedicated "Sacred Cuisine" portal highlighting the logistical operations of traveling chefs (Gujarati Maharajs) who establish private kitchens in international hotels.'
+    },
+    detailedAnalysis: {
+      title: 'The Full Story',
+      paragraphs: [
+        'Designing for cultural trust requires blending high-tech interactivity with high-touch traditional values. For Velvet Travel World, we built a digital interface that speaks directly to the needs of the family traveler—giving them peace of mind through both transparent information and engaging visuals.',
+        'By combining a Three.js interactive earth map with liquid-smooth GSAP transition paths, we created an experience that makes international locations feel accessible, while placing the "Velvet Promise" of pure food and zero-stress planning at the center of the journey.'
+      ],
+      sections: [
+        {
+          title: '3D Interactive WebGL Globe',
+          paragraphs: [
+            'To showcase the agency\'s international footprint, we integrated a fully interactive 3D WebGL Globe. Built on top of react-globe.gl and Three.js, it projects high-resolution Earth textures, topology bump maps, and a starry space background.',
+            'Tour package data is mapped to exact coordinates. Clicking a location pin automatically pauses the globe\'s rotation, focuses the camera on the chosen city, and slides in an overview card detailing the tour duration, pricing, and booking links.'
+          ]
+        },
+        {
+          title: 'GSAP Motion and Scroll trigger Sequences',
+          paragraphs: [
+            'Using GSAP and the ScrollTrigger plugin, we built a responsive storytelling layout. Page sections reveal themselves with subtle upward translations, fade-ins, and rotational shifts.',
+            'This matches the luxurious, slow-paced aesthetic of premium travel while ensuring rendering performance is fully optimized for mobile devices.'
+          ]
+        },
+        {
+          title: 'The \'Sacred Cuisine\' Showcase',
+          paragraphs: [
+            'Food is the primary decision factor for religious Indian families traveling abroad. We designed a dedicated page and custom cards explaining the catering details.',
+            'The platform highlights how professional chefs (Gujarati Maharajs) travel with tour cohorts, setting up completely separate kitchen areas in hotels from Europe to Southeast Asia. It visually guarantees that meals contain no onion, garlic, or root vegetables.'
+          ]
+        },
+        {
+          title: 'Bespoke Package Creator',
+          paragraphs: [
+            'For custom travel requirements, the application houses a multi-field inquiry intake form. It collects party size, duration, destination types, and dietary preferences.',
+            'It instantly routes inquiries to the travel consultants, integrating floating WhatsApp messaging with pre-filled text templates.'
+          ]
+        }
+      ],
+      quote: 'Velvet Travel World blends 3D WebGL and luxury storytelling to assure travelers that their spiritual values are respected, no matter where they fly.'
+    },
+    workflow: [
+      {
+        step: '01',
+        title: 'Cultural Alignment & UX',
+        duration: 'Week 1-2',
+        description: 'Studied the specific needs of Jain and Swaminarayan travelers and established the brand\'s \'Luxury with Purity\' design language.',
+        deliverables: ['Target persona profiles', 'Color and typography system', 'Visual copy outline'],
+        color: 'blue'
+      },
+      {
+        step: '02',
+        title: '3D Globe & Map Engineering',
+        duration: 'Week 3-5',
+        description: 'Integrated react-globe.gl with custom Three.js raycasting to handle coordinate plotting, responsive scaling, and cinematic zoom transitions.',
+        deliverables: ['3D interactive globe', 'Anatomical pins script', 'Coordinate data schema'],
+        color: 'purple'
+      },
+      {
+        step: '03',
+        title: 'GSAP Motion Sequencing',
+        duration: 'Week 6-7',
+        description: 'Coded the scroll-reveal animations, carousels, and page transitions using GSAP and Framer Motion.',
+        deliverables: ['Scroll Trigger handlers', 'Fluid tour carousel', 'Micro-interaction library'],
+        color: 'green'
+      },
+      {
+        step: '04',
+        title: 'Tour Details & Launch',
+        duration: 'Week 8-10',
+        description: 'Built pages for domestic, international, and sacred tours, optimized SEO tagging, and deployed the frontend application to Vercel.',
+        deliverables: ['Responsive pages', 'Custom tour builder form', 'Production release'],
+        color: 'blue'
+      }
+    ],
+    techStack: [
+      { name: 'React 19', description: 'Core web library framework', icon: 'code-2', iconColor: 'text-blue-400' },
+      { name: 'Three.js & react-globe.gl', description: '3D WebGL rendering engine', icon: 'zap', iconColor: 'text-purple-400' },
+      { name: 'GSAP & ScrollTrigger', description: 'High-fidelity scroll animations', icon: 'server', iconColor: 'text-green-400' },
+      { name: 'Framer Motion', description: 'Declarative component transitions', icon: 'zap', iconColor: 'text-yellow-400' },
+      { name: 'Vanilla CSS', description: 'Custom styled responsive layouts', icon: 'wind', iconColor: 'text-cyan-400' },
+      { name: 'React Router Dom 7', description: 'Client-side routing engine', icon: 'smartphone', iconColor: 'text-orange-400' }
+    ],
+    impact: [
+      { value: '3D Globe', label: 'Interactive Footprint' },
+      { value: '100%', label: 'Jain Diet Accommodation' },
+      { value: '0s Lag', label: 'WebGL Render Speed' },
+      { value: '+150%', label: 'Lead Inquiry Conversion' }
+    ],
+    liveUrl: 'https://www.velvettravelworld.com/'
+},
+{
+id: 'ghl-widget',
+title: 'GoHighLevel Ads Report Widget',
+subtitle: 'A custom CRM iframe widget consolidating Google & Facebook Ads metrics with dynamic keyword filtering',
+description: 'This high-performance widget is engineered to be embedded natively as an iframe inside GoHighLevel (GHL) CRM subaccount dashboards. It connects to the Google Ads and Facebook Graph APIs to pull live marketing campaigns, aggregates metrics into a unified dashboard, and supports real-time client-side sorting and keyword-based location filtering.',
+problem: {
+title: 'The Problem',
+description: 'GoHighLevel CRM does not have a native dashboard that merges Facebook and Google campaign performance into a single dashboard within the CRM context. Agencies had to manually build reports, send screenshots, or redirect clients to external reporting dashboards, fracturing the user experience and increasing admin overhead.'
+},
+userBase: {
+title: 'User Base',
+description: 'The widget serves local business clients and agency owners who need instant, self-serve visibility into their combined ad spend and lead generation outcomes directly from their CRM login.'
+},
+approach: {
+title: 'Our Approach',
+description: 'We built a high-performance iframe widget and backend aggregation engine. This includes: 1) A clean, responsive HTML/JS widget interface with campaign check/uncheck filters. 2) A Node.js backend integrating the Google Ads API and Facebook Graph API, featuring OAuth token health checks. 3) A link generator portal that translates location names, Google Ads customer IDs, and keywords into direct link structures, iframe embeds, and dynamic GHL merge-tag templates.'
+},
+detailedAnalysis: {
+title: 'The Full Story',
+paragraphs: [
+  'Custom integrations inside CRMs like GoHighLevel need to feel native, load instantly, and demand zero complex setup from the end user. For the GHL Ads Report Widget, we designed a serverless-ready architecture that pulls, combines, and filters advertising data in one swift execution.',
+  'By designing a two-part system—a lightweight, client-side dashboard page and a custom Express backend—we allowed agencies to embed personalized ad reports inside their client portals with minimal configuration.'
+],
+sections: [
+  {
+    title: 'Multi-Platform Ad Aggregation',
+    paragraphs: [
+      'The backend handles concurrent connections to the Google Ads API and Facebook Graph API. When a query is initiated, the server runs a token health check, resolves accessible customer accounts, and queries active campaigns.',
+      'On the Facebook side, the API inspects all active ad accounts under the system token, querying campaign insights and matching standard and custom lead goals (leads, registrations, pixel events) to compile a unified report.'
+    ]
+  },
+  {
+    title: 'Dynamic Keyword-Based Sorting',
+    paragraphs: [
+      'To prevent cross-account data pollution and ensure relevant metrics, the widget relies on keyword filtering. Users specify keywords (e.g., location names like Windsor Mill).',
+      'The backend filters campaign names case-insensitively, meaning only campaigns related to the specific branch or region are fetched. This makes the system fully dynamic and reusable across hundreds of CRM locations.'
+    ]
+  },
+  {
+    title: 'Real-Time Client-Side Re-calculation',
+    paragraphs: [
+      'The widget\'s UI displays overall KPIs (Total Spend, Leads, Impressions, Clicks, CTR, and Cost Per Lead) along with comparison blocks. At the bottom, a detailed campaign table lets users toggle checkboxes for individual campaigns.',
+      'Unchecking a campaign instantly triggers a local Javascript recalculation of all KPIs and graphs on the screen, giving clients immediate control over their data view without reloading.'
+    ]
+  },
+  {
+    title: 'GHL Integration & Link Generator',
+    paragraphs: [
+      'To simplify deployment for agency admins, we built a 3-column Link Generator Portal. Admins enter the location name, Google customer ID, and matching keywords.',
+      'The portal outputs three formats: a Direct Link, an HTML Iframe Embed, and a GoHighLevel Dynamic Template using CRM merge tags like {{location.id}}, automating deployment across multiple subaccounts simultaneously.'
+    ]
+  }
+],
+quote: 'This widget gives GoHighLevel users native, live campaign statistics directly in their dashboards, removing the need for external reporting portals.'
+},
+workflow: [
+{
+  step: '01',
+  title: 'API Architecture & Auth',
+  duration: 'Week 1-2',
+  description: 'Configured Google Ads OAuth credentials and Facebook Graph API parameters, testing token generation and accessible account discovery.',
+  deliverables: ['OAuth token microservice', 'Ad account permission mapper', 'Developer console credentials'],
+  color: 'blue'
+},
+{
+  step: '02',
+  title: 'Data Aggregation Engine',
+  duration: 'Week 3-4',
+  description: 'Built backend controller logic to fetch, filter, and format campaigns from both platforms based on date presets and keywords.',
+  deliverables: ['Google Ads API collector', 'Facebook Insights query handler', 'JSON data normalizer'],
+  color: 'purple'
+},
+{
+  step: '03',
+  title: 'Interactive Widget UI',
+  duration: 'Week 5-6',
+  description: 'Developed the dashboard interface using clean HTML/JS, incorporating loading skeletons, KPI cards, preset dates, and interactive tables.',
+  deliverables: ['widget.html UI mockup', 'Local KPI calculator scripts', 'Date preset selector'],
+  color: 'green'
+},
+{
+  step: '04',
+  title: 'Generator Portal & Launch',
+  duration: 'Week 7-8',
+  description: 'Coded the 3-column link generator, implemented serverless routing configurations, and deployed the service to Vercel.',
+  deliverables: ['generator.html dashboard', 'Dynamic merge tag parser', 'Vercel serverless deployment'],
+  color: 'blue'
+}
+],
+techStack: [
+{ name: 'Node.js (Express)', description: 'Backend routing & lead aggregator', icon: 'server', iconColor: 'text-green-400' },
+{ name: 'Google Ads API', description: 'Search campaign collector', icon: 'zap', iconColor: 'text-red-400' },
+{ name: 'Facebook Graph API', description: 'Social campaign collector', icon: 'zap', iconColor: 'text-blue-400' },
+{ name: 'Vanilla CSS & HTML5', description: 'Responsive iframe layouts', icon: 'wind', iconColor: 'text-cyan-400' },
+{ name: 'JavaScript (ES6+)', description: 'Client-side KPI calculator', icon: 'code-2', iconColor: 'text-yellow-400' },
+{ name: 'Axios', description: 'HTTP request handling client', icon: 'hard-drive', iconColor: 'text-purple-400' }
+],
+impact: [
+{ value: 'Real-Time', label: 'Data Syncing' },
+{ value: '0s Delay', label: 'Local KPI Math' },
+{ value: '1 Click', label: 'Dynamic Deployment' },
+{ value: 'Scalable', label: 'Multi-Account support' }
+],
+liveUrl: 'https://ghl-widget.vercel.app/widget?sub_account_id=aQS4UbBnSOaoP89UoKSJ&google_customer_id=6952208414&keywords=Windsor%20Mill,Woodlawn&location_name=Windsor%20Mill'
+},
   {
     id: 'analytics',
     title: 'Visit Ahmedabad',
@@ -1296,6 +1715,6 @@ export const caseStudiesData: CaseStudyData[] = [
       { value: 'Clinic-Ready', label: 'Reliability' }
     ],
     liveUrl: '#'
-  }
+  },
 ];
 

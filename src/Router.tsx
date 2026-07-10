@@ -6,15 +6,18 @@ import BlogDetail from './pages/BlogDetail';
 import GlobeReviewsPage from './pages/GlobeReviewsPage';
 import CinematicGreeting from './components/CinematicGreeting';
 import { useState, useCallback } from 'react';
-import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 
 function AppRoutes({ showIntro, setShowIntro }: { showIntro: boolean; setShowIntro: (show: boolean) => void }) {
     const navigate = useNavigate();
+    const location = useLocation();
 
     const handleIntroComplete = useCallback(() => {
         setShowIntro(false);
-        navigate('/reviews');
-    }, [navigate, setShowIntro]);
+        if (location.pathname === '/') {
+            navigate('/reviews');
+        }
+    }, [navigate, setShowIntro, location.pathname]);
 
     return (
         <>
